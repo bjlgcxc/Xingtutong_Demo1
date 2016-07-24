@@ -30,6 +30,8 @@ public class BraceletController {
 			return null;
 		else
 			return braceletService.getBraceletInfo(mac);
+		
+		
 	}
 	
 }
