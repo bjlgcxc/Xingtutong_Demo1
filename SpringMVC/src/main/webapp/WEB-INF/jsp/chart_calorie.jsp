@@ -27,7 +27,6 @@
 </head>
 
 <script>
-
 	//获取格式化时间
 	function GetDateTimeFormatStr(date) {
 		var seperator1 = "-";
@@ -226,7 +225,6 @@
 			flag = 1;
 		}
 	};
-
 	var end2 = {
 		dateCell : "#endTime2",
 		format : "YYYY-MM-DD",
@@ -253,7 +251,6 @@
 			flag = 1;
 		}
 	};
-
 	function setDaysTime(start, end) {
 		jeDate(start);
 		jeDate(end);

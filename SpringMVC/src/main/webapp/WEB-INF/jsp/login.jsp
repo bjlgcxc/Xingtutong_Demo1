@@ -7,20 +7,23 @@
 %>
 <html>
 <head>
+    <title>管理员登录</title>
+    
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
-    <title>管理员登录</title>
+   
     <link rel="stylesheet" href="css/pintuer.css">
     <link rel="stylesheet" href="css/admin.css">
+    <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon" />
+    <link href="/favicon.ico" rel="bookmark icon" />
+    
     <script src="js/jquery-2.2.3.js"></script>
     <script src="js/pintuer.js"></script>
     <script src="js/respond.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/layer.js"></script>
-    <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon" />
-    <link href="/favicon.ico" rel="bookmark icon" />
 </head>
 
 <script type="text/javascript">
@@ -61,7 +64,6 @@
 		});
 		
 	});	
-	
 </script>
 
 <body>
@@ -98,7 +100,6 @@
                 <div class="panel-foot text-center"><button type="button" id="submit" class="button button-block bg-main text-big">登录</button></div>
             </div>
             </form>
-            
         </div>
     </div>
 </div>

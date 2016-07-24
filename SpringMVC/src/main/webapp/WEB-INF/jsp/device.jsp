@@ -22,7 +22,7 @@
   		deviceAlias = request.getParameter("deviceAlias");
   	}
 %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
 <html>
 <head>
 	<title>用户</title>
@@ -184,11 +184,9 @@
 	</form>	
 	<br/>
     <div id="page-wrapper">
-		<!-- /.row -->
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<!-- /.panel-heading -->
 					<div class="panel-body">
 						<div class="dataTable_wrapper">
 							<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -220,12 +218,9 @@
            						</tbody>
        					 </table>
        				</div>
-					<!-- /.panel-body -->
 				</div>
-				<!-- /.panel -->
-			</div>
-			<!-- /.col-lg-12 -->
-		</div>
+			 </div>
+		  </div>
        </div>
     </div>
 </div>

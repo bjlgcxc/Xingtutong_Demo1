@@ -159,7 +159,6 @@
 	
 	//init
 	$(document).ready(function(){
-		
 		var type='day';
 		var flag2=0,flag3=0;
 		

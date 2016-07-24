@@ -11,7 +11,7 @@
   		loginState = "login";
   	}
 %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
 <html>
 <head>
  	<title>首页</title>
@@ -34,15 +34,15 @@
 </head>
 
 <script>
-  if('<%=loginState%>' == 'notLogin'){
+  	if('<%=loginState%>' == 'notLogin'){
    	   location.href = "login.html";
-  }
+  	}
   
-  $(document).ready(function(){
+  	$(document).ready(function(){
    	   $("#userGuide").click(function(){
    	   		layer.tips('未设置', '#userGuide');
    	   });    
-   });
+    });
 </script>
 
 <body>
