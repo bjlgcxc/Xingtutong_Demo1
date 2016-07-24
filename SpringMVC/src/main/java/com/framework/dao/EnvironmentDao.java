@@ -16,8 +16,7 @@ public class EnvironmentDao {
 	
 	public void insertEnvironmentArray(Environment[] environmentArray){
 		String sql = " insert into t_environment(deviceId,humidity,press,temperature,testTime) " +
-				"values(?,?,?,?,?) ";
-		
+				"values(?,?,?,?,?) ";	
 		List<Object[]> batchArgs = new ArrayList<Object[]>();
 		for(Environment environment:environmentArray){
 			Object args[] = new Object[]{environment.getDeviceId(),environment.getHumidity(),environment.getPress(),

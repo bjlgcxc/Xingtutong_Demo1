@@ -12,13 +12,13 @@ public class UserDao {
 	@Autowired 
 	private JdbcTemplate jdbcTemplate;
 	
-	//1.用户登录验证
+	//用户登录验证
 	public int getMatchCount(String userName,String password){		
 		String sqlStr = " select count(*) from t_user where userName =? and password =? ";	
 		return jdbcTemplate.queryForInt(sqlStr,new Object[]{userName,password});
 	}
 	
-	//2.通过用户名获取用户信息
+	//通过用户名获取用户信息
 	public UserInfo findUserByUserName(final String userName){
 		String sqlStr = " select * from t_user where userName =? ";
 	    UserInfo user = jdbcTemplate.query(sqlStr, new Object[]{userName},
@@ -26,7 +26,7 @@ public class UserDao {
 		return user;
 	}
 	
-	//3.更新用户登录信息
+	//更新用户登录信息
 	public void updateLoginInfo(UserInfo userInfo){
 		String sqlStr = " update t_user set lastLogin=?,loginCount=? where userName=? ";
 		jdbcTemplate.update(sqlStr,new Object[]{userInfo.getLastLogin(),userInfo.getLoginCount(),userInfo.getUserName()});

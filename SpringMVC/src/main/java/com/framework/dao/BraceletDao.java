@@ -18,6 +18,7 @@ public class BraceletDao {
 		String sqlStr = " select count(*) from t_bracelet where mac=? ";
 		return jdbcTemplate.queryForInt(sqlStr,new Object[]{mac});
 	}
+	
 	// 插入手环信息
 	public void insertBraceletInfo(BraceletInfo braceletInfo){
 		String sqlStr = " insert into t_bracelet(mac,name,braceletGeneration,braceletStyle,braceletType,firmwareVersion) " +
@@ -26,6 +27,7 @@ public class BraceletDao {
 				braceletInfo.getBraceletStyle(),braceletInfo.getBraceletType(),braceletInfo.getFirmwareVersion()};
 		jdbcTemplate.update(sqlStr, args);
 	}
+	
 	// 更新手环信息
 	public void updateBraceletInfo(BraceletInfo braceletInfo){
 		String sqlStr = "update t_bracelet set name=?,braceletGeneration=?,braceletStyle=?,braceletType=?,firmwareVersion=? where mac=? ";
@@ -33,6 +35,7 @@ public class BraceletDao {
 				,braceletInfo.getBraceletType(),braceletInfo.getFirmwareVersion(),braceletInfo.getMac()};
 		jdbcTemplate.update(sqlStr, args);
 	}
+	
 	// 更新手环状态信息
 	public void updateBraceletStateInfo(BraceletInfo braceletInfo){
 		String sqlStr = "update t_bracelet set batteryLevel=?,batteryState=? where mac=? ";

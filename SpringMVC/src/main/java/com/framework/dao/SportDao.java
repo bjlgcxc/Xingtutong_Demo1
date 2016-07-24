@@ -15,18 +15,16 @@ public class SportDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	public void insertSportInfo(SportInfo[] sportInfoArray){
-		
 		String sql = " insert into t_sport(deviceId,calorie,countStep,startTime,endTime,duration,type) " +
 				"values(?,?,?,?,?,?,?) ";
-		
 		List<Object[]> batchArgs = new ArrayList<Object[]>();
 		for(SportInfo sportInfo:sportInfoArray){
 			Object args[] = new Object[]{sportInfo.getDeviceId(),sportInfo.getCalorie(),sportInfo.getCountStep(),
 					sportInfo.getStartTime(),sportInfo.getEndTime(),sportInfo.getDuration(),sportInfo.getType()};
 			batchArgs.add(args);
 		}
-		jdbcTemplate.batchUpdate(sql, batchArgs);
 		
+		jdbcTemplate.batchUpdate(sql, batchArgs);
 	}
 	
 	public List<SportInfo> getSportInfoInfo(int deviceId,long startTime,long endTime){

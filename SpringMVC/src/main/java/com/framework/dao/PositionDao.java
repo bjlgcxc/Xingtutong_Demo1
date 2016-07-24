@@ -14,7 +14,7 @@ public class PositionDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	//1.插入位置信息
+	//插入位置信息
 	public void insertPositionInfo(PositionInfo positionInfo){
 		String sqlStr = "insert into t_position(deviceId,time,longitude,latitude,altitude,speed,bearing,accuracy) " +
 				"values(?,?,?,?,?,?,?,?)";
@@ -24,7 +24,7 @@ public class PositionDao {
 		jdbcTemplate.update(sqlStr, args);
 	}
 	
-	//2.插入多条位置信息
+	//插入多条位置信息
 	public void insertPositionInfoList(PositionInfo[] positionInfoArray){
 		String sqlStr = "insert into t_position(deviceId,time,longitude,latitude,altitude,speed,bearing,accuracy) " +
 				"values(?,?,?,?,?,?,?,?)";

@@ -18,33 +18,39 @@ public class DeviceDao {
 		String sqlStr = " select count(*) from t_device where imei=? ";
 		return jdbcTemplate.queryForInt(sqlStr,new Object[]{imei});
 	}
+	
 	// 根据id查询mac地址
 	public String queryDeviceMac(int id){
 		String sqlStr = " select mac from t_device where id=? ";
 		return jdbcTemplate.queryForObject(sqlStr, new Object[]{id},java.lang.String.class);
 	}
+	
 	// 根据imei查询mac地址
 	public String queryDeviceMac(String imei){
 		String sqlStr = " select mac from t_device where imei=? ";
 		return jdbcTemplate.queryForObject(sqlStr, new Object[]{imei},java.lang.String.class);
 	}
+	
 	// 根据imei查询设备id号
 	public int queryDeviceId(String imei){
 		String sqlStr = " select id from t_device where imei=? ";
 		return jdbcTemplate.queryForInt(sqlStr,new Object[]{imei});
 	}
+	
 	// 插入设备信息 imei,connectTime
 	public void insertDeviceInfo(DeviceInfo deviceInfo){
 		String sqlStr = " insert into t_device(imei,connectTime) values(?,?) ";
 		Object args[] = new Object[]{deviceInfo.getImei(),deviceInfo.getConnectTime()};	
 		jdbcTemplate.update(sqlStr,args);
 	}
+	
 	// 更新设备信息 
 	public void updateDeviceInfo(DeviceInfo deviceInfo){
 		String sqlStr = " update t_device set mac=?,connectTime=? where id=? ";
 		Object args[] = new Object[]{deviceInfo.getMac(),deviceInfo.getConnectTime(),deviceInfo.getId()};
 		jdbcTemplate.update(sqlStr,args);
 	}
+	
 	// 更新手机连接后台的时间
 	public void updateConnectTime(DeviceInfo deviceInfo){
 		String sqlStr = " update t_device set connectTime=? where id=? ";

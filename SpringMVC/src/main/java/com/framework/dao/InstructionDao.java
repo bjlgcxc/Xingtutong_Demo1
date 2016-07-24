@@ -17,8 +17,7 @@ public class InstructionDao {
 	//查询指令信息
 	public List<Instruction> queryInstructions(int deviceId){
 		String sql = "select * from t_instruction where deviceId=? and isSend=0";
-		Object args[] = {deviceId};
-		
+		Object args[] = {deviceId};	
 		try{
 			List<Instruction> instructions = jdbcTemplate.query(sql, args,
 											new BeanPropertyRowMapper<Instruction>(Instruction.class));
