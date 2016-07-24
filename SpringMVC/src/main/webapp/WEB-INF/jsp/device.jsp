@@ -55,6 +55,36 @@
    	 	location.href = "login.html";
 	}
 
+	//获取格式化时间
+	function GetDateTimeFormatStr(date) {
+		var seperator1 = "-";
+		var seperator2 = ":";
+		var month = date.getMonth() + 1;
+		var hours = date.getHours();
+		var minutes = date.getMinutes();
+		var strDate = date.getDate();
+		var seconds = date.getSeconds();
+		if (month >= 1 && month <= 9) {
+		    month = "0" + month;
+		}
+		if (strDate >= 0 && strDate <= 9) {
+		    strDate = "0" + strDate;
+		}
+		if(hours>=0 && hours<=9){
+			hours = "0"+hours;
+		}
+		if(minutes>=0 && minutes<=9){
+			minutes = "0"+minutes;
+		}
+		if(seconds>=0 && seconds<=9){
+			seconds = "0"+seconds;
+		}
+		var formatDate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+	            + " " + hours + seperator2 + minutes + seperator2 + seconds;
+		
+		return formatDate;
+	}
+
     $(document).ready(function(){
     	//设备相关操作(点击事件)
    		$("tr").find("#health").click(function(){
@@ -71,10 +101,10 @@
     	});
     	
     	//显示设备信息(点击事件)
-    	$("tr").find("#mac").click(function(){
-    		var mac = $(this).text();
+    	$("tr").find("#deviceName").click(function(){
+    		var deviceId = $(this).siblings("#deviceId").text();
     		$.ajax({
-    			url:"bracelet/" + mac + "/getBraceletInfo",
+    			url:"bracelet/" + deviceId + "/getBraceletInfo",
     			type:"get",
     			dataType:'json',
 				contentType: 'application/json;charset=utf-8',
@@ -94,27 +124,31 @@
         		   			shadeClose: true, //点击遮罩关闭
         		   			content: info
     					});
-    		  		}
+    		  		},
+    		  	error:
+    		  	    function(){
+    		  	    }
     		});
     		
     	});
     	
-    	//判断设备的在线状态(30分钟以内为在线)
-		var endTime = new Date().getTime();
-    	$("[id=data]").each(function(){
-    	   var time = $(this).find("#time").text();
-    	   if(time==""){
-    	   	  $(this).find("#status").text('未知');
-    	   }
-    	   else{
-           		var startTime = new Date(time.replace(/-/g,"/")).getTime();
-           		if(endTime-startTime>30*60*1000){
-           	  	 	$(this).find("#status").html('<font color="red">离线</font>');
-           		}
-           		else{
-           	   		$(this).find("#status").text('在线');
-           		}
-           }
+    	//判断设备的在线状态(30分钟以内为在线)		
+    	$("[id=data]").each(function(){ 
+    	    if($(this).find("#connectTime").text()==""){
+    	    	$(this).find("#status").text('未知');
+    	    }	     	
+    	    else{
+	    	    var startTime = parseInt($(this).find("#connectTime").text());
+	     		$(this).find("#connectTime").text(GetDateTimeFormatStr(new Date(startTime)));
+	     		
+	     		var endTime = new Date().getTime();
+	           	if(endTime-startTime>30*60*1000){
+	           	  	 $(this).find("#status").html('<font color="red">离线</font>');
+	           	}
+	           	else{
+	           	   	$(this).find("#status").text('在线');
+	           	}
+	        }
         });
     	 
    		$('#dataTables-example').DataTable({
@@ -171,10 +205,10 @@
 								<tbody>    
            							<c:forEach items="${deviceInfo}" var="item"  varStatus="status">
             						<tr id="data">
-            							<td id="id">${item.id}</td>
-            							<td id="imei">${item.imei}</td>
-            							<td id="mac"><a href="#">${item.mac}</a></td>
-            							<td id="time"><fmt:formatDate value="${item.connectTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+            							<td id="deviceId">${item.id}</td>
+            							<td id="deviceName"><a href="#">${item.name}</a></td>
+            							<td id="deviceAlias">${item.alias}</td>
+            							<td id="connectTime">${item.connectTime}</td>
             							<td id="status">未知</td>
             							<td id="operation">
             								<a class="button border-black button-medium" id="health" href="#">健康</a> 

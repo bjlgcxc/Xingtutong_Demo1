@@ -3,6 +3,7 @@ package com.framework.web;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,7 +31,7 @@ public class DeviceController {
 	BraceletService braceletService;
 	@Autowired
 	InstructionService instructionService;
-	
+
 	
 	/*
 	 * 手机登录app,发送手机信息(imei)到后台,后台返给app相应的设备id
@@ -110,11 +111,43 @@ public class DeviceController {
 	@RequestMapping(value="device.html")
 	public String getDeviceInfo(HttpServletRequest request){
 		String deviceId = request.getParameter("deviceId");
-		String imei = (String) request.getParameter("imei");
-		String mac = request.getParameter("mac");
-		List<DeviceInfo> list = deviceService.getDeviceInfo(deviceId,imei, mac);
-		request.setAttribute("deviceInfo", list);
+		String deviceName = (String) request.getParameter("deviceName");
+		String deviceAlias = request.getParameter("deviceAlias");
+		
+		JSONArray jsonArray = new JSONArray();
+		if(deviceId!=null && deviceId!=""){
+			List<DeviceInfo> deviceInfo = deviceService.getDeviceInfo(deviceId,null, null);
+			if(deviceInfo!=null){
+				List<BraceletInfo> braceletInfoList = braceletService.getBraceletInfo(deviceInfo.get(0).getMac(),deviceName, deviceAlias); 
+				if(braceletInfoList!=null){			
+					JSONObject jsonObj = new JSONObject();
+					jsonObj.put("id", deviceId);
+					jsonObj.put("name",braceletInfoList.get(0).getName());
+					jsonObj.put("alias",braceletInfoList.get(0).getAlias());
+					jsonObj.put("connectTime",deviceInfo.get(0).getConnectTime().getTime());
+					jsonArray.add(jsonObj);
+				}
+			}
+		}
+		else{
+			List<BraceletInfo> braceletInfoList = braceletService.getBraceletInfo(null,deviceName, deviceAlias); 
+			if(braceletInfoList!=null){
+				for(BraceletInfo braceletInfo:braceletInfoList){
+					JSONObject jsonObj = new JSONObject();
+					String mac = braceletInfo.getMac();
+					List<DeviceInfo> deviceInfoList = deviceService.getDeviceInfo(null,null,mac);
+					if(deviceInfoList!=null){
+						jsonObj.put("id",deviceInfoList.get(0).getId());
+						jsonObj.put("name",braceletInfo.getName());
+						jsonObj.put("alias", braceletInfo.getAlias());
+						jsonObj.put("connectTime",deviceInfoList.get(0).getConnectTime().getTime());
+						jsonArray.add(jsonObj);
+				    }
+				}
+			}
+		}
+		
+		request.setAttribute("deviceInfo", jsonArray);
 		return "device";
 	}
-
 }

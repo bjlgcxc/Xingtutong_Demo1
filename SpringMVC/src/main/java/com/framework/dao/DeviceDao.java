@@ -52,7 +52,6 @@ public class DeviceDao {
 		jdbcTemplate.update(sqlStr, args);
 	}
 	
-	
     // 获取设备信息
 	public List<DeviceInfo> getDeviceInfo(String deviceId,String imei,String mac){
 		String sql = " select * from t_device where 1=1 ";
@@ -66,7 +65,11 @@ public class DeviceDao {
 			sql += " and mac=" + "'" + mac + "'";
 		}
 		
-		return jdbcTemplate.query(sql,new BeanPropertyRowMapper<DeviceInfo>(DeviceInfo.class));
+		List<DeviceInfo> result = jdbcTemplate.query(sql,new BeanPropertyRowMapper<DeviceInfo>(DeviceInfo.class));
+		if(result.size()!=0)
+			return result;
+		else
+			return null;
 	}
 	
 }

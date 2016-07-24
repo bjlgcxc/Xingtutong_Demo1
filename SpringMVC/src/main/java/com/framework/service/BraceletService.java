@@ -1,5 +1,6 @@
 package com.framework.service;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.framework.dao.BraceletDao;
@@ -27,6 +28,9 @@ public class BraceletService {
 	
 	public BraceletInfo getBraceletInfo(String mac){
 		return braceletDao.queryBraceletInfo(mac);
+	} 
+	public List<BraceletInfo> getBraceletInfo(String mac,String deviceName,String deviceAlias){
+		return braceletDao.queryBraceletInfo(mac,deviceName,deviceAlias);
 	} 
 
 }

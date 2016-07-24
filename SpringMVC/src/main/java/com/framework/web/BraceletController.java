@@ -9,20 +9,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.BraceletInfo;
 import com.framework.service.BraceletService;
+import com.framework.service.DeviceService;
 
 @Controller
 public class BraceletController {
 	
 	@Autowired
 	BraceletService braceletService;
+	@Autowired
+	DeviceService deviceService;
 	
 	/*
 	 * 保存手环基本信息
 	 */
 	@ResponseBody
-	@RequestMapping(value="/bracelet/{mac}/getBraceletInfo",method = RequestMethod.GET)
-	public BraceletInfo getBraceletInfo(HttpServletRequest request,@PathVariable String mac){
-		 return braceletService.getBraceletInfo(mac);
+	@RequestMapping(value="/bracelet/{deviceId}/getBraceletInfo",method = RequestMethod.GET)
+	public BraceletInfo getBraceletInfo(HttpServletRequest request,@PathVariable int deviceId){
+		System.out.println("1111111111111");
+		String mac = deviceService.getDeviceMac(deviceId);
+		if(mac==null)
+			return null;
+		else
+			return braceletService.getBraceletInfo(mac);
 	}
 	
 }
