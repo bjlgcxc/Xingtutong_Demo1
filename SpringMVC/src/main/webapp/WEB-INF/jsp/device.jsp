@@ -88,15 +88,15 @@
     $(document).ready(function(){
     	//设备相关操作(点击事件)
    		$("tr").find("#health").click(function(){
-        	var deviceId = $(this).parents("td").siblings("#id").text();
+        	var deviceId = $(this).parents("td").siblings("#deviceId").text();
         	location.href="health.html?deviceId=" + deviceId;
     	});
     	$("tr").find("#position").click(function(){
-        	var deviceId = $(this).parents("td").siblings("#id").text();
+        	var deviceId = $(this).parents("td").siblings("#deviceId").text();
         	location.href="position.html?deviceId=" + deviceId;
     	});
     	$("tr").find("#config").click(function(){
-        	var deviceId = $(this).parents("td").siblings("#id").text();
+        	var deviceId = $(this).parents("td").siblings("#deviceId").text();
         	location.href="config.html?deviceId=" + deviceId;
     	});
     	
