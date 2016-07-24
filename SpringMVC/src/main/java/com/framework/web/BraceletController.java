@@ -25,7 +25,6 @@ public class BraceletController {
 	@ResponseBody
 	@RequestMapping(value="/bracelet/{deviceId}/getBraceletInfo",method = RequestMethod.GET)
 	public BraceletInfo getBraceletInfo(HttpServletRequest request,@PathVariable int deviceId){
-		System.out.println("1111111111111");
 		String mac = deviceService.getDeviceMac(deviceId);
 		if(mac==null)
 			return null;
