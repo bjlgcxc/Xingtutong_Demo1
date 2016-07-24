@@ -29,9 +29,7 @@ public class BraceletController {
 		if(mac==null)
 			return null;
 		else
-			return braceletService.getBraceletInfo(mac);
-		
-		
+			return braceletService.getBraceletInfo(mac);		
 	}
 	
 }
