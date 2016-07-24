@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="2.4"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   
+         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+   
+    <!-- 1.从类路径下加载Spring配置文件,classpath关键字特指类路径下加载 -->
+    <context-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>/WEB-INF/config/applicationContext.xml</param-value>
+    </context-param>
+    
+    <!-- 2.log4j日志输出配置 -->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name> 
+        <param-value>/WEB-INF/config/log4j.properties</param-value>
+    </context-param>
+    <listener>
+        <listener-class>
+             com.framework.utils.Log4jConfigListenerExt
+        </listener-class>
+    </listener>
+    
+    <!-- 2.负责启动Spring容器的监听器,它将引用1处的上下文参数获得Spring配置文件地址 -->
+    <listener>
+    	<listener-class>
+    		org.springframework.web.context.ContextLoaderListener
+    	</listener-class>
+    </listener>
+    
+    <!-- 3.Spring MVC的主控Servlet -->
+    <servlet>
+    	<servlet-name>spring</servlet-name>
+    	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    	<load-on-startup>3</load-on-startup>
+    </servlet>
+    
+  	<!-- 4.Spring MVC处理的URL -->
+    <servlet-mapping>
+    	<servlet-name>spring</servlet-name>
+    	<url-pattern>/</url-pattern>
+    </servlet-mapping>
+    
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    
+</web-app>
+

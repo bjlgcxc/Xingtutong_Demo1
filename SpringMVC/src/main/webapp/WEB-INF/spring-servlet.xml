@@ -1,0 +1,64 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" 
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context   
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springframework.org/schema/mvc
+    	   http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd"
+       >
+       
+       <!-- 1.扫描web包,应用Spring的注解 --> 
+       <context:component-scan base-package="com.framework.web"/>
+       
+       <!-- 2.配置视图解析器,将ModelAndView及字符串解析为具体的页面 ,通过在视图名中添加前后缀进行解析-->
+       <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+	   		p:viewClass="org.springframework.web.servlet.view.JstlView" 
+			p:prefix="/WEB-INF/jsp/"
+			p:suffix=".jsp" />
+	
+	   <!-- 3.JSON相关配置 -->
+       <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />  
+       <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >  
+          <property name="messageConverters">  
+            <list>  
+                <ref bean="mappingJacksonHttpMessageConverter"/>  
+            </list>  
+          </property>  
+       </bean>  
+       <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">  
+          <property name="supportedMediaTypes">  
+            <list>  
+                <value>text/html;charset=UTF-8</value>  
+                <value>application/json;charset=UTF-8</value>  
+                <value>application/x-www-form-urlencoded</value>  
+            </list>  
+          </property>  
+       </bean>  
+       
+       <!-- jsp页面的直接跳转 -->
+       <mvc:view-controller path="/login.html" view-name="login"/>
+       <mvc:view-controller path="/index.html" view-name="index"/>
+       <mvc:view-controller path="/health.html" view-name="health"/>
+       <mvc:view-controller path="/config.html" view-name="config"/>
+       <mvc:view-controller path="/position.html" view-name="position"/>
+       <mvc:view-controller path="/chart_heartRate.html" view-name="chart_heartRate"/>
+       <mvc:view-controller path="/chart_surfaceTem.html" view-name="chart_surfaceTem"/>
+       <mvc:view-controller path="/chart_humidity.html" view-name="chart_humidity"/>
+	   <mvc:view-controller path="/chart_temperature.html" view-name="chart_temperature"/>
+	   <mvc:view-controller path="/chart_press.html" view-name="chart_press"/>
+	   <mvc:view-controller path="/chart_sleep.html" view-name="chart_sleep"/>
+	   <mvc:view-controller path="/chart_calorie.html" view-name="chart_calorie"/>
+	   <mvc:view-controller path="/chart_step.html" view-name="chart_step"/>
+	   <mvc:view-controller path="/chart_mileage.html" view-name="chart_mileage"/> 
+	 
+	   <!-- 对静态资源的访问 的设置(由于restful风格)-->  
+	   <mvc:resources mapping="/css/**" location="/css/" />  
+	   <mvc:resources mapping="/images/**" location="/images/" />  
+       <mvc:resources mapping="/js/**" location="/js/" />  
+
+</beans>
