@@ -308,7 +308,6 @@ textarea.input{height:auto;}
 .form-x .form-button{margin-left:15%;}
 }
 @media (min-width:760px){
-.form-inline{display:inline-block;}
 .form-inline .input{width:auto;display:inline-block;}
 .form-inline .form-group{display:inline-table;padding-bottom:0;vertical-align:middle;}
 .form-inline .form-group .input-group{display:inline-table;width:auto;vertical-align:middle;}

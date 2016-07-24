@@ -11,15 +11,15 @@
   		loginState = "login";
   	}
   	
-  	String deviceId="",imei="",mac="";
+  	String deviceId="",deviceName="",deviceAlias="";
   	if(request.getParameter("deviceId")!=null){
   		deviceId = request.getParameter("deviceId");
   	}
-  	if(request.getParameter("imei")!=null){
-  		imei = request.getParameter("imei");
+  	if(request.getParameter("deviceName")!=null){
+  		deviceName = request.getParameter("deviceName");
   	}
-  	if(request.getParameter("mac")!=null){
-  		mac = request.getParameter("mac");
+  	if(request.getParameter("deviceAlias")!=null){
+  		deviceAlias = request.getParameter("deviceAlias");
   	}
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -134,19 +134,19 @@
 
 <body>
 <%@include file="naviBar.jsp"%>
-<div class="admin">
+<div class="admin" style="font-size:16px;">
 	<form method="get" action="device.html">
-		<div style="display:inline-block;"><label for="readme">ID：</label></div>
-    	<div class="field" style="display:inline-block;width:20%;"><input class="input_" type="text" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备ID"/></div>	
+		<div style="display:inline-block;"><label for="readme">设备编号：</label></div>
+    	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>	
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<div style="display:inline-block;"><label for="readme">IMEI：</label></div>
-    	<div class="field" style="display:inline-block;width:20%;"><input class="input_" type="text" name="imei" value="<%=imei%>" placeholder="请填入IMEI"/></div>	
+		<div style="display:inline-block;"><label for="readme">设备名：</label></div>
+    	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceName" value="<%=deviceName%>" placeholder="请填入设备名"/></div>	
   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  		<div style="display:inline-block;"><label for="readme">MAC：</label></div>
-    	<div class="field" style="display:inline-block;width:20%;"><input class="input_" type="text" name="mac" value="<%=mac%>" placeholder="请填入MAC "/></div>	
-  		<div style="float:right;"><button  id="clear" class="button button-block bg-green text-small">重 置</button></div>
-  		<div style="float:right;">&nbsp;&nbsp;</div>
-  		<div style="float:right;"><button type="submit" id="submit" class="button button-block bg-green text-little">查  询</button></div>
+  		<div style="display:inline-block;"><label for="readme">设备别名：</label></div>
+    	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceAlias" value="<%=deviceAlias%>" placeholder="请填入设备别名"/></div>	
+  		<div style="display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+  		<div style="display:inline-block;"><button type="submit" id="submit" class="button button-block bg-green text-little">查  询</button></div>
+  		<div style="display:inline-block;"><button  id="clear" class="button button-block bg-green text-small">重 置</button></div>
 	</form>	
 	<br/>
     <div id="page-wrapper">
@@ -160,12 +160,12 @@
 							<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 								<thead>
 									<tr>	
-										<th width="2%">ID</th>
-        								<th>IMEI</th>
-        								<th>MAC</th>
+										<th>设备编号</th>
+        								<th>设备名    </th>
+        								<th>设备别名</th>
         								<th>连接时间</th>
         								<th>连接状态</th>
-        								<th width="15%">相关操作</th>
+        								<th>相关操作</th>
 									</tr>
 								</thead>
 								<tbody>    
