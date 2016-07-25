@@ -9,6 +9,7 @@ public class Instruction implements Serializable{
 	Integer deviceId;
 	Integer isSend;
 	Integer sampleInterval;
+	Integer uploadEverytime;
 	Integer locateInterval;
 	Integer locateTimes;
 	String teleNumber;
@@ -31,6 +32,12 @@ public class Instruction implements Serializable{
 	}
 	public void setSampleInterval(Integer sampleInterval) {
 		this.sampleInterval = sampleInterval;
+	}
+	public Integer getUploadEverytime() {
+		return uploadEverytime;
+	}
+	public void setUploadEverytime(Integer uploadEverytime) {
+		this.uploadEverytime = uploadEverytime;
 	}
 	public Integer getLocateInterval() {
 		return locateInterval;
