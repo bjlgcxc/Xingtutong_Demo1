@@ -15,10 +15,10 @@
    	
 
 	<!-- 持久层配置 -->
-    <import resource="/WEB-INF/config/spring-dao.xml" />
+    <import resource="spring-dao.xml" />
     
     <!-- 服务层配置 -->
-    <import resource="/WEB-INF/config/spring-service.xml" />
+    <import resource="spring-service.xml" />
 
 </beans>
   

@@ -18,7 +18,6 @@
     </listener>
     
     <!-- 3.Spring MVC的主控Servlet -->
-     <!-- 4.Spring MVC的主控Servlet -->
     <servlet>
     	<servlet-name>spring</servlet-name>
     	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
