@@ -7,7 +7,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <script>
-    window.location.href="<c:url value="/index.html"/>";
+    window.location.href="<c:url value="login.html"/>";
 </script> 
 	
 

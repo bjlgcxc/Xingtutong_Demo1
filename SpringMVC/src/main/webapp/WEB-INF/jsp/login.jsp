@@ -3,7 +3,8 @@
 <%  
     String context = request.getContextPath();
     request.setAttribute("context",context);
-    session.setAttribute("passcode","6982");    
+    
+    String verifyCode = (String)session.getAttribute("verifyCode");    
 %>
 <html>
 <head>
@@ -38,7 +39,7 @@
 			if($("#userName").val()=='' || $("#password").val()==''){
 				layer.msg('请输入账号和密码');
 			}
-			else if($("#passcode").val()==<%=session.getAttribute("passcode")%>){
+			else if($("#verifyCode").val()==<%=verifyCode%>){
 				$.ajax({
 					url:"user/loginCheck",
 					type:"get",			
@@ -59,7 +60,7 @@
 			}
 			else{
 			    layer.msg('验证码错误');
-			    $("#passcode").val('');
+			    $("#verifyCode").val('');
 			}
 		});
 		
@@ -91,8 +92,8 @@
                     </div>
                     <div class="form-group">
                         <div class="field">
-                            <input type="text" class="input" id="passcode" name="passcode" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
-                            <img src="images/passcode.jpg" width="80" height="32" class="passcode" />
+                            <input type="text" class="input" id="verifyCode" name="verifyCode" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
+                            <img src="images/verifyCode.jpg" width="80" height="32" class="passcode" />
                             <p id="info"></p>
                         </div>                  
                     </div>               

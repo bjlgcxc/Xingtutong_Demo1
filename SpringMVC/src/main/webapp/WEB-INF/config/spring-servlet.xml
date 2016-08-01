@@ -41,7 +41,6 @@
        </bean>  
        
        <!-- jsp页面的直接跳转 -->
-       <mvc:view-controller path="/login.html" view-name="login"/>
        <mvc:view-controller path="/index.html" view-name="index"/>
        <mvc:view-controller path="/health.html" view-name="health"/>
        <mvc:view-controller path="/config.html" view-name="config"/>
