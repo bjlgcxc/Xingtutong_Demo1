@@ -8,7 +8,7 @@
 %>
 <html>
 <head>
-    <title>管理员登录</title>
+    <title>用户注册</title>
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -76,7 +76,7 @@
             <br/><br/>
             <form id="form" method="post" action="index.html">
             <div class="panel">
-                <div class="panel-head" style="text-align:center;"><h2><strong>管理员登录</strong></h2></div>
+                <div class="panel-head" style="text-align:center;"><h2><strong>用户注册</strong></h2></div>
                 <div class="panel-body" style="padding:30px;">
                     <div class="form-group">
                         <div class="field field-icon-right">
@@ -96,10 +96,9 @@
                             <img src="images/verifyCode.jpg" width="80" height="32" class="passcode" />
                             <p id="info"></p>
                         </div>                  
-                    </div>      
-                    <div style="float:right"><a href="#" style="text-decoration:underline;color:blue;">用户注册?</a></div>
+                    </div>                 
                 </div>
-                <div class="panel-foot text-center"><button type="button" id="submit" class="button button-block bg-main text-big">登录</button></div>
+                <div class="panel-foot text-center"><button type="button" id="submit" class="button button-block bg-main text-big">注册</button></div>
             </div>
             </form>
         </div>

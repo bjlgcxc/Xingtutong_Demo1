@@ -78,14 +78,24 @@ public class SpecialController {
 			basicInfo.setSex(jsonObj.getInt("sex"));
 			basicInfo.setStepLength(jsonObj.getInt("stepLength"));
 			basicInfo.setUnit(jsonObj.getInt("unit"));
-			basicInfoService.addBasicInfo(basicInfo);
+			if(basicInfoService.hasMatchBasicInfo(deviceId)){
+				basicInfoService.updateBasicInfo(basicInfo);
+			}
+			else{
+				basicInfoService.addBasicInfo(basicInfo);
+			}
 			log.info("get basicInfo");
 			
 			//插入提醒阈值信息 noticeThreshold
 			JSONObject noticeThreshold = jsonObj.getJSONObject("noticeThreshold");
 			NoticeInfo noticeInfo = (NoticeInfo)JSONObject.toBean(noticeThreshold,NoticeInfo.class);
 			noticeInfo.setDeviceId(deviceId);
-			noticeService.addNoticeInfo(noticeInfo);
+			if(noticeService.hasMatchNoticeInfo(deviceId)){
+				noticeService.updateNoticeInfo(noticeInfo);
+			}
+			else{
+				noticeService.addNoticeInfo(noticeInfo);
+			}
 			log.info("get noticeThreshold");
 			
 			//插入运动数据 sportData

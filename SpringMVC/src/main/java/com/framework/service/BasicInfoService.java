@@ -11,8 +11,16 @@ public class BasicInfoService {
 	@Autowired
 	BasicInfoDao basicInfoDao;
 	
+	public boolean hasMatchBasicInfo(int deviceId){
+		return basicInfoDao.getMatchCount(deviceId)>0;
+	}
+	
 	public void addBasicInfo(BasicInfo basicInfo){
 		basicInfoDao.insertBasicInfo(basicInfo);
+	}
+	
+	public void updateBasicInfo(BasicInfo basicInfo){
+		basicInfoDao.updateBasicInfo(basicInfo);
 	}
 	
 	public BasicInfo getBasicInfo(int deviceId){

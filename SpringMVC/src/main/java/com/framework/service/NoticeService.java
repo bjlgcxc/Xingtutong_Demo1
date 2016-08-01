@@ -11,8 +11,16 @@ public class NoticeService {
 	@Autowired
 	NoticeDao noticeDao;
 	
+	public boolean hasMatchNoticeInfo(int deviceId){
+		return noticeDao.getMatchCount(deviceId)>0;
+	}
+	
 	public void addNoticeInfo(NoticeInfo noticeInfo){
 		noticeDao.insertNoticeInfo(noticeInfo);
+	}
+	
+	public void updateNoticeInfo(NoticeInfo noticeInfo){
+		noticeDao.updateNoticeInfo(noticeInfo);
 	}
 	
 	public NoticeInfo getNoticeInfo(int deviceId){

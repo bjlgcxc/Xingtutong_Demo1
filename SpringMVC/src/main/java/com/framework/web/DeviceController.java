@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.BraceletInfo;
+import com.framework.domain.ConfigInfo;
 import com.framework.domain.DeviceInfo;
 import com.framework.service.BraceletService;
+import com.framework.service.ConfigService;
 import com.framework.service.DeviceService;
 import com.framework.service.InstructionService;
 
@@ -31,7 +33,8 @@ public class DeviceController {
 	BraceletService braceletService;
 	@Autowired
 	InstructionService instructionService;
-
+	@Autowired
+	ConfigService configService;
 	
 	/*
 	 * 手机登录app,发送手机信息(imei)到后台,后台返给app相应的设备id
@@ -86,6 +89,14 @@ public class DeviceController {
 			braceletService.addBraceletInfo(braceletInfo);
 		else{
 			braceletService.updateBraceletInfo(braceletInfo);
+		}
+		
+		//若没有配置信息，则插入默认配置
+		if(!configService.hasMatchConfig(deviceId)){
+			ConfigInfo configInfo = new ConfigInfo();
+			configInfo.setSampleInterval(60);
+			configInfo.setUploadEverytime(1);
+			configService.insertConfigInfo(configInfo);
 		}
 		
 		log.info("get bracelet info");
