@@ -132,6 +132,29 @@
     		
     	});
     	
+    	//修改设备别名
+    	$("tr").find("#deviceAlias").click(function(){
+    		var deviceId = $(this).siblings("#deviceId").text();  
+    		layer.prompt({
+    				title:"修改设备别名",
+    				formType:0
+    			},
+    			function(val){	  	
+    				$.ajax({
+    					url:"bracelet/" + deviceId + "/updateBraceletAlias",
+    					type:"post",
+    					data:{deviceAlias:val},
+    					success:function(){
+    						location.href="device.html";
+    					},
+    					error:function(){
+    						alert('error');
+    					}
+    				});
+    		    }
+    		); 		
+    	});
+    	
     	//判断设备的在线状态(30分钟以内为在线)		
     	$("[id=data]").each(function(){ 
     	    if($(this).find("#connectTime").text()==""){
@@ -205,7 +228,7 @@
             						<tr id="data">
             							<td id="deviceId">${item.id}</td>
             							<td id="deviceName"><a href="#">${item.name}</a></td>
-            							<td id="deviceAlias">${item.alias}</td>
+            							<td id="deviceAlias"><a href="#">${item.alias}</a></td>
             							<td id="connectTime">${item.connectTime}</td>
             							<td id="status">未知</td>
             							<td id="operation">

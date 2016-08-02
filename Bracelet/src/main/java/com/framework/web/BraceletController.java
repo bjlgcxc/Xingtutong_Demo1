@@ -32,4 +32,15 @@ public class BraceletController {
 			return braceletService.getBraceletInfo(mac);		
 	}
 	
+	/*
+	 * 修改设备别名
+	 */
+	@ResponseBody
+	@RequestMapping(value="/bracelet/{deviceId}/updateBraceletAlias",method = RequestMethod.POST)
+	public void updateBraceletAlias(HttpServletRequest request,@PathVariable int deviceId){
+		String mac = deviceService.getDeviceMac(deviceId);
+		String alias = request.getParameter("deviceAlias");
+		braceletService.updateBraceletAlias(mac, alias);
+	}
+	
 }

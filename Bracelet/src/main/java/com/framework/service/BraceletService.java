@@ -29,6 +29,10 @@ public class BraceletService {
 		braceletDao.updateBraceletStateInfo(braceletInfo);
 	}
 	
+	public void updateBraceletAlias(String mac,String alias){
+		braceletDao.updateBraceletAlias(mac,alias);
+	}
+	
 	public BraceletInfo getBraceletInfo(String mac){
 		return braceletDao.queryBraceletInfo(mac);
 	}

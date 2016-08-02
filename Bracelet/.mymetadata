@@ -3,7 +3,7 @@
   type="WEB"
   name="Bracelet"
   id="myeclipse.1467885256998"
-  context-root="/SpringMVC"
+  context-root="/Bracelet"
   j2ee-spec="1.7"
   archive="Bracelet.war">
   <attributes>

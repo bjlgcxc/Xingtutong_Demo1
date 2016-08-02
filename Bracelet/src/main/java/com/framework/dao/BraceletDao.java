@@ -43,6 +43,13 @@ public class BraceletDao {
 		jdbcTemplate.update(sqlStr,args);
 	}
 	
+	// 更新手环设备别名
+	public void updateBraceletAlias(String mac,String alias){
+		String sql = " update t_bracelet set alias=? where mac=? ";
+		Object args[] = new Object[]{alias,mac};
+		jdbcTemplate.update(sql,args);
+	}
+	
 	// 获取手环信息
 	public BraceletInfo queryBraceletInfo(String mac){
 		String sql = " select * from t_bracelet where mac=? ";
