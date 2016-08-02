@@ -57,7 +57,7 @@
                     <strong>admin</strong>
                 </div>
                 <div class="panel-foot bg-back border-back" style="height:30%">
-                	<p>您好，${user.userName},这是您第 ${user.loginCount} 次登录 </p><p>上次登录为 ${user.lastLogin}</p>
+                	<p>您好,${user.userName},这是您第 ${user.loginCount} 次登录 </p><p>上次登录为 ${user.lastLogin}</p>
                 </div>
             </div>
         </div>
