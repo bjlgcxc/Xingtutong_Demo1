@@ -307,9 +307,10 @@
 <body>
 <%@include file="naviBar.jsp"%>
 <div class="admin" style="padding:8px">
-	<div class="label" style="display:inline-block;"><label>DeviceId：</label></div>
-   	<div class="field" style="display:inline-block;width:13%;"><input class="input_" type="text" id="deviceId" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备ID"/></div>&nbsp;&nbsp;&nbsp;&nbsp;
-    <div class="label" style="display:inline-block;"><label>时间：</label></div>
+	<div class="label" style="display:inline-block;"><label style="font-size:15px">设备编号：</label></div>
+   	<div class="field" style="display:inline-block;width:13%;"><input class="input_" type="text" id="deviceId" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;
+    <div class="label" style="display:inline-block;"><label style="font-size:15px">时间：</label></div>
     <div class="field" style="display:inline-block;width:13%;"><input class="input" id="start" type="text"/></div>
     <div class="label" style="display:inline-block;"><label>~</label></div>
     <div class="field" style="display:inline-block;width:13%;"><input class="input" id="end" type="text"/></div>&nbsp;&nbsp;&nbsp;&nbsp;

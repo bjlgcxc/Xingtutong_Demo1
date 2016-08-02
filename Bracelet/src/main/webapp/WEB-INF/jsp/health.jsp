@@ -195,7 +195,7 @@
 <div class="admin">
 	<form method="get" id="form">
 		<div class="field" style="display:inline-block;width:36%;">&nbsp;</div>
-    	<div class="field" style="display:inline-block;width:18%;"><input class="input_" type="text" id="deviceId" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备ID"/></div>	
+    	<div class="field" style="display:inline-block;width:18%;"><input class="input_" type="text" id="deviceId" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>	
   		<div style="display:inline-block;"><button type="button" id="query" class="button button-block bg-green text-small"><h5> 查  询</h5></button></div>
 		<div style="display:inline-block;"><button type="button" id="clear" class="button button-block bg-green text-small"><h5> 重 置</h5></button></div>
 		<div>&nbsp;</div>

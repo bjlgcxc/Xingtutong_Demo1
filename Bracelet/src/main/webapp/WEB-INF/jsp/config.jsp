@@ -274,11 +274,11 @@
 <%@include file="naviBar.jsp"%>
 
 <!-- Tab形式  -->
-<div class="admin">
+<div class="admin" style="font-size:15px">
 	<div>
-		<div class="label" style="display:inline-block;width:5.5%"><label for="readme">DeviceId:</label></div>
+		<div class="label" style="display:inline-block;width:5.5%"><label for="readme">设备编号:</label></div>
     	<div class="field" style="display:inline-block;width:16%;">
-    		<input class="input_" type="text" id="deviceId" value="<%=deviceId%>" placeholder="请填入设备ID"/>
+    		<input class="input_" type="text" id="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/>
     	</div>	
     </div>
     <br/>

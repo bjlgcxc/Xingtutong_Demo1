@@ -191,15 +191,15 @@
 
 <body>
 <%@include file="naviBar.jsp"%>
-<div class="admin" style="font-size:16px;">
+<div class="admin">
 	<form method="get" action="device.html">
-		<div style="display:inline-block;"><label for="readme">设备编号：</label></div>
+		<div style="display:inline-block;"><label style="font-size:15px" for="readme">设备编号：</label></div>
     	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>	
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<div style="display:inline-block;"><label for="readme">设备名：</label></div>
+		<div style="display:inline-block;"><label style="font-size:15px" for="readme">设备名：</label></div>
     	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceName" value="<%=deviceName%>" placeholder="请填入设备名"/></div>	
   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  		<div style="display:inline-block;"><label for="readme">设备别名：</label></div>
+  		<div style="display:inline-block;"><label style="font-size:15px" for="readme">设备别名：</label></div>
     	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceAlias" value="<%=deviceAlias%>" placeholder="请填入设备别名"/></div>	
   		<div style="display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
   		<div style="display:inline-block;"><button type="submit" id="submit" class="button button-block bg-green text-medium">查  询</button></div>
