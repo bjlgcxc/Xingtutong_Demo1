@@ -48,13 +48,9 @@ public class InstructionController {
 	public void saveSampleInterval(HttpServletRequest request,@PathVariable int deviceId){
 		int sampleInterval = 0;
 		String minutes = request.getParameter("minutes");
-		String seconds = request.getParameter("seconds");
 		if(minutes!=""){
 			sampleInterval += 60*Integer.parseInt(minutes);
-		}
-		if(seconds!=""){
-			sampleInterval += Integer.parseInt(seconds);
-		}
+		}		
 		
 		instructionService.addSampleInterval(deviceId, sampleInterval);
 		

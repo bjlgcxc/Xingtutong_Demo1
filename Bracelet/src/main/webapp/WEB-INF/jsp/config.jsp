@@ -60,22 +60,20 @@
 		//form1表单提交
 		$("#submit1").click(function(){
 			var $deviceId = $("#deviceId").val();
-			var $minutes = $("#minutes").val();
-			var $seconds = $("#seconds").val();
-			if($minutes=='' && $seconds=='' || $("#deviceId").val()==''){
+			var $minutes = $("#minutes").val();			
+			if($minutes=='' || $("#deviceId").val()==''){
 				return;
 			}
 			else{
-				var m = Number($minutes);
-				var s = Number($seconds);
-				if(isNaN(m) || isNaN(s)){
+				var m = Number($minutes);		
+				if(isNaN(m)){
 					$(".info").text('格式错误!');
 					$("#form1").resetForm();
 					return;
 				}
 				else{
 					$.ajax({url:"instruction/"+ $deviceId + "/saveSampleInterval",
-							data:{minutes:$minutes,seconds:$seconds},
+							data:{minutes:$minutes},
 							type:"post",
 							success:function(data){
 							},
@@ -304,17 +302,11 @@
         	<br/>
         	<form method="post" class="form-x" id="form1">       
                 <div class="form-group">
-                    <div class="label"><label for="desc">分钟 :</label></div>
+                    <div class="label"><label for="desc">采集间隔(分钟) :</label></div>
                     <div class="field" style="width:15%;">
-                    	<input type="text" class="input" id="minutes" name="minutes" placeholder="请填入分钟数" />
+                    	<input type="text" class="input" id="minutes" name="minutes" placeholder="请填入数据采集间隔" />
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="label"><label for="desc">秒 : </label></div>
-                    <div class="field" style="width:15%;">
-                    	<input type="text" class="input" id="seconds" name="seconds" placeholder="请填入秒数" />
-                    </div>
-                </div>            
+                </div> 
             	<div style="width:20%;text-align:right"><font color="red"><p class="info">&nbsp;</p></font></div>
                 <div>
                 	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit1" type="button">提交</button></div>
@@ -346,13 +338,13 @@
         	<br/>
         	<form method="post" class="form-x" id="form2">         
                 <div class="form-group">
-                    <div class="label"><label for="desc">间隔(秒) : </label></div>
+                    <div class="label"><label for="desc">定位间隔(秒) : </label></div>
                     <div class="field" style="width:15%;">
                     	<input type="text" class="input" id="locateInterval" name="locateInterval" value=15 placeholder="请填入间隔时间" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="label"><label for="desc">次数 :</label></div>
+                    <div class="label"><label for="desc">定位次数 :</label></div>
                     <div class="field" style="width:15%;">
                     	<input type="text" class="input" id="locateTimes" name="locateTimes" value=15 placeholder="请填入定位次数" />
                     </div>
