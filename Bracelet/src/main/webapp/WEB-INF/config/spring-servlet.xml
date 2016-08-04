@@ -46,6 +46,7 @@
        <mvc:view-controller path="/health.html" view-name="health"/>
        <mvc:view-controller path="/config.html" view-name="config"/>
        <mvc:view-controller path="/position.html" view-name="position"/>
+       <mvc:view-controller path="/system.html" view-name="system"/>
        <mvc:view-controller path="/chart_heartRate.html" view-name="chart_heartRate"/>
        <mvc:view-controller path="/chart_surfaceTem.html" view-name="chart_surfaceTem"/>
        <mvc:view-controller path="/chart_humidity.html" view-name="chart_humidity"/>
