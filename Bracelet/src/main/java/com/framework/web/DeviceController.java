@@ -55,13 +55,22 @@ public class DeviceController {
 		else{
 			deviceInfo.setId(deviceService.getDeviceId(imei));
 			deviceService.updateConnectTime(deviceInfo);
-		}
+		}		
 		
 		//返回imei和id的对应信息
 		int id = deviceService.getDeviceId(imei);
 		deviceInfo = new DeviceInfo();
 		deviceInfo.setId(id);
 		deviceInfo.setImei(imei);
+		
+		//若没有配置信息，则插入默认配置
+		if(!configService.hasMatchConfig(id)){
+			ConfigInfo configInfo = new ConfigInfo();
+			configInfo.setDeviceId(id);
+			configInfo.setSampleInterval(60);
+			configInfo.setUploadEverytime(1);
+			configService.insertConfigInfo(configInfo);
+		}
 		
 		log.info("get imei and return id");
 		return deviceInfo;
@@ -90,15 +99,7 @@ public class DeviceController {
 		else{
 			braceletService.updateBraceletInfo(braceletInfo);
 		}
-		
-		//若没有配置信息，则插入默认配置
-		if(!configService.hasMatchConfig(deviceId)){
-			ConfigInfo configInfo = new ConfigInfo();
-			configInfo.setSampleInterval(60);
-			configInfo.setUploadEverytime(1);
-			configService.insertConfigInfo(configInfo);
-		}
-		
+			
 		log.info("get bracelet info");
 		return "redirect:/app/instruction/" + deviceId + "/returnJsonArray";
 	}
