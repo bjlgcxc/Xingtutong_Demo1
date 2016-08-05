@@ -35,23 +35,64 @@
 </head>
 
 <script>
-  $(document).ready(function(){
-  	   $.ajax({
-  	   	  url:"sysDefault/getSysDefault",
-  	   	  type:"get",
-  	   	  dataType:"json",
-  	   	  success:function(data){
-  	   	  	 $("#sampleInterval").val(data.sampleInterval);
-  	   	  	 $("#uploadEverytime").val(data.uploadEverytime);
-			 $("#locateInterval").val(data.locateInterval);
-			 $("#locateTimes").val(data.locateTimes);
-  	   	  },
-  	   	  error:function(){
-  	   	  	alert('error');
-  	   	  }	   
-  	   });	   
-  
-  });
+	function setDefault(){
+		$.ajax({
+	  	   	  url:"sysDefault/getSysDefault",
+	  	   	  type:"get",
+	  	   	  dataType:"json",
+	  	   	  success:function(data){
+	  	   	  	 $("#sampleInterval").val(data.sampleInterval);
+	  	   	  	 $("#uploadEverytime").val(data.uploadEverytime);
+				 $("#locateInterval").val(data.locateInterval);
+				 $("#locateTimes").val(data.locateTimes);
+	  	   	  },
+	  	   	  error:function(){
+	  	   	  	alert('error');
+	  	   	  }	   
+	  	});	
+	}
+    
+    $(document).ready(function(){
+  	    setDefault();
+  	    $("#submit").click(function(){
+  	    	//判断是否有未填
+  	    	if($("#sampleInterval").val()=='' || $("#uploadEverytime").val()=='' || 
+  	    						$("#locateInterval").val()=='' || $("#locateTimes").val()==''){
+  	    		 return;
+  	    	}
+  	    	//判断数据格式
+  	    	var $sampleInterval = Number($("#sampleInterval").val());
+  	    	var $uploadEverytime = Number($("#uploadEverytime").val());
+  	    	var $locateInterval = Number($("#locateInterval").val());
+  	    	var $locateTimes = Number($("#locateTimes").val());
+  	    	if(isNaN($sampleInterval) || isNaN($uploadEverytime) || isNaN($locateInterval) || isNaN($locateTimes)){
+  	    		layer.msg('格式错误');
+  	    		return;		
+  	    	}
+  	    	//更新默认配置
+  	    	$.ajax({
+	  	   	   url:"sysDefault/updateSysDefault",
+	  	   	   type:"post",
+	  	   	   data:{
+	  	   	   		sampleInterval:$sampleInterval,uploadEverytime:$uploadEverytime,
+	  	   	        locateInterval:$locateInterval,locateTimes:$locateTimes
+	  	   	   },
+	  	   	   success:function(data){
+	 			  layer.alert('更新成功!',function(){
+	 			 	 location.href="system.html";
+	 			  });
+	  	   	   },
+	  	   	   error:function(){
+	  	   	  	  layer.alert('更新失败!');
+	  	   	   }	   
+	  		});	
+  	    });
+		
+		$("#reset").click(function(){
+			setDefault();
+		});
+		
+    });
 
 </script>
 
@@ -94,7 +135,7 @@
        <div class="form-button">
        	   <button class="button bg-main" type="button" id="submit">提交</button>
        	   &nbsp;&nbsp;
-   	   	   <button class="button bg-main" type="reset" id="reset">重置</button>
+   	   	   <button class="button bg-main" type="button" id="reset">重置</button>
    	   </div>
    </form>
 </div>

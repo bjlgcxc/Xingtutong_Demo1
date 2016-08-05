@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.BraceletInfo;
 import com.framework.domain.ConfigInfo;
 import com.framework.domain.DeviceInfo;
-import com.framework.domain.SysDefault;
+import com.framework.domain.SystemInfo;
 import com.framework.service.BraceletService;
 import com.framework.service.ConfigService;
 import com.framework.service.DeviceService;
 import com.framework.service.InstructionService;
-import com.framework.service.SysDefaultService;
+import com.framework.service.SystemService;
 
 @Controller
 public class DeviceController {
@@ -38,7 +38,7 @@ public class DeviceController {
 	@Autowired
 	ConfigService configService;
 	@Autowired
-	SysDefaultService sysDefaultService;
+	SystemService sysDefaultService;
 	
 	/*
 	 * 手机登录app,发送手机信息(imei)到后台,后台返给app相应的设备id
@@ -69,7 +69,7 @@ public class DeviceController {
 		
 		//若没有配置信息，则插入默认配置
 		if(!configService.hasMatchConfig(id)){
-			SysDefault sysDefault = sysDefaultService.getSysDefault();
+			SystemInfo sysDefault = sysDefaultService.getSysDefault();
 			ConfigInfo configInfo = new ConfigInfo();
 			configInfo.setDeviceId(id);
 			configInfo.setSampleInterval(sysDefault.getSampleInterval());

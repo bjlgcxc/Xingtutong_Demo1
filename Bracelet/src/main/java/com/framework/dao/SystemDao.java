@@ -6,24 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import com.framework.domain.SysDefault;
+import com.framework.domain.SystemInfo;
 
 @Repository
-public class SysDefaultDao {
+public class SystemDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
 	
-	public SysDefault querySysDefault(){
-		String sql = " select * from t_sysdefault ";
-		List<SysDefault> result =  jdbcTemplate.query(sql,new BeanPropertyRowMapper<SysDefault>(SysDefault.class));
+	public SystemInfo querySysDefault(){
+		String sql = " select * from t_system ";
+		List<SystemInfo> result =  jdbcTemplate.query(sql,new BeanPropertyRowMapper<SystemInfo>(SystemInfo.class));
 		return result.get(0);
 	}
 	
-	public void updateSysDefault(SysDefault sysDefault){
-		String sql = " update t_sysdefault set sampleInterval=? and uploadEverytime=?" +
-	                             " and locateInterval=? and locateTimes=? ";
+	public void updateSysDefault(SystemInfo sysDefault){
+		String sql = " update t_system set sampleInterval=?,uploadEverytime=?,locateInterval=?,locateTimes=? where id=1";
 		Object args[] = new Object[]{sysDefault.getSampleInterval(),sysDefault.getUploadEverytime(),
 				sysDefault.getLocateInterval(),sysDefault.getLocateTimes()};
 		jdbcTemplate.update(sql, args);

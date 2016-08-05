@@ -233,7 +233,7 @@
 					}
 					else if(type==3){
 						if(data.locateInterval!=null && data.locateTimes!=null){
-							$("#text").text("紧急定位的最新设置为： 间隔" + data.locateInterval + "秒," + data.locateTimes + "次");
+							$("#text").text("紧急定位的最新设置为： 间隔" + data.locateInterval + "秒,采集" + data.locateTimes + "次");
 						}
 						else{
 							$("#text").text("没有紧急定位的历史设置");
@@ -289,8 +289,8 @@
       	<div class="tab-head">
         	<strong>设备设置</strong>
         	<ul class="tab-nav">
-          		<li class="active" id="tab1"><a href="#tab-set1">&nbsp;数据采集&nbsp;</a></li>
-          		<li><a href="#tab-set2" id="tab2">&nbsp;数据上传&nbsp;</a></li>
+          		<li class="active" id="tab1"><a href="#tab-set1">&nbsp;手环采集&nbsp;</a></li>
+          		<li><a href="#tab-set2" id="tab2">&nbsp;位置采集&nbsp;</a></li>
           		<li><a href="#tab-set3" id="tab3">&nbsp;紧急定位&nbsp;</a></li>
           		<li><a href="#tab-set4" id="tab4">&nbsp;基本信息&nbsp;</a></li>
         	</ul>
@@ -340,13 +340,13 @@
                 <div class="form-group">
                     <div class="label"><label for="desc">定位间隔(秒) : </label></div>
                     <div class="field" style="width:15%;">
-                    	<input type="text" class="input" id="locateInterval" name="locateInterval" value=15 placeholder="请填入间隔时间" />
+                    	<input type="text" class="input" id="locateInterval" name="locateInterval" placeholder="请填入间隔时间" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="label"><label for="desc">定位次数 :</label></div>
                     <div class="field" style="width:15%;">
-                    	<input type="text" class="input" id="locateTimes" name="locateTimes" value=15 placeholder="请填入定位次数" />
+                    	<input type="text" class="input" id="locateTimes" name="locateTimes" placeholder="请填入定位次数" />
                     </div>
                 </div>            
             	<div style="width:20%;text-align:right"><font color="red"><p class="info">&nbsp;</p></font></div>

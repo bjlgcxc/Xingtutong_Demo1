@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 
 @SuppressWarnings("serial")
-public class SysDefault implements Serializable{
+public class SystemInfo implements Serializable{
 
 	public Integer id;
 	public Integer sampleInterval;
