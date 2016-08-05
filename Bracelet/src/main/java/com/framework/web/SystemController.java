@@ -20,13 +20,18 @@ public class SystemController {
 	@ResponseBody
 	@RequestMapping(value="/sysDefault/getSysDefault")
 	public JSONObject getSysDefault(){
-		return JSONObject.fromObject(systemService.getSysDefault());
+		SystemInfo systemInfo = systemService.getSysDefault();
+		systemInfo.setBraceletInterval(systemInfo.getBraceletInterval()/60);
+		systemInfo.setLocationInterval(systemInfo.getLocationInterval()/60);
+		return JSONObject.fromObject(systemInfo);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/sysDefault/updateSysDefault")
-	public void updateSysDefault(SystemInfo sysDefault){
-		systemService.updateSysDefault(sysDefault);
+	public void updateSysDefault(SystemInfo sysInfo){
+		sysInfo.setBraceletInterval(sysInfo.getBraceletInterval()*60);
+		sysInfo.setLocationInterval(sysInfo.getLocationInterval()*60);
+		systemService.updateSysDefault(sysInfo);
 	}
 	
 }

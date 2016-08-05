@@ -952,7 +952,7 @@ a.text-black:hover{color:#666;}
 {color:#f60;}
 .text-blue, a.text-blue:link, a.text-blue:visited,.button.border-blue,.button.bg-blue-light,blockquote.border-blue strong,.pager.border-blue a,.pager-prev.border-blue,.pager-next.border-blue,.badge.bg-blue-light,.alert-blue
 {color:#0ae;}
-.text-green, a.text-green:link, a.text-green:visited,.button.border-green,.button.bg-green-light,blockquote.border-green strong,.pager.border-green a,.pager-prev.border-green,.pager-next.border-green,.badge.bg-green-light,.alert-green,.check-success
+.text-green, a.text-green:link, a.text-green:visited,.button.border-green,.button.bg-green-light,blockquote.border-green strong,.pager.border-green a,.pager-prev.border-green,.pager-next.border-green,.badge.bg-green-light,.alert-green
 {color:#2c7;}
 .text-red-light, a.text-red-light:link, a.text-red-light:visited,.button.border-red-light,blockquote.border-red-light strong,.pager.border-red-light a
 {color:#fdc;}
@@ -1005,7 +1005,7 @@ a.text-white:hover, .bg-inverse a:hover{color:#ddd;}
 {border-color:#f60;}
 .border-blue,.border-blue .button,.border-blue .tab-nav li a,.border-blue .tab-body,.button.bg-blue,.selected.border-blue,.pointer.border-blue li,.nav.border-blue .active a,.nav.nav-tabs.border-blue,.nav-main.border-blue a, .nav-main.border-blue .nav-head,.pagination.border-blue li,.pager.border-blue a
 {border-color:#0ae;}
-.border-green,.border-green .button,.border-green .tab-nav li a,.border-green .tab-body,.button.bg-green,.selected.border-green,.pointer.border-green li,.check-success .input,.nav.border-green .active a,.nav.nav-tabs.border-green,.nav-main.border-green a, .nav-main.border-green .nav-head,.pagination.border-green li,.pager.border-green a
+.border-green,.border-green .button,.border-green .tab-nav li a,.border-green .tab-body,.button.bg-green,.selected.border-green,.pointer.border-green li,.nav.border-green .active a,.nav.nav-tabs.border-green,.nav-main.border-green a, .nav-main.border-green .nav-head,.pagination.border-green li,.pager.border-green a
 {border-color:#2c7;}
 .border-red-light,.border-red-light .button,.border-red-light .tab-nav li a,.border-red-light .tab-body,.button.bg-red-light,.selected.border-red-light,.alert-red,.pointer.border-red-light li,.nav.border-red-light .active a,.nav.nav-tabs.border-red-light,.nav-main.border-red-light a, .nav-main.border-red-light .nav-head,.pagination.border-red-light li,.pager.border-red-light a
 {border-color:#fee;}

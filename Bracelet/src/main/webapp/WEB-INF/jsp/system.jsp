@@ -41,10 +41,13 @@
 	  	   	  type:"get",
 	  	   	  dataType:"json",
 	  	   	  success:function(data){
-	  	   	  	 $("#sampleInterval").val(data.sampleInterval);
-	  	   	  	 $("#uploadEverytime").val(data.uploadEverytime);
-				 $("#locateInterval").val(data.locateInterval);
-				 $("#locateTimes").val(data.locateTimes);
+	  	   	  	  $("#braceletInterval").val(data.braceletInterval);
+				  $("#braceletUpload").val(data.braceletUpload);
+				  $("#locationInterval").val(data.locationInterval);	
+				  $("#locationUpload").val(data.locationUpload);
+				  $("#locateInterval").val(data.locateInterval);
+				  $("#locateTimes").val(data.locateTimes);
+				  $("#teleNumber").val(data.teleNumber);   	
 	  	   	  },
 	  	   	  error:function(){
 	  	   	  	alert('error');
@@ -54,41 +57,8 @@
     
     $(document).ready(function(){
   	    setDefault();
-  	    $("#submit").click(function(){
-  	    	//判断是否有未填
-  	    	if($("#sampleInterval").val()=='' || $("#uploadEverytime").val()=='' || 
-  	    						$("#locateInterval").val()=='' || $("#locateTimes").val()==''){
-  	    		 return;
-  	    	}
-  	    	//判断数据格式
-  	    	var $sampleInterval = Number($("#sampleInterval").val());
-  	    	var $uploadEverytime = Number($("#uploadEverytime").val());
-  	    	var $locateInterval = Number($("#locateInterval").val());
-  	    	var $locateTimes = Number($("#locateTimes").val());
-  	    	if(isNaN($sampleInterval) || isNaN($uploadEverytime) || isNaN($locateInterval) || isNaN($locateTimes)){
-  	    		layer.msg('格式错误');
-  	    		return;		
-  	    	}
-  	    	//更新默认配置
-  	    	$.ajax({
-	  	   	   url:"sysDefault/updateSysDefault",
-	  	   	   type:"post",
-	  	   	   data:{
-	  	   	   		sampleInterval:$sampleInterval,uploadEverytime:$uploadEverytime,
-	  	   	        locateInterval:$locateInterval,locateTimes:$locateTimes
-	  	   	   },
-	  	   	   success:function(data){
-	 			  layer.alert('更新成功!',function(){
-	 			 	 location.href="system.html";
-	 			  });
-	  	   	   },
-	  	   	   error:function(){
-	  	   	  	  layer.alert('更新失败!');
-	  	   	   }	   
-	  		});	
-  	    });
-		
-		$("#reset").click(function(){
+		$(".form-reset").mousedown(function(){
+			setTimeout(function(){$(".form-reset").click()},0);
 			setDefault();
 		});
 		
@@ -98,46 +68,67 @@
 
 <body>
 <%@include file="naviBar.jsp"%>
-<div class="admin" style="font-size:15px">
-   <form method="post" class="form-x" action="system.html"> 
-   	   <div class="form-group">
-           <div class="label" style="font-size:18px"><label for="sitename">系统默认配置：</label></div>
+<div class="admin" style="font-size:15px;">
+   <div class="panel">
+      <div class="panel-head" style="font-size:18px"><strong>系统默认配置</strong></div>
+   <form method="post" class="form-x" action="sysDefault/updateSysDefault"> 
+       <br/><br/>
+       <div class="form-group">
+           <div class="label" style="width:20%;"><label>采集间隔(手环):&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+           <div class="field" style="width:12%;">
+               <input type="text" class="input" id="braceletInterval" name="braceletInterval" size="50" placeholder="填写手环数据采集间隔" data-validate="required:请填写数据采集间隔,number:格式错误(数字)" />
+           </div>  
+           <div class="label" style="width:3%;"><label>分钟</label></div>          
        </div>
        <br/>
        <div class="form-group">
-           <div class="label"><label for="sampleInterval">数据采集间隔 </label></div>
-           <div class="field" style="width:16%;">
-               <input type="text" class="input" id="sampleInterval" size="50" placeholder="填写数据采集间隔" data-validate="required:请填写数据采集间隔" />
+           <div class="label" style="width:20%;"><label>上传条数(手环):&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+           <div class="field" style="width:12%;">
+               <input type="text" class="input" id="braceletUpload" name="braceletUpload" size="50" placeholder="填写上传手环数据条数" data-validate="required:请填写上传数据条数,number:格式错误(数字)" />
            </div>
+           <div class="label" style="width:2%;"><label>条</label></div> 
        </div>
        <br/>
        <div class="form-group">
-           <div class="label"><label for="uploadEverytime">上传数据条数</label></div>
-           <div class="field" style="width:16%;">
-               <input type="text" class="input" id="uploadEverytime" size="50" placeholder="填写上传数据条数" data-validate="required:请填写上传数据条数" />
+           <div class="label" style="width:20%;"><label>采集间隔(位置):&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+           <div class="field" style="width:12%;">
+               <input type="text" class="input" id="locationInterval" name="locationInterval" size="50" placeholder="填写位置数据采集间隔" data-validate="required:请填写数据采集间隔,number:格式错误(数字)" />
            </div>
+           <div class="label" style="width:3%;"><label>分钟</label></div> 
        </div>
        <br/>
        <div class="form-group">
-           <div class="label"><label for="locateInterval">紧急定位间隔</label></div>
-           <div class="field" style="width:16%;">
-               <input type="text" class="input" id="locateInterval" size="50" placeholder="填写紧急定位间隔" data-validate="required:请填写紧急定位间隔" />
+           <div class="label" style="width:20%;"><label>上传条数(位置):&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+           <div class="field" style="width:12%;">
+               <input type="text" class="input" id="locationUpload" name="locationUpload" size="50" placeholder="填写上传位置数据条数" data-validate="required:请填写上传数据条数,number:格式错误(数字)" />
            </div>
+           <div class="label" style="width:2%;"><label>条</label></div> 
        </div>
        <br/>
        <div class="form-group">
-           <div class="label"><label for="locateTimes">紧急定位次数</label></div>
-           <div class="field" style="width:16%;">
-               <input type="text" class="input" id="locateTimes" size="50" placeholder="填写紧急定位次数" data-validate="required:请填写紧急定位次数" />
+           <div class="label" style="width:20%;"><label>紧急定位间隔:&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+           <div class="field" style="width:12%;">
+               <input type="text" class="input" id="locateInterval" name="locateInterval" size="50" placeholder="填写紧急定位间隔" data-validate="required:请填写紧急定位间隔,number:格式错误(数字)" />
            </div>
+           <div class="label" style="width:2%;"><label>秒</label></div> 
+       </div>
+       <br/>
+       <div class="form-group">
+           <div class="label" style="width:20%;"><label>紧急定位次数:&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+           <div class="field" style="width:12%;">
+               <input type="text" class="input" id="locateTimes" name="locateTimes" size="50" placeholder="填写紧急定位次数" data-validate="required:请填写紧急定位次数,number:格式错误(数字)" />
+           </div>
+           <div class="label" style="width:2%;"><label>次</label></div> 
        </div>
        <br/><br/>   
-       <div class="form-button">
-       	   <button class="button bg-main" type="button" id="submit">提交</button>
+       <div class="form-button" style="margin-left:20%;">
+       	   <button class="button bg-main form-submit" type="submit" id="submit">提交</button>
        	   &nbsp;&nbsp;
-   	   	   <button class="button bg-main" type="button" id="reset">重置</button>
+   	   	   <button class="button bg-main form-reset" type="reset">重置</button>
    	   </div>
+   	   <br/><br/>
    </form>
+</div>
 </div>
 </body>
 </html>

@@ -18,7 +18,7 @@
             </span>
             <ul class="nav nav-inline admin-nav">
                 <li id="index"><a href="index.html" class="icon-home"> 首页</a></li>	
-                <li id="user"><a href="device.html" class="icon-user"> 设备</a></li>
+                <li id="user"><a href="device.html" class="icon-rocket"> 设备</a></li>
                 <li id="health"><a href="health.html" class="icon-heart"> 健康</a></li>      
                 <li id="position"><a href="position.html" class="icon-map-marker"> 位置</a></li>
                 <li id="config"><a href="config.html" class="icon-cog"> 设置</a></li>

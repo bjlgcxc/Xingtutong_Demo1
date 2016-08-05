@@ -66,8 +66,9 @@
 				return;
 			}
 			else{
-				if(isNaN(Number(braceletInterval)) || isNaN(Number(braceletUpload))){
-					$(".info").text('格式错误!');
+				var m = Number(braceletInterval);
+				var n = Number(braceletUpload);
+				if(isNaN(m) || isNaN(n)){			
 					return;
 				}
 				else{
@@ -76,7 +77,8 @@
 						data:{"braceletInterval":braceletInterval,"braceletUpload":braceletUpload},
 						type:"post",
 						success:function(){
-							layer.alert('提交成功!');		
+							layer.alert('提交成功!');
+							check();		
 						},
 						error:function(){
 						}
@@ -96,10 +98,7 @@
 			else{
 				var m = Number(locationInterval);
 				var n = Number(locationUpload);
-				alert(m);
-				alert(n);
 				if(isNaN(m) || isNaN(n)){
-					$(".info").text('格式错误!');
 					return;
 				}
 				else{
@@ -109,6 +108,7 @@
 						type:"post",
 						success:function(data){
 							layer.alert('提交成功');
+							check();
 						},
 						error:function(){					 	
 						}
@@ -129,7 +129,6 @@
 				var m = Number(locateInterval);
 				var n = Number(locateTimes);
 				if(isNaN(m) || isNaN(n)){
-					$(".info").text('格式错误!');
 					return;
 				}
 				else{
@@ -139,6 +138,7 @@
 						type:"post",
 						success:function(data){
 							layer.alert('提交成功');
+							check();
 						},
 						error:function(){
 						}
@@ -155,23 +155,23 @@
 				return;
 			}
 			else{
-				var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
-				if(!myreg.test(teleNumber)){
-					$(".info").text('格式错误!');
-				}
-				else{
-					$.ajax({
-					     url:"instruction/"+ deviceId + "/saveBasicInfo",
-						 data:{"teleNumber":teleNumber},
-						 type:"post",
-						 success:function(data){
-							layer.alert('提交成功');
-						 },
-						 error:function(){
-						 }}
-					);			
-				}
+				$.ajax({
+				     url:"instruction/"+ deviceId + "/saveBasicInfo",
+					 data:{"teleNumber":teleNumber},
+					 type:"post",
+					 success:function(data){
+						layer.alert('提交成功');
+						check();
+					 },
+					 error:function(){
+					 }}
+				);						
 			}
+		});
+		
+		//reset
+		$(".form-reset").mousedown(function(){
+			check();
 		});
 		
 		//input of deviceId focus
@@ -188,8 +188,10 @@
 	
 	
 	function check(){
+		$(".form-reset").click();
 		if($("#deviceId").val()==''){
-			$("#text").text('Tips：请先填写设备编号');
+			$("#text").text('Tips：请填写设备编号');
+  			$("form input").val('');	
 		}
 		else{
 			$.ajax({
@@ -200,13 +202,7 @@
 				function(data){		
 	    			if(!data){
 	    				$("#text").text('Error：不存在的设备编号');
-	    				$("#braceletInterval").val('');
-						$("#braceletUpload").val('');
-						$("#locationInterval").val('');	
-						$("#locationUpload").val('');
-						$("#locateInterval").val('');
-						$("#locateTimes").val('');
-						$("#teleNumber").val(''); 		
+	    				$("form input").val('');	
 	    			}
 	    			else{		    
 	    			    $("#text").text('Info：正确的设备编号');
@@ -222,6 +218,7 @@
 			error:
 	     		function(){
 	     			$("#text").text('Error：不存在的设备编号');
+	     			$("form input").val('');
 	     		}
     		});	
 		}
@@ -242,7 +239,7 @@
     </div>
     <br/>
 	<div class="alert alert-yellow" id="alert" style="width:25%;">
-		<strong id="text">Tips：请先填写设备编号</strong>
+		<strong id="text">Tips：请填写设备编号</strong>
 	</div>
 	<br/>
     <div class="tab">	
@@ -263,20 +260,20 @@
         	<form method="post" class="form-x" id="form1">       
                 <div class="form-group">
                     <div class="label"><label for="desc">采集间隔(分钟):</label></div>
-                    <div class="field" style="width:16%;">
-                    	<input type="text" class="input" id="braceletInterval" name="braceletInterval" data-validate="required:请填写采集间隔"/>
+                    <div class="field" style="width:15%;">
+                    	<input type="text" class="input" id="braceletInterval" name="braceletInterval" data-validate="number:格式错误(数字)"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="label"><label for="desc">上送条数 :</label></div>
-                    <div class="field" style="width:16%;">
-                    	<input type="text" class="input" id="braceletUpload" name="braceletUpload" data-validate="required:请填写上送条数"/>
+                    <div class="field" style="width:15%;">
+                    	<input type="text" class="input" id="braceletUpload" name="braceletUpload" data-validate="number:格式错误(数字)"/>
                     </div>
-                </div>      
-            	<div style="width:20%;text-align:right"><font color="red"><p class="info">&nbsp;</p></font></div>
+                </div>    
+                <br/><br/>           
                 <div>
                 	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit1" type="button">提交</button></div>
-                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main" type="reset">重置</button></div>
+                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
 				</div>
             </form>
         </div>
@@ -287,20 +284,20 @@
         	<form method="post" class="form-x" id="form2">   
         		<div class="form-group">
                     <div class="label"><label for="desc">采集间隔(分钟):</label></div>
-                    <div class="field" style="width:16%;">
-                    	<input type="text" class="input" id="locationInterval" name="locationInterval"  data-validate="required:请填写采集间隔"/>
+                    <div class="field" style="width:15%;">
+                    	<input type="text" class="input" id="locationInterval" name="locationInterval"  data-validate="number:格式错误(数字)"/>
                     </div>
                 </div>      
                 <div class="form-group">
                     <div class="label"><label for="desc">上送条数 : </label></div>
-                    <div class="field" style="width:16%;">
-                    	<input type="text" class="input" id="locationUpload" name="locationUpload" data-validate="required:请填写上送条数"/>
+                    <div class="field" style="width:15%;">
+                    	<input type="text" class="input" id="locationUpload" name="locationUpload" data-validate="number:格式错误(数字)"/>
                     </div>
-                </div>          
-            	<div style="width:20%;text-align:right"><font color="red"><p class="info">&nbsp;</p></font></div>
+                </div> 
+                <br/><br/>                     
                 <div>
                 	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit2" type="button">提交</button></div>
-                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main" type="reset">重置</button></div>
+                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
 				</div>
             </form>
         </div>
@@ -312,19 +309,19 @@
                 <div class="form-group">
                     <div class="label"><label for="desc">定位间隔(秒) : </label></div>
                     <div class="field" style="width:15%;">
-                    	<input type="text" class="input" id="locateInterval" name="locateInterval"data-validate="required:请填写定位间隔"/>
+                    	<input type="text" class="input" id="locateInterval" name="locateInterval" data-validate="number:格式错误(数字)"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="label"><label for="desc">定位次数 :</label></div>
                     <div class="field" style="width:15%;">
-                    	<input type="text" class="input" id="locateTimes" name="locateTimes" data-validate="required:请填写定位次数"/>
+                    	<input type="text" class="input" id="locateTimes" name="locateTimes" data-validate="number:格式错误(数字)"/>
                     </div>
-                </div>            
-            	<div style="width:20%;text-align:right"><font color="red"><p class="info">&nbsp;</p></font></div>
+                </div>
+                <br/><br/>                      
                 <div>
                 	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit3" type="button">提交</button></div>
-                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main" type="reset">重置</button></div>
+                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
 				</div>
             </form>
         </div>
@@ -336,13 +333,16 @@
                 <div class="form-group">
                     <div class="label"><label for="desc">短信通知号码: </label></div>
                     <div class="field" style="width:15%;">
-                    	<input type="text" class="input" id="teleNumber" data-validate="required:请填入短信通知号码"/>
+                    	<input type="text" class="input" id="teleNumber" data-validate="mobile:格式错误(手机号码)"/>
                     </div>
+                </div>
+                <div class="form-group">
+                   	<div class="label"><label>&nbsp;</label></div>
                 </div> 
-                <div style="width:20%;text-align:right"><font color="red"><p class="info">&nbsp;</p></font></div>  
+                <br/><br/>
                 <div>
                 	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit4" type="button">提交</button></div>
-                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main" type="reset">重置</button></div>
+                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
 				</div>
             </form>
         </div> 

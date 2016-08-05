@@ -17,13 +17,13 @@ public class SystemDao {
 	
 	public SystemInfo querySysDefault(){
 		String sql = " select * from t_system ";
-		List<SystemInfo> result =  jdbcTemplate.query(sql,new BeanPropertyRowMapper<SystemInfo>(SystemInfo.class));
+		List<SystemInfo> result = jdbcTemplate.query(sql,new BeanPropertyRowMapper<SystemInfo>(SystemInfo.class));
 		return result.get(0);
 	}
 	
 	public void updateSysDefault(SystemInfo sysDefault){
 		String sql = " update t_system set braceletInterval=?,braceletUpload=?,locationInterval=?,locationUpload=?," +
-				"locateInterval=?,locateTimes=? where id=1";
+				" locateInterval=?,locateTimes=? where id=1 ";
 		Object args[] = new Object[]{sysDefault.getBraceletInterval(),sysDefault.getBraceletUpload(),sysDefault.getLocateInterval(),
 				sysDefault.getLocationUpload(),sysDefault.getLocateInterval(),sysDefault.getLocateTimes()};
 		jdbcTemplate.update(sql, args);
