@@ -20,20 +20,8 @@ public class InstructionService {
 		instructionDao.updateInstructionSendInfo(instruction);
 	}
 	
-	public void addSampleInterval(int deviceId,int sampleInterval){
-		instructionDao.insertSampleInterval(deviceId, sampleInterval);
-	}
-	
-	public void addUploadEverytime(int deviceId,int uploadEverytime){
-		instructionDao.insertUploadEverytime(deviceId, uploadEverytime);
-	}
-	
-	public void addLocateInfo(int deviceId,int locateInterval,int locateTimes){
-		instructionDao.insertLocateInfo(deviceId, locateInterval, locateTimes);
-	}
-	
-	public void addBasicInfo(int deviceId,String teleNumber){
-		instructionDao.insertBasicInfo(deviceId, teleNumber);
+	public void addInstruction(Instruction instruction){
+		instructionDao.insertInstruction(instruction);
 	}
 	
 }

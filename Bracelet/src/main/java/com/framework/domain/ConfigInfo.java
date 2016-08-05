@@ -6,8 +6,10 @@ import java.io.Serializable;
 public class ConfigInfo implements Serializable{
 	
 	public Integer deviceId;
-	public Integer sampleInterval;
-	public Integer uploadEverytime;
+	public Integer braceletInterval;
+	public Integer braceletUpload;
+	public Integer locationInterval;
+	public Integer locationUpload;
 	public Integer locateInterval;
 	public Integer locateTimes;
 	public String teleNumber;
@@ -18,17 +20,29 @@ public class ConfigInfo implements Serializable{
 	public void setDeviceId(Integer deviceId) {
 		this.deviceId = deviceId;
 	}
-	public Integer getSampleInterval() {
-		return sampleInterval;
+	public Integer getBraceletInterval() {
+		return braceletInterval;
 	}
-	public void setSampleInterval(Integer sampleInterval) {
-		this.sampleInterval = sampleInterval;
+	public void setBraceletInterval(Integer braceletInterval) {
+		this.braceletInterval = braceletInterval;
 	}
-	public Integer getUploadEverytime() {
-		return uploadEverytime;
+	public Integer getBraceletUpload() {
+		return braceletUpload;
 	}
-	public void setUploadEverytime(Integer uploadEverytime) {
-		this.uploadEverytime = uploadEverytime;
+	public void setBraceletUpload(Integer braceletUpload) {
+		this.braceletUpload = braceletUpload;
+	}
+	public Integer getLocationInterval() {
+		return locationInterval;
+	}
+	public void setLocationInterval(Integer locationInterval) {
+		this.locationInterval = locationInterval;
+	}
+	public Integer getLocationUpload() {
+		return locationUpload;
+	}
+	public void setLocationUpload(Integer locationUpload) {
+		this.locationUpload = locationUpload;
 	}
 	public Integer getLocateInterval() {
 		return locateInterval;
@@ -48,5 +62,5 @@ public class ConfigInfo implements Serializable{
 	public void setTeleNumber(String teleNumber) {
 		this.teleNumber = teleNumber;
 	}
-
+	
 }

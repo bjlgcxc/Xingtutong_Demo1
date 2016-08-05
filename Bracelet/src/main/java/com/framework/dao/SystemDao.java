@@ -22,9 +22,10 @@ public class SystemDao {
 	}
 	
 	public void updateSysDefault(SystemInfo sysDefault){
-		String sql = " update t_system set sampleInterval=?,uploadEverytime=?,locateInterval=?,locateTimes=? where id=1";
-		Object args[] = new Object[]{sysDefault.getSampleInterval(),sysDefault.getUploadEverytime(),
-				sysDefault.getLocateInterval(),sysDefault.getLocateTimes()};
+		String sql = " update t_system set braceletInterval=?,braceletUpload=?,locationInterval=?,locationUpload=?," +
+				"locateInterval=?,locateTimes=? where id=1";
+		Object args[] = new Object[]{sysDefault.getBraceletInterval(),sysDefault.getBraceletUpload(),sysDefault.getLocateInterval(),
+				sysDefault.getLocationUpload(),sysDefault.getLocateInterval(),sysDefault.getLocateTimes()};
 		jdbcTemplate.update(sql, args);
 	}
 	

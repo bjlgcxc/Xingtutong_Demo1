@@ -13,6 +13,11 @@ public class DeviceDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	public int queryDeviceMatchCount(int id){
+		String sql = " select count(*) from t_device where id=? ";
+		return jdbcTemplate.queryForInt(sql,new Object[]{id});
+	}
+	
 	// 查询设备imei匹配个数
 	public int queryDeviceMatchCount(String imei){
 		String sqlStr = " select count(*) from t_device where imei=? ";

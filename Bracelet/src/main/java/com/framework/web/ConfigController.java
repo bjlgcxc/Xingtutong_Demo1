@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.ConfigInfo;
 import com.framework.service.ConfigService;
+import com.framework.service.DeviceService;
 
 @Controller
 public class ConfigController {
@@ -20,7 +21,8 @@ public class ConfigController {
 	
 	@Autowired
 	ConfigService configService;
-	
+	@Autowired
+	DeviceService deviceService;
 	
 	/*
 	 * ±£¥Ê…Ë÷√(json)
@@ -49,11 +51,15 @@ public class ConfigController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/config/{deviceId}/getConfigInfo",method = RequestMethod.GET)
-	public ConfigInfo getConfigInfo(@PathVariable int deviceId){
-		ConfigInfo configInfo;
-		configInfo = configService.getConfigInfo(deviceId);
+	public JSONObject getConfigInfo(@PathVariable int deviceId){
+		if(deviceService.hasMatchDevice(deviceId)){
+			ConfigInfo configInfo = configService.getConfigInfo(deviceId);
+			configInfo.braceletInterval /= 60;
+			configInfo.locationInterval /= 60;
+			return JSONObject.fromObject(configInfo);
+		}
 		
-		return configInfo;
+		return null;
 	}
 	
 }

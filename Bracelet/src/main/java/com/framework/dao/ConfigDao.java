@@ -14,27 +14,47 @@ public class ConfigDao{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	
 	public int queryConfigMatchCount(int deviceId){
 		String sql = " select count(*) from t_config where deviceId=? ";
 		Object args[] = new Object[]{deviceId};
 		return jdbcTemplate.queryForInt(sql,args);
 	}
 	
+	public ConfigInfo queryConfigInfo(int deviceId){
+		String sql = "select * from t_config where deviceId=? ";
+		Object args[] = new Object[]{deviceId};
+		List<ConfigInfo> result = jdbcTemplate.query(sql, args, new BeanPropertyRowMapper<ConfigInfo>(ConfigInfo.class));
+		if(result.size()!=0)
+			return result.get(0);
+		else
+			return null;
+	}
+	
 	public void insertConfigInfo(ConfigInfo configInfo){
-		String sql = " insert into t_config(deviceId,sampleInterval,uploadEverytime,locateInterval,locateTimes,teleNumber) values(?,?,?,?,?,?) ";
-		Object args[] = new Object[]{configInfo.getDeviceId(),configInfo.getSampleInterval(),configInfo.getUploadEverytime(),
-				configInfo.getLocateInterval(),configInfo.getLocateTimes(),configInfo.getTeleNumber()};
+		String sql = " insert into t_config(deviceId,braceletInterval,braceletUpload,locationInterval,locationUpload" +
+				  ",locateInterval,locateTimes,teleNumber) values(?,?,?,?,?,?,?,?) ";
+		Object args[] = new Object[]{configInfo.getDeviceId(),configInfo.getBraceletInterval(),configInfo.getBraceletUpload(),
+				configInfo.getLocationInterval(),configInfo.getLocationUpload(),configInfo.getLocateInterval(),
+				configInfo.getLocateTimes(),configInfo.getTeleNumber()};
 		jdbcTemplate.update(sql, args);
 	}
 	
 	public void updateConfigInfo(ConfigInfo configInfo){
 	
 		String sql = " update t_config set deviceId=" + configInfo.getDeviceId();
-		if(configInfo.getSampleInterval()!=null){
-			sql += ",sampleInterval=" + configInfo.getSampleInterval();
+		
+		if(configInfo.getBraceletInterval()!=null){
+			sql += ",braceletInterval=" + configInfo.getBraceletInterval();
 		}
-		if(configInfo.getUploadEverytime()!=null){
-			sql += ",uploadEverytime=" + configInfo.getUploadEverytime();
+		if(configInfo.getBraceletUpload()!=null){
+			sql += ",braceletUpload=" + configInfo.getBraceletUpload();
+		}
+		if(configInfo.getLocationInterval()!=null){
+			sql += ",locationInterval=" + configInfo.getLocationInterval();
+		}
+		if(configInfo.getLocationUpload()!=null){
+			sql += ",locationUpload=" + configInfo.getLocationUpload();
 		}
 		if(configInfo.getLocateInterval()!=null){
 			sql += ",locateInterval=" + configInfo.getLocateInterval();
@@ -48,17 +68,6 @@ public class ConfigDao{
 		sql += " where deviceId=" + configInfo.getDeviceId();
 	
 		jdbcTemplate.update(sql);	
-	}
-	
-	public ConfigInfo queryConfigInfo(int deviceId){
-		String sql = "select deviceId,sampleInterval,uploadEverytime,locateInterval,locateTimes,teleNumber from" +
-				" t_config where deviceId=? ";
-		Object args[] = new Object[]{deviceId};
-		List<ConfigInfo> result = jdbcTemplate.query(sql, args, new BeanPropertyRowMapper<ConfigInfo>(ConfigInfo.class));
-		if(result.size()!=0)
-			return result.get(0);
-		else
-			return null;
 	}
 	
 }

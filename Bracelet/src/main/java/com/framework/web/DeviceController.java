@@ -72,10 +72,13 @@ public class DeviceController {
 			SystemInfo sysDefault = sysDefaultService.getSysDefault();
 			ConfigInfo configInfo = new ConfigInfo();
 			configInfo.setDeviceId(id);
-			configInfo.setSampleInterval(sysDefault.getSampleInterval());
-			configInfo.setUploadEverytime(sysDefault.getUploadEverytime());
+			configInfo.setBraceletInterval(sysDefault.getBraceletInterval());
+			configInfo.setBraceletUpload(sysDefault.getBraceletUpload());
+			configInfo.setLocationInterval(sysDefault.getLocationInterval());
+			configInfo.setLocationUpload(sysDefault.getLocationUpload());
 			configInfo.setLocateInterval(sysDefault.getLocateInterval());
 			configInfo.setLocateTimes(sysDefault.getLocateTimes());
+			configInfo.setTeleNumber(sysDefault.getTeleNumber());
 			configService.insertConfigInfo(configInfo);
 		}
 		
@@ -169,4 +172,5 @@ public class DeviceController {
 		request.setAttribute("deviceInfo", jsonArray);
 		return "device";
 	}
+	
 }

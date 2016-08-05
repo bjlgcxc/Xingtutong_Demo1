@@ -28,39 +28,21 @@ public class InstructionDao {
 		}
 	}
 	
+	//插入指令
+	public void insertInstruction(Instruction instruction){
+		String sql = " insert t_instruction(deviceId,braceletInterval,braceletUpload,locationInterval,locationUpload," +
+				"locateInterval,locateTimes,teleNumber) values(?,?,?,?,?,?,?,?) ";
+		Object args[] = new Object[]{instruction.getDeviceId(),instruction.getBraceletInterval(),instruction.getBraceletUpload(),
+				instruction.getLocationInterval(),instruction.getLocationUpload(),instruction.getLocateInterval(),instruction.getLocateTimes(),
+				instruction.getTeleNumber()};
+		jdbcTemplate.update(sql, args);
+	}	
+	
 	//更新指令发送标记
 	public void updateInstructionSendInfo(Instruction instruction){
 		String sql = " update t_instruction set isSend=1 where deviceId=? and timestamp=? ";
 		Object args[] = new Object[]{instruction.getDeviceId(),instruction.getTimestamp()};
 		jdbcTemplate.update(sql, args);
 	}
-	
-	//插入数据采集间隔
-	public void insertSampleInterval(int deviceId,int sampleInterval){
-		String sql = " insert into t_instruction(deviceId,sampleInterval) values(?,?) ";
-		Object args[] = new Object[]{deviceId,sampleInterval};
-		jdbcTemplate.update(sql, args);
-	}
-	
-	//插入每次上传的数据条数
-	public void insertUploadEverytime(int deviceId,int uploadEverytime){
-		String sql = " insert into t_instruction(deviceId,uploadEverytime) values(?,?) ";
-		Object args[] = new Object[]{deviceId,uploadEverytime};
-		jdbcTemplate.update(sql, args);
-	}
-	
-	//插入紧急定位信息
-	public void insertLocateInfo(int deviceId,int locateInterval,int locateTimes){
-		String sql = " insert into t_instruction(deviceId,locateInterval,locateTimes) value(?,?,?) ";
-		Object args[] = new Object[]{deviceId,locateInterval,locateTimes};
-		jdbcTemplate.update(sql,args);
-	}
-	
-	//插入基本信息
-	public void insertBasicInfo(int deviceId,String teleNumber){
-		String sql = " insert into t_instruction(deviceId,teleNumber) values(?,?)"; 
-		Object args[] = new Object[]{deviceId,teleNumber};
-		jdbcTemplate.update(sql,args);
-	}
-	
+
 }

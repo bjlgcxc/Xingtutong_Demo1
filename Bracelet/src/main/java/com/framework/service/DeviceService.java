@@ -13,6 +13,9 @@ public class DeviceService {
 	@Autowired
 	DeviceDao deviceDao;
 	
+	public boolean hasMatchDevice(int id){
+		return deviceDao.queryDeviceMatchCount(id) > 0;
+	}
 	public boolean hasMatchDevice(String imei){
 		return deviceDao.queryDeviceMatchCount(imei) > 0;
 	}

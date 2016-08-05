@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.ConfigInfo;
 import com.framework.domain.Instruction;
@@ -42,56 +43,61 @@ public class InstructionController {
 	
 	
 	/*
-	 * 保存采集间隔(指令)
+	 * 保存手环数据采集指令
 	 */
-	@RequestMapping(value="/instruction/{deviceId}/saveSampleInterval")
-	public void saveSampleInterval(HttpServletRequest request,@PathVariable int deviceId){
-		int sampleInterval = 0;
-		String minutes = request.getParameter("minutes");
-		if(minutes!=""){
-			sampleInterval += 60*Integer.parseInt(minutes);
-		}		
-		
-		instructionService.addSampleInterval(deviceId, sampleInterval);
+	@ResponseBody
+	@RequestMapping(value="/instruction/{deviceId}/saveBraceletSample",method=RequestMethod.POST)
+	public void saveSampleInterval(HttpServletRequest request,@PathVariable int deviceId,Instruction instruction){
+		instruction.setDeviceId(deviceId);		
+		if(instruction.getBraceletInterval()!=null){
+			instruction.setBraceletInterval(60*instruction.getBraceletInterval());
+		}
+		instructionService.addInstruction(instruction);
 		
 		//更新设置信息
 		ConfigInfo configInfo = new ConfigInfo();
 		configInfo.setDeviceId(deviceId);
-		configInfo.setSampleInterval(sampleInterval);
+		configInfo.setBraceletInterval(instruction.getBraceletInterval());
+		configInfo.setBraceletUpload(instruction.getBraceletUpload());
 		configService.updateConfigInfo(configInfo);
 	}
 
 	
 	/*
-	 * 保存每次上传数据条数(指令)
+	 * 保存位置采集指令
 	 */
-	@RequestMapping(value="/instruction/{deviceId}/saveUploadEverytime")
-	public void saveUploadEverytime(HttpServletRequest request,@PathVariable int deviceId){
-		int uploadEverytime = Integer.parseInt(request.getParameter("uploadEverytime"));
-		instructionService.addUploadEverytime(deviceId, uploadEverytime);
+	@ResponseBody
+	@RequestMapping(value="/instruction/{deviceId}/saveLocationSample",method=RequestMethod.POST)
+	public void saveUploadEverytime(HttpServletRequest request,@PathVariable int deviceId,Instruction instruction){
+		instruction.setDeviceId(deviceId);		
+		if(instruction.getLocationInterval()!=null){
+			instruction.setLocationInterval(60*instruction.getLocationInterval());
+		}
+		instructionService.addInstruction(instruction);
 		
 		//更新设置信息
 		ConfigInfo configInfo = new ConfigInfo();
 		configInfo.setDeviceId(deviceId);
-		configInfo.setUploadEverytime(uploadEverytime);
+		configInfo.setLocationInterval(instruction.getLocationInterval());
+		configInfo.setLocationUpload(instruction.getLocationUpload());
 		configService.updateConfigInfo(configInfo);
 	}
 	
 	
 	/*
-	 * 保存紧急定位(指令)
+	 * 保存紧急定位指令
 	 */
-	@RequestMapping(value="/instruction/{deviceId}/saveLocateInfo")
-	public void saveLocateInfo(HttpServletRequest request,@PathVariable int deviceId){
-		int locateInterval = Integer.parseInt(request.getParameter("locateInterval"));
-		int locateTimes = Integer.parseInt(request.getParameter("locateTimes"));
-		instructionService.addLocateInfo(deviceId, locateInterval, locateTimes);
+	@ResponseBody
+	@RequestMapping(value="/instruction/{deviceId}/saveLocateInfo",method=RequestMethod.POST)
+	public void saveLocateInfo(HttpServletRequest request,@PathVariable int deviceId,Instruction instruction){
+		instruction.setDeviceId(deviceId);
+		instructionService.addInstruction(instruction);
 		
 		//更新设置信息
 		ConfigInfo configInfo = new ConfigInfo();
 		configInfo.setDeviceId(deviceId);
-		configInfo.setLocateInterval(locateInterval);
-		configInfo.setLocateTimes(locateTimes);
+		configInfo.setLocateInterval(instruction.getLocateInterval());
+		configInfo.setLocateTimes(instruction.getLocateTimes());
 		configService.updateConfigInfo(configInfo);
 	}
 	
@@ -99,15 +105,16 @@ public class InstructionController {
 	/*
 	 * 保存基本设置(指令)
 	 */
-	@RequestMapping(value="/instruction/{deviceId}/saveBasicInfo")
-	public void saveBasicInfo(HttpServletRequest request,@PathVariable int deviceId){
-		String teleNumber = request.getParameter("teleNumber");
-		instructionService.addBasicInfo(deviceId, teleNumber);
+	@ResponseBody
+	@RequestMapping(value="/instruction/{deviceId}/saveBasicInfo",method=RequestMethod.POST)
+	public void saveBasicInfo(HttpServletRequest request,@PathVariable int deviceId,Instruction instruction){
+		instruction.setDeviceId(deviceId);
+		instructionService.addInstruction(instruction);
 		
 		//更新设置信息
 		ConfigInfo configInfo = new ConfigInfo();
 		configInfo.setDeviceId(deviceId);
-		configInfo.setTeleNumber(teleNumber);
+		configInfo.setTeleNumber(instruction.getTeleNumber());
 		configService.updateConfigInfo(configInfo);
 	}
 	
