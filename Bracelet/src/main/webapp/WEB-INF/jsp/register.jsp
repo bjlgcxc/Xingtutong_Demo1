@@ -29,12 +29,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("body").keydown(function() {
-            if (event.keyCode == "13") {//keyCode=13是回车键
-                $("#submit").click();
-            }
-        });
-        	
 		$("#submit").click(function(){
 			if($("#userName").val()=='' || $("#password").val()==''){
 				layer.msg('请填写注册账号/注册密码');
@@ -73,18 +67,18 @@
             <div class="panel">
                 <div class="panel-head" style="text-align:center;"><h2><strong>用户注册</strong></h2></div>
                 <div class="panel-body" style="padding:30px;">
+                    <div style="font-size:16px">1.填写登录账号</div>
                     <div class="form-group">
                         <div class="field field-icon-right">
-                            <input type="text" class="input" id="userName" name="userName" placeholder="注册登录账号" data-validate="required:请填写账号,length#>=5:账号长度不符合要求" />
-							<span class="icon icon-user"></span>
+                            <input type="text" class="input" id="userName" name="userName" data-validate="required:请填写账号,length#>=5:账号长度不符合要求" />
                         </div>
                         <ul style="color:red;" id="userNameVerify">
                     	</ul>
                     </div>
+                    <div style="font-size:16px">2.填写登录密码</div>
                     <div class="form-group">
                         <div class="field field-icon-right">
-                            <input type="password" class="input" id="password" name="password" placeholder="注册登录密码" data-validate="required:请填写密码,length#>=6:密码长度不符合要求" />            
-                            <span class="icon icon-key"></span>
+                            <input type="password" class="input" id="password" name="password" data-validate="required:请填写密码,length#>=6:密码长度不符合要求" />                             
                         </div>
                     </div>       
                 </div>

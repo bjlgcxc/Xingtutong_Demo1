@@ -29,11 +29,11 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		//$("body").keydown(function() {
-        //    if (event.keyCode == "13") {//keyCode=13是回车键
-        //        $("#submit").click();
-        //    }
-        //});
+		$("body").keydown(function() {
+            if (event.keyCode == "13") {//keyCode=13是回车键
+                $("#submit").click();
+            }
+        });
 		
 		$("#submit").click(function(){
 			if($("#userName").val()=='' || $("#password").val()==''){
@@ -47,7 +47,7 @@
 					data:{userName:$("#userName").val(),password:$("#password").val()},
 					success:function(data){
 						if(data.info=="error"){
-							layer.alert('账号或密码错误');
+							layer.msg('账号或密码错误');
 						}
 						else{
 							<%session.setAttribute("loginStatus", "login");%>
@@ -80,19 +80,19 @@
                 <div class="panel-body" style="padding:30px;">
                     <div class="form-group">
                         <div class="field field-icon-right">
-                            <input type="text" class="input" id="userName" name="userName" placeholder="登录账号" data-validate="required:请填写账号,length#>=5:账号长度不符合要求" />
+                            <input type="text" class="input" id="userName" name="userName" placeholder="填写登录账号" data-validate="length#>=5:账号长度不符合要求" />
 							<span class="icon icon-user"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="field field-icon-right">
-                            <input type="password" class="input" id="password" name="password" placeholder="登录密码" data-validate="required:请填写密码,length#>=6:密码长度不符合要求" />            
+                            <input type="password" class="input" id="password" name="password" placeholder="填写登录密码" data-validate="length#>=6:密码长度不符合要求" />            
                             <span class="icon icon-key"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="field">
-                            <input type="text" class="input" id="verifyCode" name="verifyCode" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
+                            <input type="text" class="input" id="verifyCode" name="verifyCode" placeholder="填写右侧的验证码"/>
                             <img src="images/verifyCode.jpg" width="80" height="32" class="passcode" />
                             <p id="info"></p>
                         </div>                  
