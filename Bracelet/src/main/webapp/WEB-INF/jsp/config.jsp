@@ -44,20 +44,25 @@
 	}
 	
 	$(document).ready(function(){
+		//submit按钮的点击事件
 		$("[id^=submit]").each(function(){
 			$(this).click(function(){
-				if($("#deviceId").val()==''){
+				if($("#text").text()=='Tips：请填写设备编号'){
+					$("#deviceId").focus();
+					$("#text").fadeOut();
+					$("#text").fadeIn();
+				}
+				if($("#text").text()=='Error：不存在的设备编号'){
 					$("#deviceId").focus();
 					$("#text").fadeOut();
 					$("#text").fadeIn();
 				}
 			});
+			$(this).mousedown(function(){
+				setTimeout(function(){},300);
+			});
 		});
-		$("input").focus(function(){
-			$(".info").html('&nbsp;');
-		});
-		
-		//form1表单提交
+		//form1表单提交事件
 		$("#submit1").click(function(){
 			var deviceId = $("#deviceId").val();
 			var braceletInterval = $("#braceletInterval").val();			
@@ -85,9 +90,8 @@
 					});				
 				}
 			}
-		});
-		
-		//form2表单提交
+		});	
+		//form2表单提交事件
 		$("#submit2").click(function(){
 			var deviceId = $("#deviceId").val();
 			var locationInterval = $("#locationInterval").val();
@@ -115,9 +119,8 @@
 					});
 				}
 			}
-		});
-			
-		//form3表单提交
+		});		
+		//form3表单提交事件
 		$("#submit3").click(function(){
 		    var deviceId = $("#deviceId").val();
 			var locateInterval = $("#locateInterval").val();
@@ -145,9 +148,8 @@
 					});
 				}
 			}
-		});
-			
-		//form4表单提交
+		});			
+		//form4表单提交事件
 		$("#submit4").click(function(){
 		    var deviceId = $("#deviceId").val();
 			var teleNumber = $("#teleNumber").val();
@@ -155,6 +157,10 @@
 				return;
 			}
 			else{
+				var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
+				if(!myreg.test(teleNumber)){
+					return;	
+				}
 				$.ajax({
 				     url:"instruction/"+ deviceId + "/saveBasicInfo",
 					 data:{"teleNumber":teleNumber},
@@ -168,22 +174,21 @@
 				);						
 			}
 		});
+			
+		//deviceId的check
+		check();
+		if($("#deviceId").val()==''){
+			$("#deviceId").focus();
+		}
+
+		//deviceId输出框change事件
+		$("#deviceId").bind('input propertychange',function(){check();}); 
 		
-		//reset
+		//reset按钮点击事件
 		$(".form-reset").mousedown(function(){
 			check();
 		});
-		
-		//input of deviceId focus
-		if($("#deviceId").val()!=''){
-			check();
-		}
-		else{
-			$("#deviceId").focus();
-		}
-		//input of deviceId change
-		$("#deviceId").bind('input propertychange',function(){check();}); 
-		
+			
 	});
 	
 	

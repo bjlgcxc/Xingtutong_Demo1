@@ -199,8 +199,7 @@
 	            }
 			},
 			error:function(result){
-				//var str=result.responseText;
-	   			//msg("系统异常",str);
+				msg("提示信息","无位置信息！");
 			}
 		});
 			

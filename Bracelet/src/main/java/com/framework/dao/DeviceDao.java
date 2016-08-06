@@ -75,7 +75,6 @@ public class DeviceDao {
 		if(mac!=null && mac!=""){
 			sql += " and mac=" + "'" + mac + "'";
 		}
-		
 		List<DeviceInfo> result = jdbcTemplate.query(sql,new BeanPropertyRowMapper<DeviceInfo>(DeviceInfo.class));
 		if(result.size()!=0)
 			return result;

@@ -29,11 +29,11 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("body").keydown(function() {
-            if (event.keyCode == "13") {//keyCode=13是回车键
-                $("#submit").click();
-            }
-        });
+		//$("body").keydown(function() {
+        //    if (event.keyCode == "13") {//keyCode=13是回车键
+        //        $("#submit").click();
+        //    }
+        //});
 		
 		$("#submit").click(function(){
 			if($("#userName").val()=='' || $("#password").val()==''){

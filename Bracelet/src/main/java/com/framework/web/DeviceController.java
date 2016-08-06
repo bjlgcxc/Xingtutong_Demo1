@@ -137,16 +137,18 @@ public class DeviceController {
 		String deviceAlias = request.getParameter("deviceAlias");
 		
 		JSONArray jsonArray = new JSONArray();
-		if(deviceId!=null && deviceId!=""){
-			List<DeviceInfo> deviceInfo = deviceService.getDeviceInfo(deviceId,null, null);
-			if(deviceInfo!=null){
-				List<BraceletInfo> braceletInfoList = braceletService.getBraceletInfo(deviceInfo.get(0).getMac(),deviceName, deviceAlias); 
-				if(braceletInfoList!=null){			
+		if(!((deviceName!="" && deviceName!=null) || (deviceAlias!="" && deviceAlias!=null))){
+			List<DeviceInfo> deviceInfoList = deviceService.getDeviceInfo(deviceId,null, null);
+			if(deviceInfoList!=null){
+				for(DeviceInfo deviceInfo:deviceInfoList){
+					List<BraceletInfo> braceletInfoList = braceletService.getBraceletInfo(deviceInfo.getMac(),deviceName, deviceAlias); 
 					JSONObject jsonObj = new JSONObject();
-					jsonObj.put("id", deviceId);
-					jsonObj.put("name",braceletInfoList.get(0).getName());
-					jsonObj.put("alias",braceletInfoList.get(0).getAlias());
-					jsonObj.put("connectTime",deviceInfo.get(0).getConnectTime().getTime());
+					jsonObj.put("id", deviceInfo.getId());
+					jsonObj.put("connectTime",deviceInfo.getConnectTime().getTime());
+					if(braceletInfoList!=null){			
+						jsonObj.put("name",braceletInfoList.get(0).getName());
+						jsonObj.put("alias",braceletInfoList.get(0).getAlias());					
+					}
 					jsonArray.add(jsonObj);
 				}
 			}

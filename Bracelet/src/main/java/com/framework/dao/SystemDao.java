@@ -24,7 +24,7 @@ public class SystemDao {
 	public void updateSysDefault(SystemInfo sysDefault){
 		String sql = " update t_system set braceletInterval=?,braceletUpload=?,locationInterval=?,locationUpload=?," +
 				" locateInterval=?,locateTimes=? where id=1 ";
-		Object args[] = new Object[]{sysDefault.getBraceletInterval(),sysDefault.getBraceletUpload(),sysDefault.getLocateInterval(),
+		Object args[] = new Object[]{sysDefault.getBraceletInterval(),sysDefault.getBraceletUpload(),sysDefault.getLocationInterval(),
 				sysDefault.getLocationUpload(),sysDefault.getLocateInterval(),sysDefault.getLocateTimes()};
 		jdbcTemplate.update(sql, args);
 	}
