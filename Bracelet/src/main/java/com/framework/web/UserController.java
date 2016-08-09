@@ -2,12 +2,13 @@
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,21 +28,27 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	
 	@RequestMapping(value="login.html")
-	public String login(HttpServletRequest request) throws IOException{
-
-		String verifyCode = VerifyCodeUtil.generateTextCode(0, 4, null);  		
-		BufferedImage bufferedImage = VerifyCodeUtil.generateImageCode(verifyCode, 90, 30, 10, true, Color.WHITE, Color.BLACK, null);  
-		
-		String path = request.getSession().getServletContext().getRealPath("images/verifyCode.jpg");
-		ImageIO.write(bufferedImage, "JPEG", new File(path));  
+	public String login(HttpServletRequest request){
+		String verifyCode = VerifyCodeUtil.generateTextCode(0, 4, null);
 		request.setAttribute("verifyCode",verifyCode);
-		
 		return "login";
 	}
 	
 	
+	@RequestMapping(value="/user/getVerifyCode")
+	public void getVerifyCode(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		response.setContentType("image/jpg");
+		OutputStream os = response.getOutputStream(); 
+		
+		String verifyCode = request.getParameter("verifyCode");
+		BufferedImage bufferedImage = VerifyCodeUtil.generateImageCode(verifyCode, 90, 30, 10, true, Color.WHITE, Color.BLACK, null);  
+		ImageIO.write(bufferedImage, "JPEG", os);
+		
+		os.close();
+	}
+	
+
 	@ResponseBody
 	@RequestMapping(value="/user/register",method=RequestMethod.GET)
 	public JSONObject register(HttpServletRequest request,UserInfo userInfo) throws NoSuchAlgorithmException {

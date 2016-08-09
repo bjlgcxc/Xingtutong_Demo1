@@ -2,9 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%  
     String context = request.getContextPath();
-    request.setAttribute("context",context);
+    request.setAttribute("context",context);   
     
-    String verifyCode = (String)request.getAttribute("verifyCode");    
+    String verifyCode = (String)request.getAttribute("verifyCode");
 %>
 <html>
 <head>
@@ -29,6 +29,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+	
 		$("body").keydown(function() {
             if (event.keyCode == "13") {//keyCode=13是回车键
                 $("#submit").click();
@@ -64,6 +65,8 @@
 			}
 		});
 		
+		//验证码
+		$("#img").attr("src","user/getVerifyCode?verifyCode="+ '<%=verifyCode%>');
 	});	
 </script>
 
@@ -93,9 +96,8 @@
                     <div class="form-group">
                         <div class="field">
                             <input type="text" class="input" id="verifyCode" name="verifyCode" placeholder="填写右侧的验证码"/>
-                            <img src="images/verifyCode.jpg" width="80" height="32" class="passcode" />
-                            <p id="info"></p>
-                        </div>                  
+                            <img id="img" width="80" height="32" class="passcode"/>            
+                        </div>              
                     </div>      
                     <div style="float:right"><a href="register.html" style="text-decoration:underline;color:blue;">用户注册?</a></div>
                 </div>
