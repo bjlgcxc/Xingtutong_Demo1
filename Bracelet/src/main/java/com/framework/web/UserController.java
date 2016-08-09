@@ -87,10 +87,12 @@ public class UserController {
 	//修改用户密码
 	@ResponseBody
 	@RequestMapping(value="/user/changePsw",method=RequestMethod.POST)
-	public void changePsw(UserInfo userInfo) throws NoSuchAlgorithmException{
+	public void changePsw(HttpSession session,UserInfo userInfo) throws NoSuchAlgorithmException{
 		userInfo.setPassword(EncodeMD5.encode(userInfo.getPassword()));
 		userService.updatePassword(userInfo);
 		
+		UserInfo user = userService.findUserByUserName(userInfo.getUserName());
+		session.setAttribute("user", user);
 	}
 	
 }

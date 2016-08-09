@@ -30,22 +30,25 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#submit").click(function(){
-			if($("#userName").val()=='' || $("#password").val()==''){
-				layer.msg('请填写注册账号/注册密码');
+			if($("#userName").val()=='' || $("#password1").val()=='' || $("#password2").val()==''){
+				layer.msg('请填写完整的信息');
+			}
+			else if($("#password1").val()!=$("#password2").val()){
+				layer.msg('输入的密码不一致');
 			}
 			else{
 			    $.ajax({
 					url:"user/register",
 					type:"get",			
 					dataType:"json",
-					data:{userName:$("#userName").val(),password:$("#password").val()},
+					data:{userName:$("#userName").val(),password:$("#password1").val()},
 					success:function(data){
 						if(data.info!="error"){
 							layer.msg('注册成功!');						
 							setTimeout(function(){location.href="login.html";},2000);
 						}
 						else{
-							layer.msg('注册的账号已存在，请重新选择!');
+							layer.msg('账号已存在，请重新选择');
 							setTimeout(function(){location.href="register.html";},2000);
 						}
 					}			
@@ -53,6 +56,9 @@
 			}
 		});
 		
+		$("#return").click(function(){
+			location.href="login.html";
+		});
 	});	
 </script>
 
@@ -78,11 +84,20 @@
                     <div style="font-size:16px">2.填写登录密码</div>
                     <div class="form-group">
                         <div class="field field-icon-right">
-                            <input type="password" class="input" id="password" name="password" data-validate="required:请填写密码,length#>=6:密码长度不符合要求" />                             
+                            <input type="password" class="input" id="password1" name="password1" data-validate="required:请填写密码,length#>=6:密码长度不符合要求" />                             
+                        </div>
+                    </div>
+                    <div style="font-size:16px">3.确认登录密码</div>
+                    <div class="form-group">
+                        <div class="field field-icon-right">
+                            <input type="password" class="input" id="password2" name="password2" data-validate="required:请填写密码,length#>=6:密码长度不符合要求" />                             
                         </div>
                     </div>       
                 </div>
-                <div class="panel-foot text-center"><button type="button" id="submit" class="button button-block bg-main text-big">注册</button></div>
+                <div class="panel-foot text-center">
+                	<button type="button" id="submit" class="button bg-main text-big">&nbsp;&nbsp;注&nbsp;册&nbsp;&nbsp;</button>
+                	<button type="button" id="return" class="button bg-main text-big">&nbsp;&nbsp;返&nbsp;回&nbsp;&nbsp;</button>
+                </div>
             </div>
             </form>
         </div>

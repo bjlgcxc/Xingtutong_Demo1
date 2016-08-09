@@ -6,7 +6,7 @@
   		loginState = "login";
   	}
   	
-  	UserInfo user=null;
+  	UserInfo user = new UserInfo();
   	if(session.getAttribute("user")!=null){
    		 user = (UserInfo)session.getAttribute("user");
    	}
@@ -36,9 +36,14 @@
   				content: $("#dialog")
 			});
 			$("#password").focus();
+			$(document).keydown(function (e) {
+            	if (e.keyCode == 13) {
+                	$("#confirm").click();
+            	}
+        	});
  		});	
  		
- 		$("#confirm").click(function(){
+ 		$("#confirm").click(function(){ 		
  			var psw = $("#password").val();
  			var newPsw1 = $("#newPassword1").val();
  			var newPsw2 = $("#newPassword2").val();
@@ -58,11 +63,10 @@
  				$.ajax({
  					url:"user/changePsw",
  					type:"post",
- 					data:{'userName':'<%=user.getUserName()%>','password':$("#newPsw1").val()},
- 					success:function(){
-						layer.msg("修改成功",function(){
-							location.href="";
-						});					
+ 					data:{'userName':'<%=user.getUserName()%>','password':$("#newPassword1").val()},
+ 					success:function(){				
+						location.href="";
+						layer.msg("修改成功");
  					},
  					error:function(){
  					}
@@ -113,8 +117,8 @@
 							</div>
 						</div>
 						<div class="dialog-foot">
-							<button class="button" id="cancel">取消</button>
-							<a class="button bg-green" id="confirm" href="#">确认</a>
+							<a class="button bg-main" id="cancel" href="" >取消</a>
+							<a class="button bg-main" id="confirm" href="#">确认</a>
 						</div>
 					</form>	
 				</div>

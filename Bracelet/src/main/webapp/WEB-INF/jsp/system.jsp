@@ -52,7 +52,7 @@
     $(document).ready(function(){
   	    setDefault();
 		$(".form-reset").mousedown(function(){
-			setTimeout(function(){$(".form-reset").click()},0);
+			setTimeout(function(){$(".form-reset").click();},0);
 			setDefault();
 		});
 		
