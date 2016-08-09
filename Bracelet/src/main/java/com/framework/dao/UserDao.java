@@ -43,4 +43,10 @@ public class UserDao {
 		jdbcTemplate.update(sqlStr,new Object[]{userInfo.getLastLogin(),userInfo.getLoginCount(),userInfo.getUserName()});
 	}
 	
+	//更新用户密码
+	public void updatePassword(UserInfo userInfo){
+		String sql = " update t_user set password=? where userName=? ";
+		jdbcTemplate.update(sql,new Object[]{userInfo.getPassword(),userInfo.getUserName()});
+	}
+	
 }

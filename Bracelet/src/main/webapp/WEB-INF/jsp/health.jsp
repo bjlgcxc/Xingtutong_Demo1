@@ -5,11 +5,6 @@
     request.setAttribute("context",context);
     request.setAttribute("page", "health");
     
-    String loginState = "notLogin";
-  	if(session.getAttribute("loginState")!=null){
-  		loginState = "login";
-  	}
-    
     String deviceId = request.getParameter("deviceId");
     if(deviceId==null){
     	deviceId = "";
@@ -51,10 +46,6 @@
 </head>
 
 <script type='text/javascript'>
-	if('<%=loginState%>' == 'notLogin'){
-	   	 location.href = "login.html";
-	}
-
 	var formatDateTime = function (date) {  
     	var y = date.getFullYear();  
     	var m = date.getMonth() + 1;  

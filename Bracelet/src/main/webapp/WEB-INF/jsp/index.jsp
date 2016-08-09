@@ -4,12 +4,6 @@
     String context = request.getContextPath();
     request.setAttribute("context",context);
     request.setAttribute("page", "index");
-    
-    Object user = session.getAttribute("user");
-  	String loginState = "notLogin";
-  	if(session.getAttribute("loginState")!=null){
-  		loginState = "login";
-  	}
 %>
 
 <html>
@@ -33,11 +27,7 @@
     <script src="js/layer.js"></script>
 </head>
 
-<script>
-  	if('<%=loginState%>' == 'notLogin'){
-   	   location.href = "login.html";
-  	}
-  
+<script> 
   	$(document).ready(function(){
    	   $("#userGuide").click(function(){
    	   		layer.tips('未设置', '#userGuide');

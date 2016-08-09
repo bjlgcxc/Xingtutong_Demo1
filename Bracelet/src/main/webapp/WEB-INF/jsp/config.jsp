@@ -4,12 +4,7 @@
     String context = request.getContextPath();
     request.setAttribute("context",context);
     request.setAttribute("page", "config");
-    
-    String loginState = "notLogin";
-  	if(session.getAttribute("loginState")!=null){
-  		loginState = "login";
-  	}
-    
+
     String deviceId = request.getParameter("deviceId");
     if(deviceId==null){
     	deviceId = "";
@@ -39,10 +34,6 @@
 </head>
 
 <script type='text/javascript'>
-	if('<%=loginState%>' == 'notLogin'){
-	   	 location.href = "login.html";
-	}
-	
 	$(document).ready(function(){
 		//submit按钮的点击事件
 		$("[id^=submit]").each(function(){
@@ -67,7 +58,13 @@
 			var deviceId = $("#deviceId").val();
 			var braceletInterval = $("#braceletInterval").val();			
 			var braceletUpload = $("#braceletUpload").val();
-			if(deviceId=='' || (braceletInterval=='' && braceletUpload=='')){
+			if(deviceId=='' || braceletInterval=='' || braceletUpload==''){	
+				if(braceletUpload==''){
+					$("#braceletUpload").focus();
+				}
+				if(braceletInterval==''){
+					$("#braceletInterval").focus();
+				}					  
 				return;
 			}
 			else{
@@ -96,7 +93,13 @@
 			var deviceId = $("#deviceId").val();
 			var locationInterval = $("#locationInterval").val();
 			var locationUpload = $("#locationUpload").val();
-			if(deviceId=='' || (locationInterval=='' && locationUpload=='')){
+			if(deviceId=='' || locationInterval=='' || locationUpload==''){
+				if(locationUpload==''){
+					$("#locationUpload").focus();
+				}
+				if(locationInterval==''){
+					$("#locationInterval").focus();
+				}
 				return ;
 			}
 			else{
@@ -125,7 +128,13 @@
 		    var deviceId = $("#deviceId").val();
 			var locateInterval = $("#locateInterval").val();
 			var locateTimes = $("#locateTimes").val();
-			if(deviceId=='' || (locateTimes=='' && locateInterval=='')){
+			if(deviceId=='' || locateTimes=='' || locateInterval==''){
+				if(locateTimes==''){
+					$("#locateTimes").focus();
+				}
+				if(locateInterval==''){
+					$("#locateInterval").focus();
+				}
 				return ;
 			}
 			else{
@@ -154,6 +163,9 @@
 		    var deviceId = $("#deviceId").val();
 			var teleNumber = $("#teleNumber").val();
 			if(teleNumber=='' || deviceId==''){
+				if(teleNumber==''){
+					$("#teleNumber").focus();
+				}
 				return;
 			}
 			else{
@@ -188,7 +200,7 @@
 		$(".form-reset").mousedown(function(){
 			check();
 		});
-			
+		
 	});
 	
 	

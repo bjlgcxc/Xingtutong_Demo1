@@ -38,7 +38,7 @@ public class DeviceController {
 	@Autowired
 	ConfigService configService;
 	@Autowired
-	SystemService sysDefaultService;
+	SystemService systemService;
 	
 	/*
 	 * 手机登录app,发送手机信息(imei)到后台,后台返给app相应的设备id
@@ -69,7 +69,7 @@ public class DeviceController {
 		
 		//若没有配置信息，则插入默认配置
 		if(!configService.hasMatchConfig(id)){
-			SystemInfo sysDefault = sysDefaultService.getSysDefault();
+			SystemInfo sysDefault = systemService.getSysDefault();
 			ConfigInfo configInfo = new ConfigInfo();
 			configInfo.setDeviceId(id);
 			configInfo.setBraceletInterval(sysDefault.getBraceletInterval());

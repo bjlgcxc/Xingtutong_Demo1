@@ -4,11 +4,6 @@
     String context = request.getContextPath();
     request.setAttribute("context",context);
     request.setAttribute("page", "system");
-    
-    String loginState = "notLogin";
-  	if(session.getAttribute("loginState")!=null){
-  		loginState = "login";
-  	}
 %>
 
 <!DOCTYPE html>

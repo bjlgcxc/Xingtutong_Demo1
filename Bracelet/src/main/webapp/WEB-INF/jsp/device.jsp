@@ -5,12 +5,7 @@
     String context = request.getContextPath();
     request.setAttribute("context",context);
     request.setAttribute("page", "user");
-    
-    String loginState = "notLogin";
-  	if(session.getAttribute("loginState")!=null){
-  		loginState = "login";
-  	}
-  	
+	
   	String deviceId="",deviceName="",deviceAlias="";
   	if(request.getParameter("deviceId")!=null){
   		deviceId = request.getParameter("deviceId");
@@ -39,22 +34,17 @@
     <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon" />
     <link href="/favicon.ico" rel="bookmark icon" />
    
-    <script src="js/jquery-2.2.3.js"></script>
-    <script src="js/pintuer.js"></script>
+    <script src="js/jquery-2.2.3.js"></script>    
     <script src="js/respond.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/layer.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="js/dataTables.bootstrap.min.js"></script> 
+    <script src="js/pintuer.js"></script>
 </head>
 
 <script type='text/javascript'>
-	//登录状态判断
-	if('<%=loginState%>' == 'notLogin'){
-   	 	location.href = "login.html";
-	}
-
 	//获取格式化时间
 	function GetDateTimeFormatStr(date) {
 		var seperator1 = "-";
@@ -137,7 +127,7 @@
     		var deviceId = $(this).siblings("#deviceId").text();  
     		layer.prompt({
     				title:"修改设备别名",
-    				formType:0
+    				formType:0,
     			},
     			function(val){	  	
     				$.ajax({

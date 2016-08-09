@@ -32,4 +32,9 @@ public class UserService {
 		userDao.updateUserInfo(userInfo);
 	}
 	
+	//5.更新用户密码
+	public void updatePassword(UserInfo userInfo){
+		userDao.updatePassword(userInfo);
+	}
+	
 }
