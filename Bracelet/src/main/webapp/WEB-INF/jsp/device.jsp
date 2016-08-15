@@ -11,10 +11,10 @@
   		deviceId = request.getParameter("deviceId");
   	}
   	if(request.getParameter("deviceName")!=null){
-  		deviceName = request.getParameter("deviceName");
+  		deviceName = new String(request.getParameter("deviceName").getBytes("ISO-8859-1"),"utf-8");
   	}
   	if(request.getParameter("deviceAlias")!=null){
-  		deviceAlias = request.getParameter("deviceAlias");
+  		deviceAlias = new String(request.getParameter("deviceAlias").getBytes("ISO-8859-1"),"utf-8");
   	}
 %>
 

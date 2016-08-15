@@ -1,5 +1,6 @@
 package com.framework.web;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -41,33 +42,30 @@ public class DeviceController {
 	SystemService systemService;
 	
 	/*
-	 * ÊÖ»úµÇÂ¼app,·¢ËÍÊÖ»úĞÅÏ¢(imei)µ½ºóÌ¨,ºóÌ¨·µ¸øappÏàÓ¦µÄÉè±¸id
+	 * æ‰‹æœºç™»å½•app,å‘é€æ‰‹æœºä¿¡æ¯(imei)åˆ°åå°,åå°è¿”ç»™appç›¸åº”çš„è®¾å¤‡id
 	 */
 	@ResponseBody
 	@RequestMapping(value="/app/device/{imei}/appLogin")
-	public DeviceInfo appLogin(@PathVariable String imei){
-		
-		//imeiÊÇ·ñÒÑ¾­×¢²á
-		boolean isDeviceExist = deviceService.hasMatchDevice(imei);
-		
+	public DeviceInfo appLogin(@PathVariable String imei){	
 		DeviceInfo deviceInfo = new DeviceInfo();
 		deviceInfo.setImei(imei);
 		deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
-		//ÈôÎ´×¢²á£¬Ìí¼Ó×¢²á£»ÈôÒÑ×¢²á£¬¸üĞÂÁ¬½ÓÊ±¼ä
-		if(!isDeviceExist)
+		//è‹¥è®¾å¤‡æœªæ³¨å†Œï¼Œæ·»åŠ æ³¨å†Œï¼›è‹¥å·²æ³¨å†Œï¼Œæ›´æ–°è¿æ¥æ—¶é—´
+		if(!deviceService.hasMatchDevice(imei))
 			deviceService.addDeviceInfo(deviceInfo);
 		else{
 			deviceInfo.setId(deviceService.getDeviceId(imei));
 			deviceService.updateConnectTime(deviceInfo);
 		}		
+		log.info("get phone imei");
 		
-		//·µ»ØimeiºÍidµÄ¶ÔÓ¦ĞÅÏ¢
+		//è¿”å›imeiå’Œidçš„å¯¹åº”ä¿¡æ¯
 		int id = deviceService.getDeviceId(imei);
 		deviceInfo = new DeviceInfo();
 		deviceInfo.setId(id);
 		deviceInfo.setImei(imei);
 		
-		//ÈôÃ»ÓĞÅäÖÃĞÅÏ¢£¬Ôò²åÈëÄ¬ÈÏÅäÖÃ
+		//è‹¥æ²¡æœ‰é…ç½®ä¿¡æ¯ï¼Œåˆ™æ’å…¥é»˜è®¤é…ç½®
 		if(!configService.hasMatchConfig(id)){
 			SystemInfo sysDefault = systemService.getSysDefault();
 			ConfigInfo configInfo = new ConfigInfo();
@@ -81,19 +79,20 @@ public class DeviceController {
 			configInfo.setTeleNumber(sysDefault.getTeleNumber());
 			configService.insertConfigInfo(configInfo);
 		}
+		log.info("insert device config info");
 		
-		log.info("get imei and return id");
+		log.info("return device id");
 		return deviceInfo;
 	}
 	
 	
 	/*
-	 * ÊÖ»úÁ¬½ÓÀ¶ÑÀ,app·¢ËÍÊÖ»·ĞÅÏ¢µ½ºóÌ¨
+	 * æ‰‹æœºè¿æ¥è“ç‰™,appå‘é€æ‰‹ç¯ä¿¡æ¯åˆ°åå°
 	 */
 	@RequestMapping(value="/app/device/{deviceId}/bluetoothConn",method = RequestMethod.POST)
 	public String bluetoothConn(@RequestBody JSONObject jsonObj,@PathVariable int deviceId){
 		
-		//¸üĞÂÉè±¸(ÊÖ»·)µÄmacµØÖ·
+		//æ›´æ–°è®¾å¤‡(æ‰‹ç¯)çš„macåœ°å€
 		String mac = jsonObj.getString("mac");
 		DeviceInfo deviceInfo = new DeviceInfo();
 		deviceInfo.setId(deviceId);
@@ -101,7 +100,7 @@ public class DeviceController {
 		deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
 		deviceService.updateDevicetInfo(deviceInfo);
 		
-		//Ìí¼ÓÊÖ»·µÄĞÅÏ¢
+		//æ·»åŠ æ‰‹ç¯çš„ä¿¡æ¯
 		BraceletInfo braceletInfo = (BraceletInfo)JSONObject.toBean(jsonObj,BraceletInfo.class);
 		boolean isBraceletExist = braceletService.hasMatchBracelet(mac);
 		if(!isBraceletExist)
@@ -109,14 +108,14 @@ public class DeviceController {
 		else{
 			braceletService.updateBraceletInfo(braceletInfo);
 		}
-			
-		log.info("get bracelet info");
+		log.info("get bracelet mac and other info");
+		
 		return "redirect:/app/instruction/" + deviceId + "/returnJsonArray";
 	}
 	
 	
 	/*
-	 * appÓëºóÌ¨Í¨ĞÅÊ±,¸üĞÂÍ¨ĞÅÊ±¼ä
+	 * appä¸åå°é€šä¿¡æ—¶,æ›´æ–°é€šä¿¡æ—¶é—´
 	 */
 	@RequestMapping(value="/app/device/{deviceId}/refreshTime")
 	public void connect(@PathVariable int deviceId){
@@ -128,42 +127,47 @@ public class DeviceController {
 	
 	
 	/*
-	 * »ñÈ¡Éè±¸ĞÅÏ¢ÁĞ±í
+	 * è·å–è®¾å¤‡ä¿¡æ¯åˆ—è¡¨
 	 */
 	@RequestMapping(value="device.html")
-	public String getDeviceInfo(HttpServletRequest request){
+	public String getDeviceInfo(HttpServletRequest request) throws UnsupportedEncodingException{
+	
 		String deviceId = request.getParameter("deviceId");
 		String deviceName = (String) request.getParameter("deviceName");
+		if(deviceName!=null)
+			deviceName = new String(deviceName.getBytes("ISO-8859-1"),"utf-8");
 		String deviceAlias = request.getParameter("deviceAlias");
-		
+		if(deviceAlias!=null)
+			deviceAlias = new String(deviceAlias.getBytes("ISO-8859-1"),"utf-8");
+	
 		JSONArray jsonArray = new JSONArray();
-		if(!((deviceName!="" && deviceName!=null) || (deviceAlias!="" && deviceAlias!=null))){
-			List<DeviceInfo> deviceInfoList = deviceService.getDeviceInfo(deviceId,null, null);
+		if(deviceId!="" || deviceId!=null || deviceAlias!="" || deviceAlias!=null){
+			List<DeviceInfo> deviceInfoList = deviceService.getDeviceInfo(deviceId,null,deviceAlias);
 			if(deviceInfoList!=null){
 				for(DeviceInfo deviceInfo:deviceInfoList){
-					List<BraceletInfo> braceletInfoList = braceletService.getBraceletInfo(deviceInfo.getMac(),deviceName, deviceAlias); 
+					List<BraceletInfo> braceletInfoList = braceletService.getBraceletInfo(deviceInfo.getMac(),deviceName); 
 					JSONObject jsonObj = new JSONObject();
 					jsonObj.put("id", deviceInfo.getId());
+					jsonObj.put("alias",deviceInfo.getAlias());
 					jsonObj.put("connectTime",deviceInfo.getConnectTime().getTime());
 					if(braceletInfoList!=null){			
-						jsonObj.put("name",braceletInfoList.get(0).getName());
-						jsonObj.put("alias",braceletInfoList.get(0).getAlias());					
+						jsonObj.put("name",braceletInfoList.get(0).getName());					
+						jsonArray.add(jsonObj);
 					}
-					jsonArray.add(jsonObj);
 				}
 			}
 		}
 		else{
-			List<BraceletInfo> braceletInfoList = braceletService.getBraceletInfo(null,deviceName, deviceAlias); 
+			List<BraceletInfo> braceletInfoList = braceletService.getBraceletInfo(null,deviceName); 
 			if(braceletInfoList!=null){
 				for(BraceletInfo braceletInfo:braceletInfoList){
 					JSONObject jsonObj = new JSONObject();
 					String mac = braceletInfo.getMac();
-					List<DeviceInfo> deviceInfoList = deviceService.getDeviceInfo(null,null,mac);
+					List<DeviceInfo> deviceInfoList = deviceService.getDeviceInfo(null,mac,null);
 					if(deviceInfoList!=null){
 						jsonObj.put("id",deviceInfoList.get(0).getId());
 						jsonObj.put("name",braceletInfo.getName());
-						jsonObj.put("alias", braceletInfo.getAlias());
+						jsonObj.put("alias", deviceInfoList.get(0).getAlias());
 						jsonObj.put("connectTime",deviceInfoList.get(0).getConnectTime().getTime());
 						jsonArray.add(jsonObj);
 				    }

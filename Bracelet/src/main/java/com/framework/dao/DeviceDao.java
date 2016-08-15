@@ -64,17 +64,18 @@ public class DeviceDao {
 	}
 	
     // 获取设备信息
-	public List<DeviceInfo> getDeviceInfo(String deviceId,String imei,String mac){
+	public List<DeviceInfo> getDeviceInfo(String deviceId,String mac,String alias){
 		String sql = " select * from t_device where 1=1 ";
 		if(deviceId!=null && deviceId!=""){
 			sql += " and id=" + deviceId;
 		}
-		if(imei!=null && imei!=""){ 
-			sql += " and imei=" + "'" + imei + "'";
-		}
-		if(mac!=null && mac!=""){
+		if(mac!=null && mac!=""){ 
 			sql += " and mac=" + "'" + mac + "'";
 		}
+		if(alias!=null && alias!=""){ 
+			sql += " and alias like " + "'%" + alias + "%'";
+		}
+
 		List<DeviceInfo> result = jdbcTemplate.query(sql,new BeanPropertyRowMapper<DeviceInfo>(DeviceInfo.class));
 		if(result.size()!=0)
 			return result;

@@ -61,16 +61,13 @@ public class BraceletDao {
 			return null;
 	}
 	// 获取手环信息
-	public List<BraceletInfo> queryBraceletInfo(String mac,String deviceName,String deviceAlias){
+	public List<BraceletInfo> queryBraceletInfo(String mac,String deviceName){
 		String sql = " select * from t_bracelet where 1=1";
 		if(mac!=null && mac!=""){
 			sql += " and mac='" + mac + "'";
  		}
 		if(deviceName!=null && deviceName!=""){
 			sql += " and name like '%" + deviceName + "%'";
-		}
-		if(deviceAlias!=null && deviceAlias!=""){
-			sql += " and alias like '%" + deviceAlias + "%'";
 		}
 		List<BraceletInfo> result = jdbcTemplate.query(sql,new BeanPropertyRowMapper<BraceletInfo>(BraceletInfo.class));
 		if(result.size()!=0)

@@ -7,7 +7,6 @@ public class BraceletInfo implements Serializable{
 	
 	public String mac;
 	public String name;
-	public String alias;
 	public Integer braceletGeneration;
 	public Integer braceletStyle;
 	public Integer braceletType;
@@ -26,12 +25,6 @@ public class BraceletInfo implements Serializable{
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getAlias() {
-		return alias;
-	}
-	public void setAlias(String alias) {
-		this.alias = alias;
 	}
 	public Integer getBraceletGeneration() {
 		return braceletGeneration;

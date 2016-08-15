@@ -38,8 +38,8 @@ public class DeviceService {
 		deviceDao.updateConnectTime(deviceInfo);
 	}
 	
-	public List<DeviceInfo> getDeviceInfo(String deviceId,String imei,String mac){
-		return deviceDao.getDeviceInfo(deviceId,imei, mac);
+	public List<DeviceInfo> getDeviceInfo(String deviceId,String mac,String alias){
+		return deviceDao.getDeviceInfo(deviceId,mac,alias);
 	}
 
 }

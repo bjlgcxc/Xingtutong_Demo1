@@ -9,6 +9,7 @@ public class DeviceInfo implements Serializable{
 	public Integer id;
 	public String imei;
 	public String mac;
+	public String alias;
 	public Timestamp connectTime;
 	
 	public Integer getId() {
@@ -28,6 +29,12 @@ public class DeviceInfo implements Serializable{
 	}
 	public void setMac(String mac) {
 		this.mac = mac;
+	}
+	public String getAlias() {
+		return alias;
+	}
+	public void setAlias(String alias) {
+		this.alias = alias;
 	}
 	public Timestamp getConnectTime() {
 		return connectTime;

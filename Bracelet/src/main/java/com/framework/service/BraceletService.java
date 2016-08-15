@@ -37,8 +37,8 @@ public class BraceletService {
 		return braceletDao.queryBraceletInfo(mac);
 	}
 	
-	public List<BraceletInfo> getBraceletInfo(String mac,String deviceName,String deviceAlias){
-		return braceletDao.queryBraceletInfo(mac,deviceName,deviceAlias);
+	public List<BraceletInfo> getBraceletInfo(String mac,String deviceName){
+		return braceletDao.queryBraceletInfo(mac,deviceName);
 	} 
 
 }
