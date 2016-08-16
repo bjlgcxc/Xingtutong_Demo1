@@ -131,7 +131,7 @@
     			},
     			function(val){	  	
     				$.ajax({
-    					url:"bracelet/" + deviceId + "/updateBraceletAlias",
+    					url:"device/" + deviceId + "/updateDeviceAlias",
     					type:"post",
     					data:{deviceAlias:val},
     					success:function(){

@@ -179,4 +179,17 @@ public class DeviceController {
 		return "device";
 	}
 	
+	
+	/*
+	 * 修改设备别名
+	 */
+	@ResponseBody
+	@RequestMapping(value="/device/{deviceId}/updateDeviceAlias",method = RequestMethod.POST)
+	public void updateBraceletAlias(HttpServletRequest request,@PathVariable int deviceId){
+		DeviceInfo deviceInfo = new DeviceInfo();
+		deviceInfo.setId(deviceId);
+		deviceInfo.setAlias(request.getParameter("deviceAlias"));
+		deviceService.updateDevicetInfo(deviceInfo);
+	}
+	
 }

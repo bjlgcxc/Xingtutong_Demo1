@@ -49,11 +49,20 @@ public class DeviceDao {
 		jdbcTemplate.update(sqlStr,args);
 	}
 	
-	// 更新设备信息 
+	// 更新设备信息(mac,alias)
 	public void updateDeviceInfo(DeviceInfo deviceInfo){
-		String sqlStr = " update t_device set mac=?,connectTime=? where id=? ";
-		Object args[] = new Object[]{deviceInfo.getMac(),deviceInfo.getConnectTime(),deviceInfo.getId()};
-		jdbcTemplate.update(sqlStr,args);
+		String sql = " update t_device set id=" + deviceInfo.getId();
+		if(deviceInfo.getMac()!=null){
+			sql += ",mac='" + deviceInfo.getMac() + "'";
+		}
+		if(deviceInfo.getAlias()!=null){
+			sql += ",alias='" + deviceInfo.getAlias() + "'";
+		}
+		if(deviceInfo.getConnectTime()!=null){
+			sql += ",connectTime='" + deviceInfo.getConnectTime() + "'";
+		}
+		sql += " where id='" + deviceInfo.getId() + "'";
+		jdbcTemplate.update(sql);
 	}
 	
 	// 更新手机连接后台的时间

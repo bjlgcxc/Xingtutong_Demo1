@@ -41,5 +41,5 @@ public class DeviceService {
 	public List<DeviceInfo> getDeviceInfo(String deviceId,String mac,String alias){
 		return deviceDao.getDeviceInfo(deviceId,mac,alias);
 	}
-
+	
 }
