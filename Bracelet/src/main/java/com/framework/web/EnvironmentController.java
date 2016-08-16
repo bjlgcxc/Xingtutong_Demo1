@@ -22,7 +22,6 @@ public class EnvironmentController {
 	@Autowired
 	EnvironmentService environmentService;
 
-	
 	/*
 	 * »ñÈ¡Êª¶È(josn)
 	 */

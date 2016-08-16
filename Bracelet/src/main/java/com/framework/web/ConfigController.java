@@ -34,7 +34,8 @@ public class ConfigController {
 		configInfo.setDeviceId(deviceId);
 		
 		//如果不存在，则插入
-		if(!configService.hasMatchConfig(deviceId)){
+		boolean isConfigExit = configService.hasMatchConfig(deviceId);
+		if(!isConfigExit){
 			configService.insertConfigInfo(configInfo);
 		}
 		//存在，则更新
