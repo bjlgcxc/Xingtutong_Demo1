@@ -134,12 +134,8 @@ public class DeviceController {
 	
 		String deviceId = request.getParameter("deviceId");
 		String deviceName = (String) request.getParameter("deviceName");
-		if(deviceName!=null)
-			deviceName = new String(deviceName.getBytes("ISO-8859-1"),"utf-8");
 		String deviceAlias = request.getParameter("deviceAlias");
-		if(deviceAlias!=null)
-			deviceAlias = new String(deviceAlias.getBytes("ISO-8859-1"),"utf-8");
-	
+		
 		JSONArray jsonArray = new JSONArray();
 		if(deviceId!="" || deviceId!=null || deviceAlias!="" || deviceAlias!=null){
 			List<DeviceInfo> deviceInfoList = deviceService.getDeviceInfo(deviceId,null,deviceAlias);
