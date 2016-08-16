@@ -48,7 +48,7 @@ public class PositionController {
 		DeviceInfo deviceInfo = new DeviceInfo();
 		deviceInfo.setId(deviceId);
 		deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
-		deviceService.updateConnectTime(deviceInfo);
+		deviceService.updateDeviceInfo(deviceInfo);
 		
 		log.info("get position info");
 		return "redirect:/app/instruction/" + deviceId + "/returnJsonArray";
@@ -72,7 +72,7 @@ public class PositionController {
 		DeviceInfo deviceInfo = new DeviceInfo();
 		deviceInfo.setId(deviceId);
 		deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
-		deviceService.updateConnectTime(deviceInfo);	
+		deviceService.updateDeviceInfo(deviceInfo);	
 		
 		log.info("get position info,size=" + positionInfoArray.length);
 		return  "redirect:/app/instruction/" + deviceId + "/returnJsonArray";

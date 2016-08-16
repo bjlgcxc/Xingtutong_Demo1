@@ -11,7 +11,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,31 +40,32 @@ public class DeviceController {
 	@Autowired
 	SystemService systemService;
 	
+	
 	/*
 	 * 手机登录app,发送手机信息(imei)到后台,后台返给app相应的设备id
 	 */
 	@ResponseBody
 	@RequestMapping(value="/app/device/{imei}/appLogin")
 	public DeviceInfo appLogin(@PathVariable String imei){	
+		
+		log.info("get phone imei");
 		DeviceInfo deviceInfo = new DeviceInfo();
-		deviceInfo.setImei(imei);
-		deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
+		
 		//若设备未注册，添加注册；若已注册，更新连接时间
-		if(!deviceService.hasMatchDevice(imei))
+		boolean isDeviceExist = deviceService.hasMatchDevice(imei);
+		if(!isDeviceExist){
+			deviceInfo.setImei(imei);
+			deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
 			deviceService.addDeviceInfo(deviceInfo);
+		}
 		else{
 			deviceInfo.setId(deviceService.getDeviceId(imei));
-			deviceService.updateConnectTime(deviceInfo);
+			deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
+			deviceService.updateDeviceInfo(deviceInfo);
 		}		
-		log.info("get phone imei");
 		
-		//返回imei和id的对应信息
 		int id = deviceService.getDeviceId(imei);
-		deviceInfo = new DeviceInfo();
-		deviceInfo.setId(id);
-		deviceInfo.setImei(imei);
-		
-		//若没有配置信息，则插入默认配置
+		//若设备没有配置信息,则插入默认配置
 		if(!configService.hasMatchConfig(id)){
 			SystemInfo sysDefault = systemService.getSysDefault();
 			ConfigInfo configInfo = new ConfigInfo();
@@ -81,6 +81,10 @@ public class DeviceController {
 		}
 		log.info("insert device config info");
 		
+		//返回imei和id的对应信息
+		deviceInfo = new DeviceInfo();
+		deviceInfo.setId(id);
+		deviceInfo.setImei(imei);
 		log.info("return device id");
 		return deviceInfo;
 	}
@@ -90,19 +94,17 @@ public class DeviceController {
 	 * 手机连接蓝牙,app发送手环信息到后台
 	 */
 	@RequestMapping(value="/app/device/{deviceId}/bluetoothConn",method = RequestMethod.POST)
-	public String bluetoothConn(@RequestBody JSONObject jsonObj,@PathVariable int deviceId){
+	public String bluetoothConn(BraceletInfo braceletInfo,@PathVariable int deviceId){
 		
-		//更新设备(手环)的mac地址
-		String mac = jsonObj.getString("mac");
+		//更新设备的mac地址
 		DeviceInfo deviceInfo = new DeviceInfo();
 		deviceInfo.setId(deviceId);
-		deviceInfo.setMac(mac);
+		deviceInfo.setMac(braceletInfo.getMac());
 		deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
-		deviceService.updateDevicetInfo(deviceInfo);
+		deviceService.updateDeviceInfo(deviceInfo);
 		
-		//添加手环的信息
-		BraceletInfo braceletInfo = (BraceletInfo)JSONObject.toBean(jsonObj,BraceletInfo.class);
-		boolean isBraceletExist = braceletService.hasMatchBracelet(mac);
+		//更新手环的信息
+		boolean isBraceletExist = braceletService.hasMatchBracelet(braceletInfo.getMac());
 		if(!isBraceletExist)
 			braceletService.addBraceletInfo(braceletInfo);
 		else{
@@ -111,18 +113,6 @@ public class DeviceController {
 		log.info("get bracelet mac and other info");
 		
 		return "redirect:/app/instruction/" + deviceId + "/returnJsonArray";
-	}
-	
-	
-	/*
-	 * app与后台通信时,更新通信时间
-	 */
-	@RequestMapping(value="/app/device/{deviceId}/refreshTime")
-	public void connect(@PathVariable int deviceId){
-		DeviceInfo deviceInfo = new DeviceInfo();
-		deviceInfo.setId(deviceId);
-		deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
-		deviceService.updateConnectTime(deviceInfo);
 	}
 	
 	
@@ -185,7 +175,7 @@ public class DeviceController {
 		DeviceInfo deviceInfo = new DeviceInfo();
 		deviceInfo.setId(deviceId);
 		deviceInfo.setAlias(request.getParameter("deviceAlias"));
-		deviceService.updateDevicetInfo(deviceInfo);
+		deviceService.updateDeviceInfo(deviceInfo);
 	}
 	
 }

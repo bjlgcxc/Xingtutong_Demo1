@@ -13,12 +13,13 @@ public class DeviceDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	// 根据id查询设备匹配个数
 	public int queryDeviceMatchCount(int id){
 		String sql = " select count(*) from t_device where id=? ";
 		return jdbcTemplate.queryForInt(sql,new Object[]{id});
 	}
 	
-	// 查询设备imei匹配个数
+	// 根据imei查询设备匹配个数
 	public int queryDeviceMatchCount(String imei){
 		String sqlStr = " select count(*) from t_device where imei=? ";
 		return jdbcTemplate.queryForInt(sqlStr,new Object[]{imei});
@@ -42,14 +43,14 @@ public class DeviceDao {
 		return jdbcTemplate.queryForInt(sqlStr,new Object[]{imei});
 	}
 	
-	// 插入设备信息 imei,connectTime
+	// 插入设备信息 imei,connectTime并自动生成id
 	public void insertDeviceInfo(DeviceInfo deviceInfo){
 		String sqlStr = " insert into t_device(imei,connectTime) values(?,?) ";
 		Object args[] = new Object[]{deviceInfo.getImei(),deviceInfo.getConnectTime()};	
 		jdbcTemplate.update(sqlStr,args);
 	}
 	
-	// 更新设备信息(mac,alias)
+	// 更新设备信息(mac,alias,connectTime)
 	public void updateDeviceInfo(DeviceInfo deviceInfo){
 		String sql = " update t_device set id=" + deviceInfo.getId();
 		if(deviceInfo.getMac()!=null){
@@ -61,15 +62,9 @@ public class DeviceDao {
 		if(deviceInfo.getConnectTime()!=null){
 			sql += ",connectTime='" + deviceInfo.getConnectTime() + "'";
 		}
-		sql += " where id='" + deviceInfo.getId() + "'";
-		jdbcTemplate.update(sql);
-	}
+		sql += " where id=" + deviceInfo.getId();
 	
-	// 更新手机连接后台的时间
-	public void updateConnectTime(DeviceInfo deviceInfo){
-		String sqlStr = " update t_device set connectTime=? where id=? ";
-		Object args[] = new Object[]{deviceInfo.getConnectTime(),deviceInfo.getId()};
-		jdbcTemplate.update(sqlStr, args);
+		jdbcTemplate.update(sql);
 	}
 	
     // 获取设备信息
