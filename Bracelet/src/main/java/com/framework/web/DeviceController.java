@@ -59,6 +59,7 @@ public class DeviceController {
 		}		
 		log.info("get phone imei");
 		
+		
 		//返回imei和id的对应信息
 		int id = deviceService.getDeviceId(imei);
 		deviceInfo = new DeviceInfo();
