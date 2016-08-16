@@ -55,7 +55,7 @@
             <div class="alert" style="height:50%;font-size:16px">
                 <div style="height:90%;">
                		<strong>功能介绍</strong>
-               	    <br/><br/>
+               	    <br/>
                	    <div style="float:left;width:20%;">&nbsp;</div>
                 	<div style="float:left;">
                    	    <p><a href="device.html">1.设备信息管理：设备信息查询、修改</a></p>

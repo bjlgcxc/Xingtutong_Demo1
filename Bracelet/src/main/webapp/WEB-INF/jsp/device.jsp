@@ -238,6 +238,7 @@
        				</div>
 				</div>
 			 </div>
+			  <p class="text-right text-gray text-big">提示：点击设备名查看设备相关信息，点击设备别名可进行修改</p>
 		  </div>
        </div>
     </div>
