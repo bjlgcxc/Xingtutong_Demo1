@@ -3,8 +3,9 @@
 <%  
 	String loginState = "notLogin";
   	if(session.getAttribute("loginState")!=null){
-  		loginState = "login";
+  		loginState = (String)session.getAttribute("loginState");
   	}
+  	System.out.println(loginState);
   	
   	UserInfo user = new UserInfo();
   	if(session.getAttribute("user")!=null){
@@ -12,6 +13,10 @@
    	}
 %>
 
+<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="0">
 <script type="text/javascript" src="js/jquery.md5.js"></script> 
 
 <script type='text/javascript'>
@@ -23,7 +28,7 @@
    $(document).ready(function(){
    		$("#<%=request.getAttribute("page")%>").addClass("active");
    		$("#logOut").click(function(){
-   			location.href="login.html";
+   			location.href="logout.html";
    		});
    			
  		$("#change").click(function(){

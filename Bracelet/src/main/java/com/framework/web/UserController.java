@@ -48,21 +48,6 @@ public class UserController {
 		os.close();
 	}
 	
-
-	@ResponseBody
-	@RequestMapping(value="/user/register",method=RequestMethod.GET)
-	public JSONObject register(HttpServletRequest request,UserInfo userInfo) throws NoSuchAlgorithmException {
-		JSONObject jsonObj = new JSONObject();
-		if(userService.findUserByUserName(userInfo.getUserName())!=null){
-			jsonObj.put("info", "error");
-		}
-		else{
-			jsonObj.put("info", "success"); 
-			userService.addUserInfo(userInfo.getUserName(),EncodeMD5.encode(userInfo.getPassword()));
-		}
-		return jsonObj;
-	}
-	
 	
 	//负责处理用户验证的请求
 	@ResponseBody
@@ -91,6 +76,21 @@ public class UserController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value="/user/register",method=RequestMethod.GET)
+	public JSONObject register(HttpServletRequest request,UserInfo userInfo) throws NoSuchAlgorithmException {
+		JSONObject jsonObj = new JSONObject();
+		if(userService.findUserByUserName(userInfo.getUserName())!=null){
+			jsonObj.put("info", "error");
+		}
+		else{
+			jsonObj.put("info", "success"); 
+			userService.addUserInfo(userInfo.getUserName(),EncodeMD5.encode(userInfo.getPassword()));
+		}
+		return jsonObj;
+	}
+	
+	
 	//修改用户密码
 	@ResponseBody
 	@RequestMapping(value="/user/changePsw",method=RequestMethod.POST)
@@ -100,6 +100,17 @@ public class UserController {
 		
 		UserInfo user = userService.findUserByUserName(userInfo.getUserName());
 		session.setAttribute("user", user);
+	}
+	
+	
+	@RequestMapping(value="logout.html")
+	public String logout(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession(false);
+		if(session!=null){
+			session.removeAttribute("loginState");
+			session.invalidate();
+		}
+		return "forward:login.html";
 	}
 	
 }

@@ -46,11 +46,10 @@ public class DeviceController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/app/device/{imei}/appLogin")
-	public DeviceInfo appLogin(@PathVariable String imei){	
+	public JSONObject appLogin(@PathVariable String imei){	
 		
 		log.info("get phone imei");
-		DeviceInfo deviceInfo = new DeviceInfo();
-		
+		DeviceInfo deviceInfo = new DeviceInfo();		
 		//若设备未注册，添加注册；若已注册，更新连接时间
 		boolean isDeviceExist = deviceService.hasMatchDevice(imei);
 		if(!isDeviceExist){
@@ -64,11 +63,13 @@ public class DeviceController {
 			deviceService.updateDeviceInfo(deviceInfo);
 		}		
 		
+		//configInfo
 		int id = deviceService.getDeviceId(imei);
-		//若设备没有配置信息,则插入默认配置
+		ConfigInfo configInfo = null;
 		if(!configService.hasMatchConfig(id)){
+			//若设备没有配置信息,则插入默认配置
 			SystemInfo sysDefault = systemService.getSysDefault();
-			ConfigInfo configInfo = new ConfigInfo();
+			configInfo = new ConfigInfo();
 			configInfo.setDeviceId(id);
 			configInfo.setBraceletInterval(sysDefault.getBraceletInterval());
 			configInfo.setBraceletUpload(sysDefault.getBraceletUpload());
@@ -78,15 +79,14 @@ public class DeviceController {
 			configInfo.setLocateTimes(sysDefault.getLocateTimes());
 			configInfo.setTeleNumber(sysDefault.getTeleNumber());
 			configService.insertConfigInfo(configInfo);
+			log.info("insert device config info");
 		}
-		log.info("insert device config info");
+		else{
+			configInfo = configService.getConfigInfo(id);
+		}
 		
-		//返回imei和id的对应信息
-		deviceInfo = new DeviceInfo();
-		deviceInfo.setId(id);
-		deviceInfo.setImei(imei);
-		log.info("return device id");
-		return deviceInfo;
+		log.info("return deviceId and configInfo");
+		return JSONObject.fromObject(configInfo);
 	}
 	
 	
