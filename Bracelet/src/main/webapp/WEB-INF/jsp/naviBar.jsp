@@ -87,9 +87,9 @@
     <div class="mainer">
         <div class="admin-navbar">
             <span class="float-right">
-            	<a class="button button-small bg-main" href="index.html">&nbsp;&nbsp;首&nbsp;&nbsp;页&nbsp;&nbsp;</a>
-                <a class="button button-small bg-red" id="logOut" href="#">&nbsp;&nbsp;注&nbsp;&nbsp;销&nbsp;&nbsp;</a>
-                <button class="button button-small bg-yellow" id="change">修改密码</button>
+            	<a class="button button-small bg-main icon-home" href="index.html">&nbsp;&nbsp;首&nbsp;&nbsp;页&nbsp;&nbsp;</a>
+                <a class="button button-small bg-red icon-power-off" id="logOut" href="#">&nbsp;&nbsp;注&nbsp;&nbsp;销&nbsp;&nbsp;</a>
+                <button class="button button-small bg-yellow icon-pencil" id="change"> 修改密码</button>
             </span>
 			<div class="dialog" id="dialog">
 				<div class="dialog-head">

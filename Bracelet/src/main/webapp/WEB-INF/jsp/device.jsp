@@ -76,6 +76,8 @@
 	}
 
     $(document).ready(function(){
+    	$("#deviceId").focus();
+    	
     	//设备相关操作(点击事件)
    		$("tr").find("#health").click(function(){
         	var deviceId = $(this).parents("td").siblings("#deviceId").text();
@@ -188,17 +190,18 @@
 <%@include file="naviBar.jsp"%>
 <div class="admin">
 	<form method="get" action="device.html" onsubmit="return check();">
-		<div style="display:inline-block;"><label style="font-size:15px" for="readme">设备编号：</label></div>
+		<div class="label" style="display:inline-block;"><label style="font-size:15px" for="readme">设备编号：</label></div>
     	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceId" id="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>	
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<div style="display:inline-block;"><label style="font-size:15px" for="readme">设备名：</label></div>
+		<div class="label" style="display:inline-block;"><label style="font-size:15px" for="readme">设备名：</label></div>
     	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceName" value="<%=deviceName%>" placeholder="请填入设备名"/></div>	
   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  		<div style="display:inline-block;"><label style="font-size:15px" for="readme">设备别名：</label></div>
+  		<div class="label" style="display:inline-block;"><label style="font-size:15px" for="readme">设备别名：</label></div>
     	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceAlias" value="<%=deviceAlias%>" placeholder="请填入设备别名"/></div>	
-  		<div style="display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-  		<div style="display:inline-block;"><button type="submit" id="submit" class="button button-block bg-green text-medium">查  询</button></div>
-  		<div style="display:inline-block;"><button  id="clear" class="button button-block bg-green text-medium">重 置</button></div>
+  		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  		<div style="display:inline-block;"><button type="submit" id="submit" class="button button-block bg-green text-medium icon-search"> 查询</button></div>
+  		<div style="display:inline-block;"><button  id="clear" class="button button-block bg-green text-medium icon-undo"> 重置</button></div>
+  		<div style="display:inline-block;"><button type="submit" id="submit" class="button button-block bg-green text-medium icon-refresh"> 刷新</button></div>
 	</form>	
 	<br/>
     <div id="page-wrapper">

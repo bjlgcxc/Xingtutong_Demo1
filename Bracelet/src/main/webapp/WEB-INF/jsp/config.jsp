@@ -59,11 +59,13 @@
 			var braceletInterval = $("#braceletInterval").val();			
 			var braceletUpload = $("#braceletUpload").val();
 			if(deviceId=='' || braceletInterval=='' || braceletUpload==''){	
-				if(braceletUpload==''){
-					$("#braceletUpload").focus();
-				}
-				if(braceletInterval==''){
-					$("#braceletInterval").focus();
+				if(deviceId!=''){
+					if(braceletUpload==''){
+						$("#braceletUpload").focus();
+					}
+					if(braceletInterval==''){
+						$("#braceletInterval").focus();
+					}
 				}					  
 				return;
 			}
@@ -94,11 +96,13 @@
 			var locationInterval = $("#locationInterval").val();
 			var locationUpload = $("#locationUpload").val();
 			if(deviceId=='' || locationInterval=='' || locationUpload==''){
-				if(locationUpload==''){
-					$("#locationUpload").focus();
-				}
-				if(locationInterval==''){
-					$("#locationInterval").focus();
+				if(deviceId!=''){
+					if(locationUpload==''){
+						$("#locationUpload").focus();
+					}
+					if(locationInterval==''){
+						$("#locationInterval").focus();
+					}
 				}
 				return ;
 			}
@@ -129,11 +133,13 @@
 			var locateInterval = $("#locateInterval").val();
 			var locateTimes = $("#locateTimes").val();
 			if(deviceId=='' || locateTimes=='' || locateInterval==''){
-				if(locateTimes==''){
-					$("#locateTimes").focus();
-				}
-				if(locateInterval==''){
-					$("#locateInterval").focus();
+				if(deviceId!=''){
+					if(locateTimes==''){
+						$("#locateTimes").focus();
+					}
+					if(locateInterval==''){
+						$("#locateInterval").focus();
+					}
 				}
 				return ;
 			}
@@ -163,8 +169,10 @@
 		    var deviceId = $("#deviceId").val();
 			var teleNumber = $("#teleNumber").val();
 			if(teleNumber=='' || deviceId==''){
-				if(teleNumber==''){
-					$("#teleNumber").focus();
+				if(deviceId!=''){
+					if(teleNumber==''){
+						$("#teleNumber").focus();
+					}
 				}
 				return;
 			}
@@ -249,7 +257,7 @@
 <!-- Tab形式  -->
 <div class="admin" style="font-size:15px">
 	<div>
-		<div class="label" style="display:inline-block;width:5.5%"><label for="readme">设备编号:</label></div>
+		<div class="label" style="display:inline-block;width:5.5%"><label style="font-size:15px;" for="readme">设备编号:</label></div>
     	<div class="field" style="display:inline-block;width:16%;">
     		<input class="input_" type="text" id="deviceId" value="<%=deviceId%>"/>
     	</div>	
@@ -289,8 +297,8 @@
                 </div>    
                 <br/><br/>           
                 <div>
-                	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit1" type="button">提交</button></div>
-                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
+                	<div style="float:left;width:22%;text-align:right"><button class="button bg-main text-medium icon-check" id="submit1" type="button"> 提交</button></div>
+                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset text-medium icon-undo" type="button"> 重置</button></div>
 				</div>
             </form>
         </div>
@@ -313,8 +321,8 @@
                 </div> 
                 <br/><br/>                     
                 <div>
-                	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit2" type="button">提交</button></div>
-                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
+                	<div style="float:left;width:22%;text-align:right"><button class="button bg-main text-medium icon-check" id="submit2" type="button"> 提交</button></div>
+                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset text-medium icon-undo" type="button"> 重置</button></div>
 				</div>
             </form>
         </div>
@@ -337,8 +345,8 @@
                 </div>
                 <br/><br/>                      
                 <div>
-                	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit3" type="button">提交</button></div>
-                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
+                	<div style="float:left;width:22%;text-align:right"><button class="button bg-main text-medium icon-check" id="submit3" type="button"> 提交</button></div>
+                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset text-medium icon-undo" type="button"> 重置</button></div>
 				</div>
             </form>
         </div>
@@ -358,8 +366,8 @@
                 </div> 
                 <br/><br/>
                 <div>
-                	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit4" type="button">提交</button></div>
-                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
+                	<div style="float:left;width:22%;text-align:right"><button class="button bg-main text-medium icon-check" id="submit4" type="button"> 提交</button></div>
+                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset text-medium icon-undo" type="button"> 重置</button></div>
 				</div>
             </form>
         </div> 

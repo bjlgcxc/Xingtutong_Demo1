@@ -54,6 +54,7 @@
 <script type="text/javascript">
 	var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
 	$(function() {
+		$("#deviceId").focus();
 	    $("#query").click(function(){
 	    	if($("#deviceId").val()==''){
 	    		layer.msg('Tips：请先填写设备ID');
@@ -298,14 +299,15 @@
 <%@include file="naviBar.jsp"%>
 <div class="admin" style="padding:8px">
 	<div class="label" style="display:inline-block;"><label style="font-size:15px">设备编号：</label></div>
-   	<div class="field" style="display:inline-block;width:13%;"><input class="input_" type="text" id="deviceId" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;
+   	<div class="field" style="display:inline-block;width:13%;"><input class="input_" type="text" id="deviceId" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>
+   	&nbsp;&nbsp;&nbsp;&nbsp;
     <div class="label" style="display:inline-block;"><label style="font-size:15px">时间：</label></div>
     <div class="field" style="display:inline-block;width:13%;"><input class="input" id="start" type="text"/></div>
     <div class="label" style="display:inline-block;"><label>~</label></div>
-    <div class="field" style="display:inline-block;width:13%;"><input class="input" id="end" type="text"/></div>&nbsp;&nbsp;&nbsp;&nbsp;
-    <button class="button bg-green text-meidum" id="query" onclick="gjcx()">查  询</button>
-    <button class="button bg-green text-meidum" id="reset">重  置</button>
+    <div class="field" style="display:inline-block;width:13%;"><input class="input" id="end" type="text"/></div>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="button bg-green text-meidum icon-search" id="query" onclick="gjcx()"> 查询</button>
+    <button class="button bg-green text-meidum icon-undo" id="reset"> 重置</button>
 	<div id="" style="height:10px"></div>
     <div id="allmap"></div>
 </div>
