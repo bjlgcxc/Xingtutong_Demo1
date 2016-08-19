@@ -5,32 +5,65 @@
   	if(session.getAttribute("loginState")!=null){
   		loginState = (String)session.getAttribute("loginState");
   	}
-  	System.out.println(loginState);
-  	
+
   	UserInfo user = new UserInfo();
   	if(session.getAttribute("user")!=null){
    		 user = (UserInfo)session.getAttribute("user");
    	}
 %>
 
-<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
-<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
-<META HTTP-EQUIV="Expires" CONTENT="0">
 <script type="text/javascript" src="js/jquery.md5.js"></script> 
 
 <script type='text/javascript'>
    //登录状态是否过期
    if('<%=loginState%>' == 'notLogin'){
-   	    location.href = "login.html";
+   	    location.href = "login.html";	
    }
    
-   $(document).ready(function(){
+   function startTime(){  
+	    var today = new Date();  
+	    var y = today.getFullYear();
+	    var M = today.getMonth();
+	    var d = today.getDate();
+	    var h = today.getHours();  
+		var m = today.getMinutes();  
+	    var s = today.getSeconds();  
+	    m = checkTime(m);  
+		s = checkTime(s); 
+		$("#time").text(y + "年" + M + "月" + d + "日"  + " " + h + ":" + m + ":" + s);  
+		t = setTimeout('startTime()',500);  
+   }  
+   function checkTime(i){  
+		if (i<10){
+			i="0" + i;
+		}  
+  		return i;  	
+   }  
+   
+   $(document).ready(function(){  
+   		//clock
+   		startTime(); 
+   		//登录超时		
+   		var timer;
+   		var old = event.x;
+   		document.body.onmousemove = function(){	
+   			if(event.x!=old){
+	   			if(timer!=null){
+	   			    clearTimeout(timer);
+	   			}
+	   			timer = setTimeout(function(){
+	   				location.href = "logout.html";
+	   			},10*1000); 
+	   		}
+	   		old = event.x;
+   		};
+   	
    		$("#<%=request.getAttribute("page")%>").addClass("active");
+   		//注销登录
    		$("#logOut").click(function(){
    			location.href="logout.html";
    		});
-   			
+   		//修改密码
  		$("#change").click(function(){
  			layer.open({
   				type: 1,
@@ -47,7 +80,6 @@
             	}
         	});
  		});	
- 		
  		$("#confirm").click(function(){ 		
  			var psw = $("#password").val();
  			var newPsw1 = $("#newPassword1").val();
@@ -87,6 +119,7 @@
     <div class="mainer">
         <div class="admin-navbar">
             <span class="float-right">
+            	<label style="font-size:15px" for="readme" id="time"></label>&nbsp;&nbsp;&nbsp;&nbsp;           
             	<a class="button button-small bg-main icon-home" href="index.html">&nbsp;&nbsp;首&nbsp;&nbsp;页&nbsp;&nbsp;</a>
                 <a class="button button-small bg-red icon-power-off" id="logOut" href="#">&nbsp;&nbsp;注&nbsp;&nbsp;销&nbsp;&nbsp;</a>
                 <button class="button button-small bg-yellow icon-pencil" id="change"> 修改密码</button>

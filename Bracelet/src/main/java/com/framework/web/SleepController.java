@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,9 +24,10 @@ import com.framework.service.SleepService;
 @Controller
 public class SleepController {
 	
+	private static final Log log =  LogFactory.getLog(SleepController.class);
+	
 	@Autowired
 	SleepService sleepService;
-	
 	
 	/*
 	 * 获取睡眠信息
@@ -57,6 +60,8 @@ public class SleepController {
 			
 				jsonArray.add(jsonObj);
 			}
+			
+			log.info("get sleep info");
 			return jsonArray;
 		}
 		//多天的睡眠数据统计(每天的深睡总时间，浅睡总时间，睡眠总时间)
@@ -96,6 +101,8 @@ public class SleepController {
 				jsonObj.put("total", (light[i]+deep[i])/3600000%24 + "小时" + (light[i]+deep[i])/60000%60 + "分钟" + (light[i]+deep[i])/1000%60 + "秒");
 				jsonArray.add(jsonObj);
 			}
+			
+			log.info("get sleep info");
 			return jsonArray;
 		}
 		

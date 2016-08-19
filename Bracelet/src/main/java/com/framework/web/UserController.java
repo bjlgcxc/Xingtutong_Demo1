@@ -105,12 +105,27 @@ public class UserController {
 	
 	@RequestMapping(value="logout.html")
 	public String logout(HttpServletRequest request,HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(false);	
 		if(session!=null){
 			session.removeAttribute("loginState");
 			session.invalidate();
 		}
-		return "forward:login.html";
+		return "redirect:index.html";
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="/user/logoutCheck")
+	public JSONObject logoutCheck(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		JSONObject jsonObj = new JSONObject();
+		HttpSession session = request.getSession(false);	
+		if(session==null){
+			jsonObj.put("sessionState", 0);
+		}
+		else{
+			jsonObj.put("sessionState", 1);
+		}
+		
+		return jsonObj;
+	}
 }

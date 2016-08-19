@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,9 +24,10 @@ import com.framework.service.HeartRateService;
 @Controller
 public class HeartRateController {
 	
+	private static final Log log =  LogFactory.getLog(HeartRateController.class);
+
 	@Autowired
 	HeartRateService heartRateService;
-	
 	
 	/*
 	 * 获取心率(josn)
@@ -55,7 +58,8 @@ public class HeartRateController {
 			jsonObj.put("time", formater.format(new Date(heartRate.getTestTime())));
 			jsonArray.add(jsonObj);
 		}
-	
+		
+		log.info("get heartRate data");
 		return jsonArray; 
 	}
 	
@@ -91,6 +95,7 @@ public class HeartRateController {
 			jsonArray.add(jsonObj);
 		}
 	
+		log.info("get surface temperature");
 		return jsonArray; 
 	}
 	

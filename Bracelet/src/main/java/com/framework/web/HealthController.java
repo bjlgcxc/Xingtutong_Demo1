@@ -1,6 +1,9 @@
 package com.framework.web;
 
 import net.sf.json.JSONObject;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +18,12 @@ import com.framework.service.HealthService;
 @Controller  
 public class HealthController {
 	
+	private static final Log log =  LogFactory.getLog(HealthController.class);
+	
 	@Autowired
 	HealthService healthService;
 	@Autowired
 	BasicInfoService basicInfoService;
-	
 	
 	/*
 	 * 获取健康信息(json)
@@ -49,6 +53,7 @@ public class HealthController {
 			jsonObj.put("press", healthInfo.getPress());
 		}
 		
+		log.info("get health info");
 		if(basicInfo==null && healthInfo==null)
 			return null;
 		else

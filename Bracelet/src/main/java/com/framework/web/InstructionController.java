@@ -1,6 +1,5 @@
 package com.framework.web;
 
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,23 +24,6 @@ public class InstructionController {
 	@Autowired
 	ConfigService configService;
 	
-	
-	/*
-	 * 返回指令到app(josnArray)
-	 */
-	@ResponseBody
-	@RequestMapping(value="/app/instruction/{deviceId}/returnJsonArray")
-	public List<Instruction> returnInstructions(@PathVariable int deviceId){
-		 List<Instruction> instructions = instructionService.getInstructions(deviceId);
-		 for(Instruction instruction:instructions){
-			 instructionService.updateInstructionSendInfo(instruction);
-		 } 
-		 
-		 log.info("return instructions,size=" + instructions.size());
-		 return instructions;
-	}
-	
-	
 	/*
 	 * 保存手环数据采集指令
 	 */
@@ -60,6 +42,8 @@ public class InstructionController {
 		configInfo.setBraceletInterval(instruction.getBraceletInterval());
 		configInfo.setBraceletUpload(instruction.getBraceletUpload());
 		configService.updateConfigInfo(configInfo);
+		
+		log.info("save bracelet sample instruction,update device config");
 	}
 
 	
@@ -81,6 +65,8 @@ public class InstructionController {
 		configInfo.setLocationInterval(instruction.getLocationInterval());
 		configInfo.setLocationUpload(instruction.getLocationUpload());
 		configService.updateConfigInfo(configInfo);
+		
+		log.info("save location sample instruction,update device config");
 	}
 	
 	
@@ -99,6 +85,8 @@ public class InstructionController {
 		configInfo.setLocateInterval(instruction.getLocateInterval());
 		configInfo.setLocateTimes(instruction.getLocateTimes());
 		configService.updateConfigInfo(configInfo);
+		
+		log.info("save emergency locate instruction,update device config");
 	}
 	
 
@@ -116,6 +104,8 @@ public class InstructionController {
 		configInfo.setDeviceId(deviceId);
 		configInfo.setTeleNumber(instruction.getTeleNumber());
 		configService.updateConfigInfo(configInfo);
+		
+		log.info("save basicInfo instruction,update device config");
 	}
 	
 }

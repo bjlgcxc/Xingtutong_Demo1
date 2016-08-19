@@ -39,7 +39,7 @@
             </list>  
           </property>  
        </bean>  
-       
+      
        <!-- jsp页面的直接跳转 -->
        <mvc:view-controller path="/register.html" view-name="register"/>
        <mvc:view-controller path="/index.html" view-name="index"/>

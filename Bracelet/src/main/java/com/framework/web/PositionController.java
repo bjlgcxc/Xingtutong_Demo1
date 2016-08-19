@@ -1,24 +1,18 @@
 package com.framework.web;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.framework.domain.DeviceInfo;
 import com.framework.domain.PositionInfo;
 import com.framework.service.DeviceService;
 import com.framework.service.PositionService;
@@ -34,50 +28,6 @@ public class PositionController {
 	PositionService positionService;
 	@Autowired
 	DeviceService deviceService;
-	
-	/*
-	 * 保存位置信息(json)
-	 */
-	@RequestMapping(value="/app/position/{deviceId}/saveJson",method = RequestMethod.POST)
-	public String savePositionInfo(@RequestBody JSONObject jsonObj,@PathVariable int deviceId){
-		
-		PositionInfo positionInfo = (PositionInfo)JSONObject.toBean(jsonObj,PositionInfo.class);
-		positionInfo.setDeviceId(deviceId);
-		positionService.savePositionInfo(positionInfo);		
-		
-		DeviceInfo deviceInfo = new DeviceInfo();
-		deviceInfo.setId(deviceId);
-		deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
-		deviceService.updateDeviceInfo(deviceInfo);
-		
-		log.info("get position info");
-		return "redirect:/app/instruction/" + deviceId + "/returnJsonArray";
-	}
-	
-	
-	/*
-	 * 保存位置信息(json array)
-	 */
-	@RequestMapping(value="/app/position/{deviceId}/saveJsonArray",method = RequestMethod.POST)
-	public String savePositionInfoList(@RequestBody JSONArray jsonArray,@PathVariable int deviceId){
-		
-		//保存位置信息
-		PositionInfo positionInfoArray[] = (PositionInfo[])JSONArray.toArray(jsonArray, PositionInfo.class);
-		for(PositionInfo positionInfo:positionInfoArray){
-			positionInfo.setDeviceId(deviceId);
-		}
-		positionService.savePositionInfoList(positionInfoArray);
-			
-		//更新设备通信时间
-		DeviceInfo deviceInfo = new DeviceInfo();
-		deviceInfo.setId(deviceId);
-		deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
-		deviceService.updateDeviceInfo(deviceInfo);	
-		
-		log.info("get position info,size=" + positionInfoArray.length);
-		return  "redirect:/app/instruction/" + deviceId + "/returnJsonArray";
-	}
-	
 	
 	/*
 	 * 获取位置信息(json Array)
@@ -99,6 +49,7 @@ public class PositionController {
 			positionInfo.setLatitude(gps.getLatitude());
 		}	
 		
+		log.info("get position info");
 		return positionInfoList;
 	}
 	

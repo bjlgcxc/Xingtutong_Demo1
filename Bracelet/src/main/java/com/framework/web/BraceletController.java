@@ -1,6 +1,9 @@
 package com.framework.web;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +17,8 @@ import com.framework.service.DeviceService;
 @Controller
 public class BraceletController {
 	
+	private static final Log log =  LogFactory.getLog(BraceletController.class);
+	
 	@Autowired
 	BraceletService braceletService;
 	@Autowired
@@ -26,6 +31,8 @@ public class BraceletController {
 	@RequestMapping(value="/bracelet/{deviceId}/getBraceletInfo",method = RequestMethod.GET)
 	public BraceletInfo getBraceletInfo(HttpServletRequest request,@PathVariable int deviceId){
 		String mac = deviceService.getDeviceMac(deviceId);
+		
+		log.info("save bracelet info");
 		if(mac==null)
 			return null;
 		else

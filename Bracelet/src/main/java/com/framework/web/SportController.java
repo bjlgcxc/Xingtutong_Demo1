@@ -8,6 +8,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,11 +24,12 @@ import com.framework.service.SportService;
 @Controller
 public class SportController {
 	
+	private static final Log log =  LogFactory.getLog(SportController.class);
+	
 	@Autowired
 	SportService sportService;
 	@Autowired
 	BasicInfoService basicInfoService;
-
 	
 	/*
 	 * 获取卡路里(json)
@@ -37,6 +41,7 @@ public class SportController {
 		int duration = Integer.parseInt(request.getParameter("duration"));
 		JSONArray jsonArray = new JSONArray();
 		
+		log.info("get calorie data");
 		//一天的卡路里数据
 		if(duration==1){
 			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -109,6 +114,7 @@ public class SportController {
 		int duration = Integer.parseInt(request.getParameter("duration"));
 		JSONArray jsonArray = new JSONArray();
 		
+		log.info("get step data");
 		//一天的卡路里数据
 		if(duration==1){
 			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -184,6 +190,7 @@ public class SportController {
 	    int duration = Integer.parseInt(request.getParameter("duration"));
 		JSONArray jsonArray = new JSONArray();
 		
+		log.info("get mileage data");
 		//一天的里程数据
 		if(duration==1){
 			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

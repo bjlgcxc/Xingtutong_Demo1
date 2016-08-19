@@ -51,8 +51,7 @@
 							layer.msg('账号或密码错误');
 						}
 						else{
-							<%session.setAttribute("loginStatus", "login");%>
-							location.href = "index.html";
+							location.href = "index.html";						
 						}
 					}
 			

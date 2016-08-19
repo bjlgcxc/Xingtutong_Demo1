@@ -45,6 +45,11 @@
     	<url-pattern>/</url-pattern>
     </servlet-mapping>
     
+    <!-- 6.不限制session失效时间 -->
+    <session-config>  
+    	<session-timeout>-1</session-timeout>  
+	</session-config>  
+    
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
