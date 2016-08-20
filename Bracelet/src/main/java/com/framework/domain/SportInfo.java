@@ -5,19 +5,26 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class SportInfo implements Serializable{
 	
-	public Integer deviceId;
-	public Integer calorie;
-	public Integer countStep;
-	public Long startTime;
-	public Long endTime;
-	public Integer duration;
-	public Integer type;
+	private Integer deviceId;
+	private String mac;
+	private Integer calorie;
+	private Integer countStep;
+	private Long startTime;
+	private Long endTime;
+	private Integer duration;
+	private Integer type;
 	
 	public Integer getDeviceId() {
 		return deviceId;
 	}
 	public void setDeviceId(Integer deviceId) {
 		this.deviceId = deviceId;
+	}
+	public String getMac() {
+		return mac;
+	}
+	public void setMac(String mac) {
+		this.mac = mac;
 	}
 	public Integer getCalorie() {
 		return calorie;

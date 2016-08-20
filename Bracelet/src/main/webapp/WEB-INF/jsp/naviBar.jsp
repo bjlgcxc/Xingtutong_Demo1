@@ -53,7 +53,7 @@
 	   			}
 	   			timer = setTimeout(function(){
 	   				location.href = "logout.html";
-	   			},10*1000); 
+	   			},10*60*1000); 
 	   		}
 	   		old = event.x;
    		};

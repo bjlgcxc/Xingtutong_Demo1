@@ -60,6 +60,7 @@ public class RestfulController {
 	SystemService systemService;
 	@Autowired
 	PositionService positionService;
+	@Autowired
 	BasicInfoService basicInfoService;
 	@Autowired
 	NoticeService noticeService;
@@ -73,7 +74,6 @@ public class RestfulController {
 	HeartRateService heartRateService;
 	@Autowired
 	HealthService healthService;
-	
 	
 	/*
 	 * 手机登录app,发送手机信息(imei)到后台,后台返给app相应的设备id
@@ -120,7 +120,9 @@ public class RestfulController {
 		}
 		
 		log.info("send device_id and config_info to device");
-		return JSONObject.fromObject(configInfo);
+		JSONObject jsonObj = JSONObject.fromObject(configInfo);
+		jsonObj.put("id",configInfo.getDeviceId());
+		return jsonObj;
 	}
 	
 	
@@ -151,20 +153,21 @@ public class RestfulController {
 	
 	
 	/*
-	 * 保存手机上的设置(json)
+	 * 保存从设备接收的设置信息(json)
 	 */
 	@ResponseBody
 	@RequestMapping(value="/app/config/{deviceId}/saveJson")
 	public void saveJson(@RequestBody JSONObject jsonObj,@PathVariable int deviceId){
+		
 		ConfigInfo configInfo = (ConfigInfo)JSONObject.toBean(jsonObj,ConfigInfo.class);
 		configInfo.setDeviceId(deviceId);
 		
-		//如果不存在，则插入
+		//如果不存在设备的设置信息，则插入
 		boolean isConfigExit = configService.hasMatchConfig(deviceId);
 		if(!isConfigExit){
 			configService.insertConfigInfo(configInfo);
 		}
-		//存在，则更新
+		//如果存在，则更新
 		else{
 			configService.updateConfigInfo(configInfo);
 		}
@@ -174,7 +177,7 @@ public class RestfulController {
 	
 	
 	/*
-	 * 保存位置信息(json array)
+	 * 保存从设备接收的位置信息(json array)
 	 */
 	@RequestMapping(value="/app/position/{deviceId}/saveJsonArray",method = RequestMethod.POST)
 	public String savePositionInfoList(@RequestBody JSONArray jsonArray,@PathVariable int deviceId){
@@ -198,10 +201,10 @@ public class RestfulController {
 	
 	
 	/*
-	 * 保存手环状态信息、健康信息等
+	 * 保存从设备接收的手环状态信息、健康信息等
 	 */
 	@RequestMapping(value="app/special/{deviceId}/saveJsonArray",method = RequestMethod.POST)
-	public String specialJson(@RequestBody JSONObject[] jsonArray,@PathVariable int deviceId){
+	public String getSpecial(@RequestBody JSONObject[] jsonArray,@PathVariable int deviceId){
 		String mac = null;
 		for(JSONObject jsonObj:jsonArray){
 			//获取mac
@@ -293,7 +296,7 @@ public class RestfulController {
 	
 
 	/*
-	 * 返回指令到app(josnArray)
+	 * 返回指令到设备(josnArray)
 	 */
 	@ResponseBody
 	@RequestMapping(value="/app/instruction/{deviceId}/returnJsonArray")

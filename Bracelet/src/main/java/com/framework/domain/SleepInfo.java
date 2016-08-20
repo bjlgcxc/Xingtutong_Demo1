@@ -5,16 +5,23 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class SleepInfo implements Serializable{
 
-	public Integer deviceId;
-	public Integer duration;
-	public Long startTime;
-	public Integer type;
+	private Integer deviceId;
+	private String mac;
+	private Integer duration;
+	private Long startTime;
+	private Integer type;
 	
 	public Integer getDeviceId() {
 		return deviceId;
 	}
 	public void setDeviceId(Integer deviceId) {
 		this.deviceId = deviceId;
+	}
+	public String getMac() {
+		return mac;
+	}
+	public void setMac(String mac) {
+		this.mac = mac;
 	}
 	public Integer getDuration() {
 		return duration;

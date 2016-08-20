@@ -47,15 +47,15 @@ public class SleepController {
 			
 			List<SleepInfo> sleepInfoList = sleepService.getSleepInfo(deviceId, startTime, endTime);
 			for(SleepInfo sleepInfo:sleepInfoList){
-				if(sleepInfo.type==2||sleepInfo.type==3)
+				if(sleepInfo.getType()==2||sleepInfo.getType()==3)
 					continue;
 				JSONObject jsonObj = new JSONObject();
-				jsonObj.put("startTime",formater.format(new Date(sleepInfo.startTime)));
-				jsonObj.put("endTime", formater.format(new Date(sleepInfo.startTime+sleepInfo.duration)));
-				jsonObj.put("duration",sleepInfo.duration/3600000%24 + "小时" + sleepInfo.duration/60000%60 + "分钟" + sleepInfo.duration/1000%60 + "秒");
-				if(sleepInfo.type==0)
+				jsonObj.put("startTime",formater.format(new Date(sleepInfo.getStartTime())));
+				jsonObj.put("endTime", formater.format(new Date(sleepInfo.getStartTime()+sleepInfo.getDuration())));
+				jsonObj.put("duration",sleepInfo.getDuration()/3600000%24 + "小时" + sleepInfo.getDuration()/60000%60 + "分钟" + sleepInfo.getDuration()/1000%60 + "秒");
+				if(sleepInfo.getType()==0)
 					jsonObj.put("type", "浅睡眠");
-				else if(sleepInfo.type==1)
+				else if(sleepInfo.getType()==1)
 					jsonObj.put("type", "深睡眠");
 			
 				jsonArray.add(jsonObj);
@@ -83,13 +83,13 @@ public class SleepController {
 			int deep[] = new int[day];
 			int light[] = new int[day];
 			for(SleepInfo sleepInfo:sleepInfoList){
-				if(sleepInfo.type==2||sleepInfo.type==3)
+				if(sleepInfo.getType()==2||sleepInfo.getType()==3)
 					continue;
 				int index = dateList.indexOf(formater.format(sleepInfo.getStartTime()));
-				if(sleepInfo.type==0){
+				if(sleepInfo.getType()==0){
 					light[index] += sleepInfo.getDuration();
 				}
-				else if(sleepInfo.type==1){
+				else if(sleepInfo.getType()==1){
 					deep[index] += sleepInfo.getDuration();
 				}
 			}

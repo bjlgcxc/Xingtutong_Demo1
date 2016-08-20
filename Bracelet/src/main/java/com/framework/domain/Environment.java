@@ -5,17 +5,24 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Environment implements Serializable {
 
-	Integer deviceId;
-	Integer humidity;
-	Float press;
-	Float temperature;
-	Long testTime;
+	private Integer deviceId;
+	private String mac;
+	private Integer humidity;
+	private Float press;
+	private Float temperature;
+	private Long testTime;
 	
 	public Integer getDeviceId() {
 		return deviceId;
 	}
 	public void setDeviceId(Integer deviceId) {
 		this.deviceId = deviceId;
+	}
+	public String getMac() {
+		return mac;
+	}
+	public void setMac(String mac) {
+		this.mac = mac;
 	}
 	public Integer getHumidity() {
 		return humidity;

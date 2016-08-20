@@ -5,18 +5,25 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class BasicInfo implements Serializable {
 	
-	Integer deviceId;
-	Integer height;
-	Integer weight;
-	Integer stepLength;
-	Integer sex;
-	Integer unit;
+	private Integer deviceId;
+	private String mac;
+	private Integer height;
+	private Integer weight;
+	private Integer stepLength;
+	private Integer sex;
+	private Integer unit;
 	
 	public Integer getDeviceId() {
 		return deviceId;
 	}
 	public void setDeviceId(Integer deviceId) {
 		this.deviceId = deviceId;
+	}
+	public String getMac() {
+		return mac;
+	}
+	public void setMac(String mac) {
+		this.mac = mac;
 	}
 	public Integer getHeight() {
 		return height;

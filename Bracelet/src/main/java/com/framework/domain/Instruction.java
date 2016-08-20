@@ -6,16 +6,16 @@ import java.sql.Timestamp;
 @SuppressWarnings("serial")
 public class Instruction implements Serializable{
 	
-	Integer deviceId;
-	Integer isSend;
-	Integer braceletInterval;
-	Integer braceletUpload;
-	Integer locationInterval;
-	Integer locationUpload;
-	Integer locateInterval;
-	Integer locateTimes;
-	String teleNumber;
-	Timestamp timestamp;
+	private Integer deviceId;
+	private Integer isSend;
+	private Integer braceletInterval;
+	private Integer braceletUpload;
+	private Integer locationInterval;
+	private Integer locationUpload;
+	private Integer locateInterval;
+	private Integer locateTimes;
+	private String teleNumber;
+	private Timestamp timestamp;
 	
 	public Integer getDeviceId() {
 		return deviceId;

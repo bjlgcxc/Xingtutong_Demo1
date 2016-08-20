@@ -61,7 +61,8 @@
 	};  
 	
 	$(document).ready(function(){
-		$("#deviceId").focus();
+		if($("#deviceId").val()=='')
+				$("#deviceId").focus();
 		$("#query").click(function(){
 			$(".huge").text('');
 			if($("#deviceId").val()==""){

@@ -27,10 +27,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
    
-    <link href="css/dataTables.bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/pintuer.css">
     <link rel="stylesheet" href="css/admin.css">
+    <link href="css/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon" />
     <link href="/favicon.ico" rel="bookmark icon" />
    

@@ -5,10 +5,10 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class UserInfo implements Serializable{
 	
-	String userName;
-	String password;
-	String lastLogin;
-	Integer loginCount;
+	private String userName;
+	private String password;
+	private String lastLogin;
+	private Integer loginCount;
 	
 	public String getUserName() {
 		return userName;

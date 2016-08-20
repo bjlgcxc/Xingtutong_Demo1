@@ -5,23 +5,30 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class HealthInfo implements Serializable{
 	
-	Integer deviceId;
-	Long belongDate;
-	Integer calorie;
-	Integer heartRateSize;
-	Integer humidity;
-	Integer mileage;
-	Integer press;
-	Integer sleepTime;
-	Integer step;
-	Integer surfaceTem;
-	Integer temperature;
+	private Integer deviceId;
+	private String mac;
+	private Long belongDate;
+	private Integer calorie;
+	private Integer heartRateSize;
+	private Integer humidity;
+	private Integer mileage;
+	private Integer press;
+	private Integer sleepTime;
+	private Integer step;
+	private Integer surfaceTem;
+	private Integer temperature;
 	
 	public Integer getDeviceId() {
 		return deviceId;
 	}
 	public void setDeviceId(Integer deviceId) {
 		this.deviceId = deviceId;
+	}
+	public String getMac() {
+		return mac;
+	}
+	public void setMac(String mac) {
+		this.mac = mac;
 	}
 	public Long getBelongDate() {
 		return belongDate;

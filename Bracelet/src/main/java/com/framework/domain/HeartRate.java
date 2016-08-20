@@ -5,19 +5,26 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class HeartRate implements Serializable {
 	
-	Integer deviceId;
-	Integer measureType;
-	Integer result;
-	Integer size;
-	Float surfaceTem;
-	Long testTime;
-	Integer type;
+	private Integer deviceId;
+	private String mac;
+	private Integer measureType;
+	private Integer result;
+	private Integer size;
+	private Float surfaceTem;
+	private Long testTime;
+	private Integer type;
 	
 	public Integer getDeviceId() {
 		return deviceId;
 	}
 	public void setDeviceId(Integer deviceId) {
 		this.deviceId = deviceId;
+	}
+	public String getMac() {
+		return mac;
+	}
+	public void setMac(String mac) {
+		this.mac = mac;
 	}
 	public Integer getMeasureType() {
 		return measureType;

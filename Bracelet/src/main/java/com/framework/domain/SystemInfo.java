@@ -5,14 +5,14 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class SystemInfo implements Serializable{
 
-	public Integer id;
-	public Integer braceletInterval;
-	public Integer braceletUpload;
-	public Integer locationInterval;
-	public Integer locationUpload;
-	public Integer locateInterval;
-	public Integer locateTimes;
-	public String teleNumber;
+	private Integer id;
+	private Integer braceletInterval;
+	private Integer braceletUpload;
+	private Integer locationInterval;
+	private Integer locationUpload;
+	private Integer locateInterval;
+	private Integer locateTimes;
+	private String teleNumber;
 	
 	public Integer getId() {
 		return id;

@@ -54,7 +54,8 @@
 <script type="text/javascript">
 	var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
 	$(function() {
-		$("#deviceId").focus();
+		if($("#deviceId").val()=='')
+			$("#deviceId").focus();
 	    $("#query").click(function(){
 	    	if($("#deviceId").val()==''){
 	    		layer.msg('Tips：请先填写设备ID');

@@ -6,11 +6,11 @@ import java.sql.Timestamp;
 @SuppressWarnings("serial")
 public class DeviceInfo implements Serializable{
 	
-	public Integer id;
-	public String imei;
-	public String mac;
-	public String alias;
-	public Timestamp connectTime;
+	private Integer id;
+	private String imei;
+	private String mac;
+	private String alias;
+	private Timestamp connectTime;
 	
 	public Integer getId() {
 		return id;

@@ -5,14 +5,14 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class PositionInfo implements Serializable{
 	
-	Integer deviceId;
-	Long time;
-	Double longitude;
-	Double latitude;
-	Double altitude;
-	Float speed;
-	Float bearing;
-	Float accuracy;
+	private Integer deviceId;
+	private Long time;
+	private Double longitude;
+	private Double latitude;
+	private Double altitude;
+	private Float speed;
+	private Float bearing;
+	private Float accuracy;
 	
 	public Integer getDeviceId() {
 		return deviceId;

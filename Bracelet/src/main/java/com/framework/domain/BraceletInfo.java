@@ -5,14 +5,14 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class BraceletInfo implements Serializable{
 	
-	public String mac;
-	public String name;
-	public Integer braceletGeneration;
-	public Integer braceletStyle;
-	public Integer braceletType;
-	public String firmwareVersion;
-	public Integer batteryLevel;
-	public Integer batteryState;
+	private String mac;
+	private String name;
+	private Integer braceletGeneration;
+	private Integer braceletStyle;
+	private Integer braceletType;
+	private String firmwareVersion;
+	private Integer batteryLevel;
+	private Integer batteryState;
 	
 	public String getMac() {
 		return mac;

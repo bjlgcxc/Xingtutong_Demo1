@@ -5,17 +5,24 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class NoticeInfo implements Serializable{
 	
-	Integer deviceId;
-	Integer heartRate;
-	Integer step;
-	Integer temp;
-	Integer type;
+	private Integer deviceId;
+	private String mac;
+	private Integer heartRate;
+	private Integer step;
+	private Integer temp;
+	private Integer type;
 	
 	public Integer getDeviceId() {
 		return deviceId;
 	}
 	public void setDeviceId(Integer deviceId) {
 		this.deviceId = deviceId;
+	}
+	public String getMac() {
+		return mac;
+	}
+	public void setMac(String mac) {
+		this.mac = mac;
 	}
 	public Integer getHeartRate() {
 		return heartRate;

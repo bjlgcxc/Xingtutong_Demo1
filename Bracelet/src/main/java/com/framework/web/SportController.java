@@ -51,12 +51,12 @@ public class SportController {
 			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId, startTime, endTime);
 			for(SportInfo sportInfo:sportInfoList){
 				JSONObject jsonObj = new JSONObject();
-				jsonObj.put("startTime",formater.format(new Date(sportInfo.startTime)));
-				jsonObj.put("endTime", formater.format(new Date(sportInfo.startTime+sportInfo.duration)));
-				jsonObj.put("duration",sportInfo.duration/3600000%24 + "小时" + sportInfo.duration/60000%60 + "分钟" + sportInfo.duration/1000%60 + "秒");
-				if(sportInfo.type==0)
+				jsonObj.put("startTime",formater.format(new Date(sportInfo.getStartTime())));
+				jsonObj.put("endTime", formater.format(new Date(sportInfo.getStartTime()+sportInfo.getDuration())));
+				jsonObj.put("duration",sportInfo.getDuration()/3600000%24 + "小时" + sportInfo.getDuration()/60000%60 + "分钟" + sportInfo.getDuration()/1000%60 + "秒");
+				if(sportInfo.getType()==0)
 					jsonObj.put("type", "步行");
-				else if(sportInfo.type==1)
+				else if(sportInfo.getType()==1)
 					jsonObj.put("type", "跑步");
 				jsonObj.put("calorie", sportInfo.getCalorie() + " 大卡");
 			
@@ -83,10 +83,10 @@ public class SportController {
 			int run[] = new int[day];
 			for(SportInfo sportInfo:sportInfoList){
 				int index = dateList.indexOf(formater.format(sportInfo.getStartTime()));
-				if(sportInfo.type==0){
+				if(sportInfo.getType()==0){
 					walk[index] += sportInfo.getCalorie();
 				}
-				else if(sportInfo.type==1){
+				else if(sportInfo.getType()==1){
 					run[index] += sportInfo.getCalorie();
 				}
 			}
@@ -124,12 +124,12 @@ public class SportController {
 			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId, startTime, endTime);
 			for(SportInfo sportInfo:sportInfoList){
 				JSONObject jsonObj = new JSONObject();
-				jsonObj.put("startTime",formater.format(new Date(sportInfo.startTime)));
-				jsonObj.put("endTime", formater.format(new Date(sportInfo.startTime+sportInfo.duration)));
-				jsonObj.put("duration",sportInfo.duration/3600000%24 + "小时" + sportInfo.duration/60000%60 + "分钟" + sportInfo.duration/1000%60 + "秒");
-				if(sportInfo.type==0)
+				jsonObj.put("startTime",formater.format(new Date(sportInfo.getStartTime())));
+				jsonObj.put("endTime", formater.format(new Date(sportInfo.getStartTime()+sportInfo.getDuration())));
+				jsonObj.put("duration",sportInfo.getDuration()/3600000%24 + "小时" + sportInfo.getDuration()/60000%60 + "分钟" + sportInfo.getDuration()/1000%60 + "秒");
+				if(sportInfo.getType()==0)
 					jsonObj.put("type", "步行");
-				else if(sportInfo.type==1)
+				else if(sportInfo.getType()==1)
 					jsonObj.put("type", "跑步");
 				jsonObj.put("countStep", sportInfo.getCountStep() + " 步");
 			
@@ -156,10 +156,10 @@ public class SportController {
 			int run[] = new int[day];
 			for(SportInfo sportInfo:sportInfoList){
 				int index = dateList.indexOf(formater.format(sportInfo.getStartTime()));
-				if(sportInfo.type==0){
+				if(sportInfo.getType()==0){
 					walk[index] += sportInfo.getCountStep();
 				}
-				else if(sportInfo.type==1){
+				else if(sportInfo.getType()==1){
 					run[index] += sportInfo.getCountStep();
 				}
 			}
@@ -200,12 +200,12 @@ public class SportController {
 			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId, startTime, endTime);
 			for(SportInfo sportInfo:sportInfoList){
 				JSONObject jsonObj = new JSONObject();
-				jsonObj.put("startTime",formater.format(new Date(sportInfo.startTime)));
-				jsonObj.put("endTime", formater.format(new Date(sportInfo.startTime+sportInfo.duration)));
-				jsonObj.put("duration",sportInfo.duration/3600000%24 + "小时" + sportInfo.duration/60000%60 + "分钟" + sportInfo.duration/1000%60 + "秒");
-				if(sportInfo.type==0)
+				jsonObj.put("startTime",formater.format(new Date(sportInfo.getStartTime())));
+				jsonObj.put("endTime", formater.format(new Date(sportInfo.getStartTime()+sportInfo.getDuration())));
+				jsonObj.put("duration",sportInfo.getDuration()/3600000%24 + "小时" + sportInfo.getDuration()/60000%60 + "分钟" + sportInfo.getDuration()/1000%60 + "秒");
+				if(sportInfo.getType()==0)
 					jsonObj.put("type", "步行");
-				else if(sportInfo.type==1)
+				else if(sportInfo.getType()==1)
 					jsonObj.put("type", "跑步");
 				
 				jsonObj.put("mileage", df.format(sportInfo.getCountStep()*feetLong/100/1000.0) + " km");
@@ -233,10 +233,10 @@ public class SportController {
 			int run[] = new int[day];
 			for(SportInfo sportInfo:sportInfoList){
 				int index = dateList.indexOf(formater.format(sportInfo.getStartTime()));
-				if(sportInfo.type==0){
+				if(sportInfo.getType()==0){
 					walk[index] += sportInfo.getCountStep();
 				}
-				else if(sportInfo.type==1){
+				else if(sportInfo.getType()==1){
 					run[index] += sportInfo.getCountStep();
 				}
 			}
