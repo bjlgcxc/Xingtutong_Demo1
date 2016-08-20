@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.BasicInfo;
 import com.framework.service.BasicInfoService;
+import com.framework.service.DeviceService;
 
 @Controller
 public class BasicInfoController {
@@ -19,16 +20,19 @@ public class BasicInfoController {
 	private static final Log log =  LogFactory.getLog(BasicInfoController.class);
 	
 	@Autowired
+	DeviceService deviceService;
+	@Autowired
 	BasicInfoService basicInfoService;
 	
 	/*
-	 * 获取用户基本信息
+	 * 获取设备用户基本信息
 	 */
 	@ResponseBody
 	@RequestMapping(value="/basic/{deviceId}/getBasicInfo",method = RequestMethod.GET)
 	public BasicInfo getBasicInfo(HttpServletRequest request,@PathVariable int deviceId){
 		log.info("get basic info");
-		return basicInfoService.getBasicInfo(deviceId);
+		String mac = deviceService.getDeviceMac(deviceId);
+		return basicInfoService.getBasicInfo(deviceId,mac);
 	}
 	
 }

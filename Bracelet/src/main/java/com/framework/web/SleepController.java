@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.SleepInfo;
+import com.framework.service.DeviceService;
 import com.framework.service.SleepService;
 
 @Controller
@@ -26,6 +27,8 @@ public class SleepController {
 	
 	private static final Log log =  LogFactory.getLog(SleepController.class);
 	
+	@Autowired
+	DeviceService deviceService;
 	@Autowired
 	SleepService sleepService;
 	
@@ -45,7 +48,8 @@ public class SleepController {
 			long startTime = formater.parse(request.getParameter("startTime")).getTime();
 			long endTime = formater.parse(request.getParameter("endTime")).getTime();
 			
-			List<SleepInfo> sleepInfoList = sleepService.getSleepInfo(deviceId, startTime, endTime);
+			String mac = deviceService.getDeviceMac(deviceId);
+			List<SleepInfo> sleepInfoList = sleepService.getSleepInfo(deviceId,mac,startTime, endTime);
 			for(SleepInfo sleepInfo:sleepInfoList){
 				if(sleepInfo.getType()==2||sleepInfo.getType()==3)
 					continue;
@@ -70,8 +74,8 @@ public class SleepController {
 			long startTime = formater.parse(request.getParameter("startTime")).getTime();
 			long endTime = formater.parse(request.getParameter("endTime")).getTime();
 	
-			List<SleepInfo> sleepInfoList = sleepService.getSleepInfo(deviceId, startTime, endTime);
-			
+			String mac = deviceService.getDeviceMac(deviceId);
+			List<SleepInfo> sleepInfoList = sleepService.getSleepInfo(deviceId,mac,startTime, endTime);
 			List<String> dateList = new ArrayList<String>();
 			Date et = new Date(endTime);	
 			Date st = new Date(startTime);

@@ -44,16 +44,31 @@ public class EnvironmentDao {
 		Object[] args = new Object[]{deviceId,startTime,endTime};
 		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<Environment>(Environment.class));
 	}
+	public List<Environment> queryHumidity(int deviceId,String mac,long startTime,long endTime){
+		String sql = " select humidity,testTime from t_environment where deviceId=? and mac=? and testTime>=? and testTime<=? ";
+		Object[] args = new Object[]{deviceId,mac,startTime,endTime};
+		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<Environment>(Environment.class));
+	}
 	
 	public List<Environment> queryTemperature(int deviceId,long startTime,long endTime){
 		String sql = " select temperature,testTime from t_environment where deviceId=? and testTime>=? and testTime<=? ";
 		Object[] args = new Object[]{deviceId,startTime,endTime};
 		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<Environment>(Environment.class));
 	}
+	public List<Environment> queryTemperature(int deviceId,String mac,long startTime,long endTime){
+		String sql = " select temperature,testTime from t_environment where deviceId=? and mac=? and testTime>=? and testTime<=? ";
+		Object[] args = new Object[]{deviceId,mac,startTime,endTime};
+		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<Environment>(Environment.class));
+	}
 	
 	public List<Environment> queryPress(int deviceId,long startTime,long endTime){
 		String sql = " select press,testTime from t_environment where deviceId=? and testTime>=? and testTime<=? ";
 		Object[] args = new Object[]{deviceId,startTime,endTime};
+		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<Environment>(Environment.class));
+	}
+	public List<Environment> queryPress(int deviceId,String mac,long startTime,long endTime){
+		String sql = " select press,testTime from t_environment where deviceId=? and mac=? and testTime>=? and testTime<=? ";
+		Object[] args = new Object[]{deviceId,mac,startTime,endTime};
 		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<Environment>(Environment.class));
 	}
 	

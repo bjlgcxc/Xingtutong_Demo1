@@ -20,5 +20,8 @@ public class SleepService {
 	public List<SleepInfo> getSleepInfo(int deviceId,long startTime,long endTime){
 		return sleepDao.getSleepInfo(deviceId, startTime, endTime);
 	}
+	public List<SleepInfo> getSleepInfo(int deviceId,String mac,long startTime,long endTime){
+		return sleepDao.getSleepInfo(deviceId,mac,startTime,endTime);
+	}
 	
 }

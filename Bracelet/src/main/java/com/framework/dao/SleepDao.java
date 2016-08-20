@@ -32,5 +32,10 @@ public class SleepDao {
 		Object[] args = new Object[]{deviceId,startTime,endTime};
 		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<SleepInfo>(SleepInfo.class));
 	}
+	public List<SleepInfo> getSleepInfo(int deviceId,String mac,long startTime,long endTime){
+		String sql = " select startTime,duration,type from t_sleep where deviceId=? and mac=? and startTime>=? and startTime<=? ";
+		Object[] args = new Object[]{deviceId,mac,startTime,endTime};
+		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<SleepInfo>(SleepInfo.class));
+	}
 
 }

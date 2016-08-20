@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.Environment;
+import com.framework.service.DeviceService;
 import com.framework.service.EnvironmentService;
 
 @Controller
@@ -24,6 +25,8 @@ public class EnvironmentController {
 
 	private static final Log log =  LogFactory.getLog(EnvironmentController.class);
 	
+	@Autowired
+	DeviceService deviceService;
 	@Autowired
 	EnvironmentService environmentService;
 
@@ -47,7 +50,8 @@ public class EnvironmentController {
 		startTime = formater.parse(request.getParameter("startTime")).getTime();
 		endTime = formater.parse(request.getParameter("endTime")).getTime();
 		
-		List<Environment> environmentList = environmentService.getHumidity(deviceId,startTime,endTime);
+		String mac = deviceService.getDeviceMac(deviceId);
+		List<Environment> environmentList = environmentService.getHumidity(deviceId,mac,startTime,endTime);
 		formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		JSONArray jsonArray = new JSONArray();
 		for(Environment environment:environmentList){
@@ -83,7 +87,8 @@ public class EnvironmentController {
 		startTime = formater.parse(request.getParameter("startTime")).getTime();
 		endTime = formater.parse(request.getParameter("endTime")).getTime();
 		
-		List<Environment> environmentList = environmentService.getTemperature(deviceId, startTime, endTime);	
+		String mac = deviceService.getDeviceMac(deviceId);
+		List<Environment> environmentList = environmentService.getTemperature(deviceId, mac,startTime, endTime);	
 		formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		JSONArray jsonArray = new JSONArray();
 		for(Environment environment:environmentList){
@@ -119,7 +124,8 @@ public class EnvironmentController {
 		startTime = formater.parse(request.getParameter("startTime")).getTime();
 		endTime = formater.parse(request.getParameter("endTime")).getTime();
 		
-		List<Environment> environmentList = environmentService.getPress(deviceId, startTime, endTime);
+		String mac = deviceService.getDeviceMac(deviceId);
+		List<Environment> environmentList = environmentService.getPress(deviceId, mac, startTime, endTime);
 		formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		JSONArray jsonArray = new JSONArray();
 		for(Environment environment:environmentList){

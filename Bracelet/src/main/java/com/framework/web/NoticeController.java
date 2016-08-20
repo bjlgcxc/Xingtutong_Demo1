@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.NoticeInfo;
+import com.framework.service.DeviceService;
 import com.framework.service.NoticeService;
 
 @Controller
@@ -16,6 +17,8 @@ public class NoticeController {
 	
 	private static final Log log =  LogFactory.getLog(NoticeController.class);
 	
+	@Autowired
+	DeviceService deviceService;
 	@Autowired
 	NoticeService noticeService;
 	
@@ -26,7 +29,8 @@ public class NoticeController {
 	@RequestMapping(value="/notice/{deviceId}/getNoticeInfo",method = RequestMethod.GET)
 	public NoticeInfo getNoticeInfo(@PathVariable int deviceId){
 		log.info("get notice info");
-		return noticeService.getNoticeInfo(deviceId);
+		String mac = deviceService.getDeviceMac(deviceId);
+		return noticeService.getNoticeInfo(deviceId,mac);
 	}
 	
 }

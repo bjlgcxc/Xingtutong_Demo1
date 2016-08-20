@@ -26,5 +26,8 @@ public class NoticeService {
 	public NoticeInfo getNoticeInfo(int deviceId){
 		return noticeDao.queryNoticeInfo(deviceId);
 	}
+	public NoticeInfo getNoticeInfo(int deviceId,String mac){
+		return noticeDao.queryNoticeInfo(deviceId,mac);
+	}
 	
 }

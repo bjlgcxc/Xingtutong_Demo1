@@ -26,5 +26,8 @@ public class BasicInfoService {
 	public BasicInfo getBasicInfo(int deviceId){
 		return basicInfoDao.queryBasicInfo(deviceId);
 	}
+	public BasicInfo getBasicInfo(int deviceId,String mac){
+		return basicInfoDao.queryBasicInfo(deviceId,mac);
+	}
 	
 }

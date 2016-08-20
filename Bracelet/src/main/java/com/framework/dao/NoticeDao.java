@@ -46,5 +46,16 @@ public class NoticeDao {
 			return null;
 		}
 	}
+	public NoticeInfo queryNoticeInfo(int deviceId,String mac){
+		String sql = " select heartRate,step,temp from t_notice where deviceId=? and mac=?";
+		Object args[] = new Object[]{deviceId,mac};
+		List<NoticeInfo> result = jdbcTemplate.query(sql,args,new BeanPropertyRowMapper<NoticeInfo>(NoticeInfo.class));
+		if(result.size()!=0){
+			return result.get(0);
+		}
+		else{
+			return null;
+		}
+	}
 	
 }

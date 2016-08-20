@@ -18,5 +18,8 @@ public class HealthService {
 	public HealthInfo getHealthInfo(int deviceId){
 		return healthDao.queryHealthInfo(deviceId);
 	}
+	public HealthInfo getHealthInfo(int deviceId,String mac){
+		return healthDao.queryHealthInfo(deviceId,mac);
+	}
 	
 }

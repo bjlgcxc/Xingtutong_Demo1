@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.SportInfo;
 import com.framework.service.BasicInfoService;
+import com.framework.service.DeviceService;
 import com.framework.service.SportService;
 
 @Controller
@@ -26,6 +27,8 @@ public class SportController {
 	
 	private static final Log log =  LogFactory.getLog(SportController.class);
 	
+	@Autowired
+	DeviceService deviceService;
 	@Autowired
 	SportService sportService;
 	@Autowired
@@ -48,7 +51,8 @@ public class SportController {
 			long startTime = formater.parse(request.getParameter("startTime")).getTime();
 			long endTime = formater.parse(request.getParameter("endTime")).getTime();
 			
-			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId, startTime, endTime);
+			String mac = deviceService.getDeviceMac(deviceId);
+			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId,mac,startTime, endTime);
 			for(SportInfo sportInfo:sportInfoList){
 				JSONObject jsonObj = new JSONObject();
 				jsonObj.put("startTime",formater.format(new Date(sportInfo.getStartTime())));
@@ -69,8 +73,9 @@ public class SportController {
 			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 			long startTime = formater.parse(request.getParameter("startTime")).getTime();
 			long endTime = formater.parse(request.getParameter("endTime")).getTime();
-			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId, startTime, endTime);
 			
+			String mac = deviceService.getDeviceMac(deviceId);
+			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId,mac,startTime, endTime);			
 			List<String> dateList = new ArrayList<String>();
 			Date et = new Date(endTime);	
 			Date st = new Date(startTime);
@@ -121,7 +126,8 @@ public class SportController {
 			long startTime = formater.parse(request.getParameter("startTime")).getTime();
 			long endTime = formater.parse(request.getParameter("endTime")).getTime();
 			
-			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId, startTime, endTime);
+			String mac = deviceService.getDeviceMac(deviceId);
+			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId,mac,startTime, endTime);
 			for(SportInfo sportInfo:sportInfoList){
 				JSONObject jsonObj = new JSONObject();
 				jsonObj.put("startTime",formater.format(new Date(sportInfo.getStartTime())));
@@ -142,8 +148,9 @@ public class SportController {
 			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 			long startTime = formater.parse(request.getParameter("startTime")).getTime();
 			long endTime = formater.parse(request.getParameter("endTime")).getTime();
-			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId, startTime, endTime);
 			
+			String mac = deviceService.getDeviceMac(deviceId);
+			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId,mac,startTime, endTime);
 			List<String> dateList = new ArrayList<String>();
 			Date et = new Date(endTime);	
 			Date st = new Date(startTime);
@@ -197,7 +204,8 @@ public class SportController {
 			long startTime = formater.parse(request.getParameter("startTime")).getTime();
 			long endTime = formater.parse(request.getParameter("endTime")).getTime();
 			
-			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId, startTime, endTime);
+			String mac = deviceService.getDeviceMac(deviceId);
+			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId,mac,startTime, endTime);
 			for(SportInfo sportInfo:sportInfoList){
 				JSONObject jsonObj = new JSONObject();
 				jsonObj.put("startTime",formater.format(new Date(sportInfo.getStartTime())));
@@ -219,8 +227,9 @@ public class SportController {
 			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 			long startTime = formater.parse(request.getParameter("startTime")).getTime();
 			long endTime = formater.parse(request.getParameter("endTime")).getTime();
-			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId, startTime, endTime);
 			
+			String mac = deviceService.getDeviceMac(deviceId);
+			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId,mac,startTime, endTime);
 			List<String> dateList = new ArrayList<String>();
 			Date et = new Date(endTime);	
 			Date st = new Date(startTime);

@@ -36,7 +36,7 @@ public class BasicInfoDao {
 	
 	// 获取最新的一条记录
 	public BasicInfo queryBasicInfo(int deviceId){
-		String sql = " select * from t_basic where deviceId=? ";
+		String sql = " select * from t_basic where deviceId=?";
 		Object args[] = new Object[]{deviceId};
 		List<BasicInfo> result = jdbcTemplate.query(sql, args, new BeanPropertyRowMapper<BasicInfo>(BasicInfo.class));
 		if(result.size()!=0)
@@ -44,5 +44,13 @@ public class BasicInfoDao {
 		else 
 			return null;
 	}
-	
+	public BasicInfo queryBasicInfo(int deviceId,String mac){
+		String sql = " select * from t_basic where deviceId=? and mac=?";
+		Object args[] = new Object[]{deviceId,mac};
+		List<BasicInfo> result = jdbcTemplate.query(sql, args, new BeanPropertyRowMapper<BasicInfo>(BasicInfo.class));
+		if(result.size()!=0)
+			return result.get(0);
+		else 
+			return null;
+	}
 }

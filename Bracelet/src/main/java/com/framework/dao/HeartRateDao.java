@@ -33,10 +33,20 @@ public class HeartRateDao {
 		Object[] args = new Object[]{deviceId,startTime,endTime};
 		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<HeartRate>(HeartRate.class));
 	}
+	public List<HeartRate> queryHeartRate(int deviceId,String mac,long startTime,long endTime){
+		String sql = " select size,testTime from t_heartrate where deviceId=? and mac=? and testTime>=? and testTime<=? ";
+		Object[] args = new Object[]{deviceId,mac,startTime,endTime};
+		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<HeartRate>(HeartRate.class));
+	}
 	
 	public List<HeartRate> querySurfaceTem(int deviceId,long startTime,long endTime){
 		String sql = " select surfaceTem,testTime from t_heartrate where deviceId=? and testTime>=? and testTime<=? ";
 		Object[] args = new Object[]{deviceId,startTime,endTime};
+		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<HeartRate>(HeartRate.class));
+	}
+	public List<HeartRate> querySurfaceTem(int deviceId,String mac,long startTime,long endTime){
+		String sql = " select surfaceTem,testTime from t_heartrate where deviceId=? and mac=? and testTime>=? and testTime<=? ";
+		Object[] args = new Object[]{deviceId,mac,startTime,endTime};
 		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<HeartRate>(HeartRate.class));
 	}
 	

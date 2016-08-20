@@ -26,9 +26,21 @@ public class HealthDao {
 	
 	public HealthInfo queryHealthInfo(int deviceId){
 		String sql = "select deviceId,belongDate,calorie,heartRateSize,humidity,mileage," +
-				"press,sleepTime,step,surfaceTem,temperature from t_health where deviceId=" + deviceId +
+				"press,sleepTime,step,surfaceTem,temperature from t_health where deviceId=?" +
 				" order by timestamp ";
-		List<HealthInfo> list = jdbcTemplate.query(sql,new BeanPropertyRowMapper<HealthInfo>(HealthInfo.class));
+		Object args[] = new Object[]{deviceId};
+		List<HealthInfo> list = jdbcTemplate.query(sql,args,new BeanPropertyRowMapper<HealthInfo>(HealthInfo.class));
+		if(list.size()!=0)
+			return list.get(list.size()-1);
+		else
+			return null;
+	}
+	public HealthInfo queryHealthInfo(int deviceId,String mac){
+		String sql = "select deviceId,belongDate,calorie,heartRateSize,humidity,mileage," +
+				"press,sleepTime,step,surfaceTem,temperature from t_health where deviceId=? and mac=?" +
+				" order by timestamp ";
+		Object args[] = new Object[]{deviceId,mac};
+		List<HealthInfo> list = jdbcTemplate.query(sql,args,new BeanPropertyRowMapper<HealthInfo>(HealthInfo.class));
 		if(list.size()!=0)
 			return list.get(list.size()-1);
 		else

@@ -20,5 +20,8 @@ public class SportService {
 	public List<SportInfo> getSportInfo(int deviceId,long startTime,long endTime){
 		return sportDao.getSportInfoInfo(deviceId, startTime, endTime);
 	}
+	public List<SportInfo> getSportInfo(int deviceId,String mac,long startTime,long endTime){
+		return sportDao.getSportInfoInfo(deviceId,mac, startTime, endTime);
+	}
 	
 }

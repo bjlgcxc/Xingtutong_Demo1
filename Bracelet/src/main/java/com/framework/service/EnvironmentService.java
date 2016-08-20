@@ -24,13 +24,22 @@ public class EnvironmentService {
 	public List<Environment> getHumidity(int deviceId,long startTime,long endTime){
 		return environmentDao.queryHumidity(deviceId,startTime,endTime);
 	}
+	public List<Environment> getHumidity(int deviceId,String mac,long startTime,long endTime){
+		return environmentDao.queryHumidity(deviceId,mac,startTime,endTime);
+	}
 	
 	public List<Environment> getTemperature(int deviceId,long startTime,long endTime){
 		return environmentDao.queryTemperature(deviceId,startTime,endTime);
 	}
+	public List<Environment> getTemperature(int deviceId,String mac,long startTime,long endTime){
+		return environmentDao.queryTemperature(deviceId,mac,startTime,endTime);
+	}
 	
 	public List<Environment> getPress(int deviceId,long startTime,long endTime){
 		return environmentDao.queryPress(deviceId,startTime,endTime);
+	}
+	public List<Environment> getPress(int deviceId,String mac,long startTime,long endTime){
+		return environmentDao.queryPress(deviceId,mac,startTime,endTime);
 	}
 	
 }

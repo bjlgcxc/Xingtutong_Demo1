@@ -20,9 +20,15 @@ public class HeartRateService {
 	public List<HeartRate> getHeartRate(int deviceId,long startTime,long endTime){
 		return heartRateDao.queryHeartRate(deviceId, startTime, endTime);
 	}
+	public List<HeartRate> getHeartRate(int deviceId,String mac,long startTime,long endTime){
+		return heartRateDao.queryHeartRate(deviceId, mac,startTime, endTime);
+	}
 	
 	public List<HeartRate> getSurfaceTem(int deviceId,long startTime,long endTime){
 		return heartRateDao.querySurfaceTem(deviceId, startTime, endTime);
+	}
+	public List<HeartRate> getSurfaceTem(int deviceId,String mac,long startTime,long endTime){
+		return heartRateDao.querySurfaceTem(deviceId, mac,startTime, endTime);
 	}
 	
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.BasicInfo;
 import com.framework.domain.HealthInfo;
 import com.framework.service.BasicInfoService;
+import com.framework.service.DeviceService;
 import com.framework.service.HealthService;
 
 @Controller  
@@ -20,6 +21,8 @@ public class HealthController {
 	
 	private static final Log log =  LogFactory.getLog(HealthController.class);
 	
+	@Autowired
+	DeviceService deviceService;
 	@Autowired
 	HealthService healthService;
 	@Autowired
@@ -32,8 +35,9 @@ public class HealthController {
 	@RequestMapping(value="health/{deviceId}/getHealthInfo",method = RequestMethod.GET)
 	public JSONObject getHealthInfo(@PathVariable int deviceId){
 		
-		HealthInfo healthInfo = healthService.getHealthInfo(deviceId);
-		BasicInfo basicInfo = basicInfoService.getBasicInfo(deviceId);
+		String mac = deviceService.getDeviceMac(deviceId);
+		HealthInfo healthInfo = healthService.getHealthInfo(deviceId,mac);
+		BasicInfo basicInfo = basicInfoService.getBasicInfo(deviceId,mac);
 		JSONObject jsonObj = new JSONObject();
 		
 		//数据是否存在
@@ -53,7 +57,7 @@ public class HealthController {
 			jsonObj.put("press", healthInfo.getPress());
 		}
 		
-		log.info("get health info");
+		log.info("get real-time health info");
 		if(basicInfo==null && healthInfo==null)
 			return null;
 		else

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.framework.domain.HeartRate;
+import com.framework.service.DeviceService;
 import com.framework.service.HeartRateService;
 
 @Controller
@@ -26,6 +27,8 @@ public class HeartRateController {
 	
 	private static final Log log =  LogFactory.getLog(HeartRateController.class);
 
+	@Autowired
+	DeviceService deviceService;
 	@Autowired
 	HeartRateService heartRateService;
 	
@@ -49,7 +52,8 @@ public class HeartRateController {
 		startTime = formater.parse(request.getParameter("startTime")).getTime();
 		endTime = formater.parse(request.getParameter("endTime")).getTime();
 		
-		List<HeartRate> heartRateList = heartRateService.getHeartRate(deviceId, startTime, endTime);
+		String mac = deviceService.getDeviceMac(deviceId);
+		List<HeartRate> heartRateList = heartRateService.getHeartRate(deviceId,mac,startTime,endTime);
 		formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		JSONArray jsonArray = new JSONArray();
 		for(HeartRate heartRate:heartRateList){
@@ -84,7 +88,8 @@ public class HeartRateController {
 		startTime = formater.parse(request.getParameter("startTime")).getTime();
 		endTime = formater.parse(request.getParameter("endTime")).getTime();
 	
-		List<HeartRate> heartRateList = heartRateService.getSurfaceTem(deviceId, startTime, endTime);
+		String mac = deviceService.getDeviceMac(deviceId);
+		List<HeartRate> heartRateList = heartRateService.getSurfaceTem(deviceId,mac,startTime, endTime);
 		formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		JSONArray jsonArray = new JSONArray();
 		for(HeartRate heartRate:heartRateList){
