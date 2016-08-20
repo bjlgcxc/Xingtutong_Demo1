@@ -222,6 +222,7 @@ public class RestfulController {
 			//插入基本信息 
 			BasicInfo basicInfo = new BasicInfo();
 			basicInfo.setDeviceId(deviceId);
+			basicInfo.setMac(mac);
 			basicInfo.setHeight(jsonObj.getInt("height"));
 			basicInfo.setWeight(jsonObj.getInt("weight"));
 			basicInfo.setSex(jsonObj.getInt("sex"));
@@ -239,6 +240,7 @@ public class RestfulController {
 			JSONObject noticeThreshold = jsonObj.getJSONObject("noticeThreshold");
 			NoticeInfo noticeInfo = (NoticeInfo)JSONObject.toBean(noticeThreshold,NoticeInfo.class);
 			noticeInfo.setDeviceId(deviceId);
+			noticeInfo.setMac(mac);
 			if(noticeService.hasMatchNoticeInfo(deviceId)){
 				noticeService.updateNoticeInfo(noticeInfo);
 			}
@@ -252,6 +254,7 @@ public class RestfulController {
 			SportInfo[] sportInfoArray = (SportInfo[]) JSONArray.toArray(sportData, SportInfo.class);
 			for(SportInfo sportInfo:sportInfoArray){
 				sportInfo.setDeviceId(deviceId);
+				sportInfo.setMac(mac);
 			}
 			sportService.addSportInfoArray(sportInfoArray);
 			log.info("receive sport_data from device");
@@ -261,6 +264,7 @@ public class RestfulController {
 			SleepInfo[] sleepInfoArray = (SleepInfo[]) JSONArray.toArray(sleepData, SleepInfo.class);
 			for(SleepInfo sleepInfo:sleepInfoArray){
 				sleepInfo.setDeviceId(deviceId);
+				sleepInfo.setMac(mac);
 			}
 			sleepService.addSleepInfoArray(sleepInfoArray);
 			log.info("receive sleep_data from device");
@@ -270,6 +274,7 @@ public class RestfulController {
 			Environment[] environmentArray = (Environment[])JSONArray.toArray(environmentData, Environment.class);
 			for(Environment environment:environmentArray){
 				environment.setDeviceId(deviceId);
+				environment.setMac(mac);
 			}
 			environmentService.addEnvironmentArray(environmentArray);
 			log.info("receive environment_data from device");
@@ -279,6 +284,7 @@ public class RestfulController {
 			HeartRate[] heartRateArray = (HeartRate[])JSONArray.toArray(heartRateData,HeartRate.class);
 			for(HeartRate heartRate:heartRateArray){
 				heartRate.setDeviceId(deviceId);
+				heartRate.setMac(mac);
 			}
 			heartRateService.addHeartrateArray(heartRateArray);
 			log.info("receive heartRate_data from device");
@@ -287,6 +293,7 @@ public class RestfulController {
 			JSONObject healthData = jsonObj.getJSONObject("healthData");
 			HealthInfo healthInfo = (HealthInfo)JSONObject.toBean(healthData,HealthInfo.class);
 			healthInfo.setDeviceId(deviceId);
+			healthInfo.setMac(mac);
 			healthService.addHealthInfo(healthInfo);
 			log.info("get real-time_health_data from device");
 		}

@@ -46,7 +46,7 @@
    		//登录超时		
    		var timer;
    		var old = event.x;
-   		document.body.onmousemove = function(){	
+   		$("body").mousemove = function(){	
    			if(event.x!=old){
 	   			if(timer!=null){
 	   			    clearTimeout(timer);
@@ -57,6 +57,22 @@
 	   		}
 	   		old = event.x;
    		};
+   		$(document).click(function(){
+   			if(timer!=null){
+	   			clearTimeout(timer);
+	   		}
+	   		timer = setTimeout(function(){
+	   			location.href = "logout.html";
+	   		},10*60*1000); 
+   		});
+   		$(document).keypress(function(){
+   			if(timer!=null){
+	   			clearTimeout(timer);
+	   		}
+	   		timer = setTimeout(function(){
+	   			location.href = "logout.html";
+	   		},10*60*1000); 
+   		});
    	
    		$("#<%=request.getAttribute("page")%>").addClass("active");
    		//注销登录
