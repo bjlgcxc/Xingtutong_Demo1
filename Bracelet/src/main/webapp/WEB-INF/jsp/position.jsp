@@ -55,6 +55,14 @@
 	var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
 	$(function() {
 		$("#deviceId").focus().val($("#deviceId").val());
+	    $("body").keydown(function() {
+            if (event.keyCode == "13") {//keyCode=13是回车键
+                $("#query").focus();
+                $("#query").click();
+                $("#deviceId").focus();
+            }
+        });
+	    
 	    $("#query").click(function(){
 	    	if($("#deviceId").val()==''){
 	    		layer.msg('Tips：请先填写设备ID');
@@ -308,7 +316,7 @@
     <div class="label" style="display:inline-block;"><label>~</label></div>
     <div class="field" style="display:inline-block;width:13%;"><input class="input" id="end" type="text"/></div>
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <button class="button bg-green text-meidum icon-search" id="query" onclick="gjcx()"> 查询</button>
+    <button class="button bg-green text-meidum icon-search"  id="query" onclick="gjcx()"> 查询</button>
     <button class="button bg-green text-meidum icon-refresh" id="refresh"> 刷新</button>
 	<div id="" style="height:10px"></div>
     <div id="allmap"></div>
