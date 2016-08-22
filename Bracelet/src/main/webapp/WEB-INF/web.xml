@@ -11,6 +11,10 @@
     </context-param> 
     
     <!-- 2.log4j日志输出配置 -->
+    <context-param>  
+    	<param-name>webAppRootKey</param-name>  
+    	<param-value>Bracelet.root</param-value>  
+	</context-param>  
     <context-param>
         <param-name>log4jConfigLocation</param-name> 
         <param-value>/WEB-INF/config/log4j.properties</param-value>

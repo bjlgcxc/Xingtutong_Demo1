@@ -117,20 +117,5 @@ public class UserController {
 		}
 		return "redirect:index.html";
 	}
-	
-	
-	@ResponseBody
-	@RequestMapping(value="/user/logoutCheck")
-	public JSONObject logoutCheck(HttpServletRequest request,HttpServletResponse response) throws IOException {
-		JSONObject jsonObj = new JSONObject();
-		HttpSession session = request.getSession(false);	
-		if(session==null){
-			jsonObj.put("sessionState", 0);
-		}
-		else{
-			jsonObj.put("sessionState", 1);
-		}
-		
-		return jsonObj;
-	}
+
 }

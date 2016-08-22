@@ -181,7 +181,8 @@
 							marker.on('click', markerClick);
 							//marker.emit('click', {target: marker});	            
 					    }else{
-			                msg("提示信息","无位置信息！");
+			                //msg("提示信息","无位置信息!");
+					    	layer.msg("无位置信息!");
 					    }
 					    }
 					    
@@ -197,11 +198,13 @@
 		           
 				    map3.setFitView();				 				 
 	            }else{
-	            	msg("提示信息","无位置信息！");
+	            	//msg("提示信息","无位置信息!");
+	            	layer.msg("无位置信息!");
 	            }
 			},
 			error:function(result){
-				msg("提示信息","无位置信息！");
+				//msg("提示信息","无位置信息!");
+				layer.msg("无位置信息!");
 			}
 		});
 			
