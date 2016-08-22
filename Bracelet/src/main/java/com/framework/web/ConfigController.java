@@ -32,7 +32,7 @@ public class ConfigController {
 		if(deviceService.hasMatchDevice(deviceId)){
 			ConfigInfo configInfo = configService.getConfigInfo(deviceId);
 			configInfo.setBraceletInterval(configInfo.getBraceletInterval()/60);
-			configInfo.setLocateInterval(configInfo.getLocationInterval()/60);
+			configInfo.setLocateInterval(configInfo.getLocateInterval()/60);
 			return JSONObject.fromObject(configInfo);
 		}
 		
