@@ -35,6 +35,8 @@
 
 <script type='text/javascript'>
 	$(document).ready(function(){
+		$("#deviceId").focus().val($("#deviceId").val());
+		
 		//submit按钮的点击事件
 		$("[id^=submit]").each(function(){
 			$(this).click(function(){

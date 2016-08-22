@@ -54,8 +54,7 @@
 <script type="text/javascript">
 	var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
 	$(function() {
-		if($("#deviceId").val()=='')
-			$("#deviceId").focus();
+		$("#deviceId").focus().val($("#deviceId").val());
 	    $("#query").click(function(){
 	    	if($("#deviceId").val()==''){
 	    		layer.msg('Tips：请先填写设备ID');
@@ -109,7 +108,7 @@
 	             return;  
 	          }  
 	    }	
-	    gjcxPositionLine("GET","position/"+$("#deviceId").val()+"/getPositionInfo?st="+st+"&et="+et,status,'测试');//位置轨迹线-一次性展现24小时的轨迹	     	    
+	    gjcxPositionLine("GET","position/"+$("#deviceId").val()+"/getPositionInfo?st="+st+"&et="+et,status,'定位信息');//位置轨迹线-一次性展现24小时的轨迹	     	    
 	}
 	
 	//轨迹查询-位置连线-轨迹

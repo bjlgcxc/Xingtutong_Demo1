@@ -76,7 +76,7 @@
 	}
 
     $(document).ready(function(){
-    	$("#deviceId").focus();
+    	$("#deviceId").focus().val($("#deviceId").val());
     	
     	//设备相关操作(点击事件)
    		$("tr").find("#health").click(function(){
@@ -130,6 +130,7 @@
     		layer.prompt({
     				title:"修改设备别名",
     				formType:0,
+    				maxlength:20
     			},
     			function(val){	  	
     				$.ajax({
@@ -237,13 +238,13 @@
             						</tr>
            							</c:forEach>
            						</tbody>
-       					 </table>
-       				</div>
-				</div>
-			 </div>
-			  <p class="text-right text-gray text-big">提示：点击设备名查看设备相关信息，点击设备别名可进行修改</p>
-		  </div>
-       </div>
+       					 	</table>
+       					</div>
+					</div>
+			 	</div>
+			 	<p class="text-right text-gray text-big">提示：点击设备名查看设备相关信息，点击设备别名可进行修改</p>
+		  	</div>
+       	</div>
     </div>
 </div>
 </body>
