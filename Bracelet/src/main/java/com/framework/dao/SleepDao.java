@@ -15,12 +15,12 @@ public class SleepDao {
 	JdbcTemplate jdbcTemplate;
 	
 	public void insertSleepInfoArray(SleepInfo[] sleepInfoArray){
-		String sql = " insert into t_sleep(deviceId,duration,startTime,type) " +
-				"values(?,?,?,?) ";
+		String sql = " insert into t_sleep(deviceId,mac,duration,startTime,type) " +
+				"values(?,?,?,?,?) ";
 		List<Object[]> batchArgs = new ArrayList<Object[]>();
 		for(SleepInfo sleepInfo:sleepInfoArray){
-			Object args[] = new Object[]{sleepInfo.getDeviceId(),sleepInfo.getDuration(),sleepInfo.getStartTime(),
-					sleepInfo.getType()};
+			Object args[] = new Object[]{sleepInfo.getDeviceId(),sleepInfo.getMac(),sleepInfo.getDuration(),
+					sleepInfo.getStartTime(),sleepInfo.getType()};
 			batchArgs.add(args);
 		}
 		

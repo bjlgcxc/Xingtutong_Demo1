@@ -75,7 +75,7 @@ public class SportController {
 			long endTime = formater.parse(request.getParameter("endTime")).getTime();
 			
 			String mac = deviceService.getDeviceMac(deviceId);
-			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId,mac,startTime, endTime);			
+			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId,mac,startTime, endTime+86400000);			
 			List<String> dateList = new ArrayList<String>();
 			Date et = new Date(endTime);	
 			Date st = new Date(startTime);
@@ -150,7 +150,7 @@ public class SportController {
 			long endTime = formater.parse(request.getParameter("endTime")).getTime();
 			
 			String mac = deviceService.getDeviceMac(deviceId);
-			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId,mac,startTime, endTime);
+			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId,mac,startTime, endTime+86400000);
 			List<String> dateList = new ArrayList<String>();
 			Date et = new Date(endTime);	
 			Date st = new Date(startTime);
@@ -229,7 +229,7 @@ public class SportController {
 			long endTime = formater.parse(request.getParameter("endTime")).getTime();
 			
 			String mac = deviceService.getDeviceMac(deviceId);
-			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId,mac,startTime, endTime);
+			List<SportInfo> sportInfoList = sportService.getSportInfo(deviceId,mac,startTime, endTime+86400000);
 			List<String> dateList = new ArrayList<String>();
 			Date et = new Date(endTime);	
 			Date st = new Date(startTime);

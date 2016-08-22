@@ -50,6 +50,9 @@
 						if(data.info=="error"){
 							layer.msg('账号或密码错误');
 						}
+						else if(data.info=="uncheck"){
+							layer.msg('账号未审核,请联系数据库管理员进行审核');
+						}
 						else{
 							location.href = "index.html";						
 						}

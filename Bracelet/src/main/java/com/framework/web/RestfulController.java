@@ -80,9 +80,9 @@ public class RestfulController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/app/device/{imei}/appLogin")
-	public JSONObject appLogin(@PathVariable String imei){	
+	public synchronized JSONObject appLogin(@PathVariable String imei){	
 		
-		log.info("receive device_imei");
+		log.info("receive device_imei,"+imei);
 		DeviceInfo deviceInfo = new DeviceInfo();		
 		//若设备未注册，添加注册；若已注册，更新连接时间
 		boolean isDeviceExist = deviceService.hasMatchDevice(imei);
@@ -130,7 +130,7 @@ public class RestfulController {
 	 * 手机连接蓝牙,app发送手环信息到后台
 	 */
 	@RequestMapping(value="/app/device/{deviceId}/bluetoothConn",method = RequestMethod.POST)
-	public String bluetoothConn(BraceletInfo braceletInfo,@PathVariable int deviceId){
+	public String bluetoothConn(@RequestBody BraceletInfo braceletInfo,@PathVariable int deviceId){
 		
 		//更新设备的mac地址
 		DeviceInfo deviceInfo = new DeviceInfo();
@@ -139,14 +139,19 @@ public class RestfulController {
 		deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
 		deviceService.updateDeviceInfo(deviceInfo);
 		
-		//更新手环的信息
-		boolean isBraceletExist = braceletService.hasMatchBracelet(braceletInfo.getMac());
-		if(!isBraceletExist)
-			braceletService.addBraceletInfo(braceletInfo);
-		else{
-			braceletService.updateBraceletInfo(braceletInfo);
+		if(braceletInfo.getMac()==null){
+			log.info("the mac received is null!");
 		}
-		log.info("receive bracelet_mac from device");
+		else{
+			//更新手环的信息
+			boolean isBraceletExist = braceletService.hasMatchBracelet(braceletInfo.getMac());
+			if(!isBraceletExist)
+				braceletService.addBraceletInfo(braceletInfo);
+			else{
+				braceletService.updateBraceletInfo(braceletInfo);
+			}
+			log.info("receive bracelet_mac from device,mac=" + braceletInfo.getMac());
+		}
 		
 		return "redirect:/app/instruction/" + deviceId + "/returnJsonArray";
 	}

@@ -15,11 +15,11 @@ public class SportDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	public void insertSportInfo(SportInfo[] sportInfoArray){
-		String sql = " insert into t_sport(deviceId,calorie,countStep,startTime,endTime,duration,type) " +
-				"values(?,?,?,?,?,?,?) ";
+		String sql = " insert into t_sport(deviceId,mac,calorie,countStep,startTime,endTime,duration,type) " +
+				"values(?,?,?,?,?,?,?,?) ";
 		List<Object[]> batchArgs = new ArrayList<Object[]>();
 		for(SportInfo sportInfo:sportInfoArray){
-			Object args[] = new Object[]{sportInfo.getDeviceId(),sportInfo.getCalorie(),sportInfo.getCountStep(),
+			Object args[] = new Object[]{sportInfo.getDeviceId(),sportInfo.getMac(),sportInfo.getCalorie(),sportInfo.getCountStep(),
 					sportInfo.getStartTime(),sportInfo.getEndTime(),sportInfo.getDuration(),sportInfo.getType()};
 			batchArgs.add(args);
 		}
@@ -33,7 +33,7 @@ public class SportDao {
 		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<SportInfo>(SportInfo.class));
 	}
 	public List<SportInfo> getSportInfoInfo(int deviceId,String mac,long startTime,long endTime){
-		String sql = " select calorie,countStep,startTime,endTime,duration,type from t_sport where deviceId=? and mac=? and startTime>=? and startTime<=? ";
+		String sql = " select calorie,countStep,startTime,endTime,duration,type from t_sport where deviceId=? and mac=? and startTime>=? and startTime<=?";
 		Object[] args = new Object[]{deviceId,mac,startTime,endTime};
 		return jdbcTemplate.query(sql, args,new BeanPropertyRowMapper<SportInfo>(SportInfo.class));
 	}

@@ -63,17 +63,17 @@
 	    	}
 	    });
 	    
-	    $( "#start" ).datetimepicker({
+	    $("#start").datetimepicker({
 	        timeFormat: "HH:mm:ss",
-               dateFormat: "yy-mm-dd",
-               changeMonth: true,
-               changeYear: true
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true
 	    });
 	    $( "#end" ).datetimepicker({
 	        timeFormat: "HH:mm:ss",
-               dateFormat: "yy-mm-dd",
-               changeMonth: true,
-               changeYear: true          
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true          
 	    });
 	    var nowtime = getNowFormatDate(); 
 			var starttime = GetDateStr();
@@ -81,13 +81,15 @@
         $('#end').val(nowtime); 
         
         if($("#deviceId").val()!=''){
-  				$("#query").trigger("click");
-  			}
+  			$("#query").trigger("click");
+  		}
   			
-  			$("#reset").click(function(){
-  				$("#deviceId").val('');
+  		$("#refresh").click(function(){
+  			if($("#deviceId").val()!='')
   				gjcx();
-  			});
+  			else
+  				$("#deviceId").focus();
+  		});
  
 	});
 		
@@ -308,7 +310,7 @@
     <div class="field" style="display:inline-block;width:13%;"><input class="input" id="end" type="text"/></div>
     &nbsp;&nbsp;&nbsp;&nbsp;
     <button class="button bg-green text-meidum icon-search" id="query" onclick="gjcx()"> 查询</button>
-    <button class="button bg-green text-meidum icon-undo" id="reset"> 重置</button>
+    <button class="button bg-green text-meidum icon-refresh" id="refresh"> 刷新</button>
 	<div id="" style="height:10px"></div>
     <div id="allmap"></div>
 </div>

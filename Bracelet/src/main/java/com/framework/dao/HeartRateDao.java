@@ -15,12 +15,12 @@ public class HeartRateDao {
 	JdbcTemplate jdbcTemplate;
 	
 	public void insertHeartRateArray(HeartRate[] heartRateArray){
-		String sql = " insert into t_heartRate(deviceId,measureTpye,result,size,surfaceTem,testTime,type) " +
-				"values(?,?,?,?,?,?,?) ";
+		String sql = " insert into t_heartRate(deviceId,mac,measureTpye,result,size,surfaceTem,testTime,type) " +
+				"values(?,?,?,?,?,?,?,?) ";
 		
 		List<Object[]> batchArgs = new ArrayList<Object[]>();
 		for(HeartRate heartRate:heartRateArray){
-			Object args[] = new Object[]{heartRate.getDeviceId(),heartRate.getMeasureType(),heartRate.getResult(),
+			Object args[] = new Object[]{heartRate.getDeviceId(),heartRate.getMac(),heartRate.getMeasureType(),heartRate.getResult(),
 					heartRate.getSize(),heartRate.getSurfaceTem(),heartRate.getTestTime(),heartRate.getType()};
 			batchArgs.add(args);
 		}

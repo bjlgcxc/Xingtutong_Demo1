@@ -15,9 +15,9 @@ public class HealthDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	public void insertHealthInfo(HealthInfo healthInfo){
-		String sql = " insert into t_health(deviceId,belongDate,calorie,heartRateSize,humidity,mileage,press," +
-				"sleepTime,step,surfaceTem,temperature) values(?,?,?,?,?,?,?,?,?,?,?) ";
-		Object args[] = new Object[]{healthInfo.getDeviceId(),healthInfo.getBelongDate(),healthInfo.getCalorie(),
+		String sql = " insert into t_health(deviceId,mac,belongDate,calorie,heartRateSize,humidity,mileage,press," +
+				"sleepTime,step,surfaceTem,temperature) values(?,?,?,?,?,?,?,?,?,?,?,?) ";
+		Object args[] = new Object[]{healthInfo.getDeviceId(),healthInfo.getMac(),healthInfo.getBelongDate(),healthInfo.getCalorie(),
 			healthInfo.getHeartRateSize(),healthInfo.getHumidity(),healthInfo.getMileage(),healthInfo.getPress(),
 			healthInfo.getSleepTime(),healthInfo.getStep(),healthInfo.getSurfaceTem(),healthInfo.getTemperature()};
 		

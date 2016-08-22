@@ -22,16 +22,16 @@ public class NoticeDao {
 	}
 	
 	public void insertNoticeInfo(NoticeInfo noticeInfo){
-		String sql = " insert into t_notice(deviceId,heartRate,step,temp,type) values(?,?,?,?,?) ";
-		Object args[] = new Object[]{noticeInfo.getDeviceId(),noticeInfo.getHeartRate(),noticeInfo.getStep()
-				,noticeInfo.getTemp(),noticeInfo.getType()};
+		String sql = " insert into t_notice(deviceId,mac,heartRate,step,temp,type) values(?,?,?,?,?,?) ";
+		Object args[] = new Object[]{noticeInfo.getDeviceId(),noticeInfo.getMac(),noticeInfo.getHeartRate(),
+				noticeInfo.getStep(),noticeInfo.getTemp(),noticeInfo.getType()};
 		jdbcTemplate.update(sql, args);
 	}
 	
 	public void updateNoticeInfo(NoticeInfo noticeInfo){
-		String sql = " update t_notice set heartRate=?,step=?,temp=?,type=? where deviceId=? ";
-		Object args[] = new Object[]{noticeInfo.getHeartRate(),noticeInfo.getStep(),noticeInfo.getTemp(),
-				noticeInfo.getType(),noticeInfo.getDeviceId()};
+		String sql = " update t_notice set mac=?,heartRate=?,step=?,temp=?,type=? where deviceId=? ";
+		Object args[] = new Object[]{noticeInfo.getMac(),noticeInfo.getHeartRate(),noticeInfo.getStep(),
+				noticeInfo.getTemp(),noticeInfo.getType(),noticeInfo.getDeviceId()};
 		jdbcTemplate.update(sql,args);
 	}
 	

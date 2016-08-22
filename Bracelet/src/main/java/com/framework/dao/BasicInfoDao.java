@@ -21,15 +21,15 @@ public class BasicInfoDao {
 	}
 	
 	public void insertBasicInfo(BasicInfo basicInfo){
-		String sql = " insert into t_basic(deviceId,height,weight,stepLength,sex,unit) values(?,?,?,?,?,?) ";
-		Object args[] = new Object[]{basicInfo.getDeviceId(),basicInfo.getHeight(),basicInfo.getWeight(),
+		String sql = " insert into t_basic(deviceId,mac,height,weight,stepLength,sex,unit) values(?,?,?,?,?,?,?) ";
+		Object args[] = new Object[]{basicInfo.getDeviceId(),basicInfo.getMac(),basicInfo.getHeight(),basicInfo.getWeight(),
 				basicInfo.getStepLength(),basicInfo.getSex(),basicInfo.getUnit()};
 		jdbcTemplate.update(sql, args);
 	}
-	
+
 	public void updateBasicInfo(BasicInfo basicInfo){
-		String sql = " update t_basic set height=?,weight=?,stepLength=?,sex=?,unit=? where deviceId=? ";
-		Object args[] = new Object[]{basicInfo.getHeight(),basicInfo.getWeight(),basicInfo.getStepLength(),
+		String sql = " update t_basic set mac=?,height=?,weight=?,stepLength=?,sex=?,unit=? where deviceId=? ";
+		Object args[] = new Object[]{basicInfo.getMac(),basicInfo.getHeight(),basicInfo.getWeight(),basicInfo.getStepLength(),
 				basicInfo.getSex(),basicInfo.getUnit(),basicInfo.getDeviceId()};
 		jdbcTemplate.update(sql, args);
 	}

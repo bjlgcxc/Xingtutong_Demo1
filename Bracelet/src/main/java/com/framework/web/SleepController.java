@@ -75,7 +75,7 @@ public class SleepController {
 			long endTime = formater.parse(request.getParameter("endTime")).getTime();
 	
 			String mac = deviceService.getDeviceMac(deviceId);
-			List<SleepInfo> sleepInfoList = sleepService.getSleepInfo(deviceId,mac,startTime, endTime);
+			List<SleepInfo> sleepInfoList = sleepService.getSleepInfo(deviceId,mac,startTime, endTime+86400000);
 			List<String> dateList = new ArrayList<String>();
 			Date et = new Date(endTime);	
 			Date st = new Date(startTime);

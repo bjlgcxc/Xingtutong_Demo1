@@ -67,6 +67,7 @@
 			$(".huge").text('');
 			if($("#deviceId").val()==""){
 				layer.msg('Tips：请先填写设备ID');
+				$("#deviceId").focus();
 				return;
 			}
 			else{			
@@ -102,15 +103,18 @@
 		//query
 		if($("#deviceId").val()!='')
 			$("#query").trigger('click');
-		//clear
-		$("#clear").click(function(){
-			$("#deviceId").val('');
-			$(".huge").text('');
+		//refresh
+		$("#refresh").click(function(){
+			if($("#deviceId").val()!='')
+				$("#query").trigger('click');
+			else
+				$("#deviceId").focus();
 		});
 		//View Details
 		$("#mileage_details").click(function(){
 			if($("#deviceId").val()==""){
 				layer.msg('Tips：请先填写设备ID');
+				$("#deviceId").focus();
 			}
 			else{
   				window.open("chart_mileage.html?deviceId=" + $("#deviceId").val());	
@@ -119,6 +123,7 @@
 		$("#step_details").click(function(){
 			if($("#deviceId").val()==""){
 				layer.msg('Tips：请先填写设备ID');
+				$("#deviceId").focus();
 			}
 			else{
   				window.open("chart_step.html?deviceId=" + $("#deviceId").val());	
@@ -127,6 +132,7 @@
 		$("#calorie_details").click(function(){
 			if($("#deviceId").val()==""){
 				layer.msg('Tips：请先填写设备ID');
+				$("#deviceId").focus();
 			}
 			else{
   				window.open("chart_calorie.html?deviceId=" + $("#deviceId").val());	
@@ -135,6 +141,7 @@
 		$("#sleep_details").click(function(){
 			if($("#deviceId").val()==""){
 				layer.msg('Tips：请先填写设备ID');
+				$("#deviceId").focus();
 			}
 			else{
   				window.open("chart_sleep.html?deviceId=" + $("#deviceId").val());	
@@ -143,6 +150,7 @@
 		$("#heartRate_details").click(function(){
 			if($("#deviceId").val()==""){
 				layer.msg('Tips：请先填写设备ID');
+				$("#deviceId").focus();
 			}
 			else{
 				window.open("chart_heartRate.html?deviceId=" + $("#deviceId").val());
@@ -151,6 +159,7 @@
 		$("#surfaceTem_details").click(function(){
 			if($("#deviceId").val()==""){
 				layer.msg('Tips：请先填写设备ID');
+				$("#deviceId").focus();
 			}
 			else{
   				window.open("chart_surfaceTem.html?deviceId=" + $("#deviceId").val());
@@ -159,6 +168,7 @@
 		$("#humidity_details").click(function(){
 			if($("#deviceId").val()==""){
 				layer.msg('Tips：请先填写设备ID');
+				$("#deviceId").focus();
 			}
 			else{
   				window.open("chart_humidity.html?deviceId=" + $("#deviceId").val());
@@ -167,6 +177,7 @@
 		$("#temperature_details").click(function(){
 			if($("#deviceId").val()==""){
 				layer.msg('Tips：请先填写设备ID');
+				$("#deviceId").focus();
 			}
 			else{
   				window.open("chart_temperature.html?deviceId=" + $("#deviceId").val());
@@ -175,6 +186,7 @@
 		$("#press_details").click(function(){
 			if($("#deviceId").val()==""){
 				layer.msg('Tips：请先填写设备ID');
+				$("#deviceId").focus();
 			}
 			else{
   				window.open("chart_press.html?deviceId=" + $("#deviceId").val());
@@ -191,7 +203,7 @@
     	<div class="field" style="display:inline-block;width:18%;"><input class="input_" type="text" id="deviceId" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>	
   		&nbsp;&nbsp;
   		<div style="display:inline-block;"><button type="button" id="query" class="button button-block bg-green text-medium icon-search"> 查询</button></div>
-		<div style="display:inline-block;"><button type="button" id="clear" class="button button-block bg-green text-medium icon-undo"> 重置</button></div>
+		<div style="display:inline-block;"><button type="button" id="refresh" class="button button-block bg-green text-medium icon-refresh"> 刷新</button></div>
 		<div>&nbsp;</div>
 	</form>	
 	<div class="row">

@@ -16,7 +16,7 @@ public class SportService {
 	public void addSportInfoArray(SportInfo[] sportInfoArray){
 		sportDao.insertSportInfo(sportInfoArray);
 	}
-	
+
 	public List<SportInfo> getSportInfo(int deviceId,long startTime,long endTime){
 		return sportDao.getSportInfoInfo(deviceId, startTime, endTime);
 	}

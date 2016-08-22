@@ -62,14 +62,19 @@ public class UserController {
 		}
 		else{
 			UserInfo user = userService.findUserByUserName(userInfo.getUserName());
-			user.setLoginCount(user.getLoginCount()+1);
-			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			user.setLastLogin(formater.format(new Date(System.currentTimeMillis())));
-			userService.loginSuccess(user);	
-			
-			jsonObj.put("info","success");
-			session.setAttribute("user", user);
-			session.setAttribute("loginState", "login");
+			if(user.getCheck()==0){
+				jsonObj.put("info", "uncheck");
+			}
+			else{
+				user.setLoginCount(user.getLoginCount()+1);
+				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				user.setLastLogin(formater.format(new Date(System.currentTimeMillis())));
+				userService.loginSuccess(user);	
+				
+				jsonObj.put("info","success");
+				session.setAttribute("user", user);
+				session.setAttribute("loginState", "login");
+			}
 		}
 		
 		return jsonObj;

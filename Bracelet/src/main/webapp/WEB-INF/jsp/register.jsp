@@ -44,12 +44,10 @@
 					data:{userName:$("#userName").val(),password:$("#password1").val()},
 					success:function(data){
 						if(data.info!="error"){
-							layer.msg('注册成功!');						
-							setTimeout(function(){location.href="login.html";},2000);
+							layer.alert('注册成功!等待数据库管理员进行审核',function(){location.href="login.html";});						
 						}
 						else{
-							layer.msg('账号已存在，请重新选择');
-							setTimeout(function(){location.href="register.html";},2000);
+							layer.msg('账号已存在，请重新选择',function(){$("#userName").val('');});
 						}
 					}			
 				});

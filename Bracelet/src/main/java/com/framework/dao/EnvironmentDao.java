@@ -15,12 +15,12 @@ public class EnvironmentDao {
 	JdbcTemplate jdbcTemplate;
 	
 	public void insertEnvironmentArray(Environment[] environmentArray){
-		String sql = " insert into t_environment(deviceId,humidity,press,temperature,testTime) " +
-				"values(?,?,?,?,?) ";	
+		String sql = " insert into t_environment(deviceId,mac,humidity,press,temperature,testTime) " +
+				"values(?,?,?,?,?,?) ";	
 		List<Object[]> batchArgs = new ArrayList<Object[]>();
 		for(Environment environment:environmentArray){
-			Object args[] = new Object[]{environment.getDeviceId(),environment.getHumidity(),environment.getPress(),
-					environment.getTemperature(),environment.getTestTime()};
+			Object args[] = new Object[]{environment.getDeviceId(),environment.getMac(),environment.getHumidity(),
+					environment.getPress(),environment.getTemperature(),environment.getTestTime()};
 			batchArgs.add(args);
 		}
 		
